@@ -83,3 +83,5 @@ end
 gem 'devise'
 gem 'authority'
 gem 'rolify'
+
+gem 'activeadmin', github: 'activeadmin'
