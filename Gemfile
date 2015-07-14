@@ -78,3 +78,8 @@ group :production do
   gem 'htmlcompressor', github: 'paolochiodi/htmlcompressor', branch: 'master'
   gem 'dalli'
 end
+
+
+gem 'devise'
+gem 'authority'
+gem 'rolify'
