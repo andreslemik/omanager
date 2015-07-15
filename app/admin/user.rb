@@ -1,5 +1,5 @@
 ActiveAdmin.register User do
-  permit_params :email, :password, :password_confirmation
+  permit_params :email, :password, :password_confirmation, :last_name, :first_name
 
   controller do
     def update
@@ -14,6 +14,7 @@ ActiveAdmin.register User do
   index do
     selectable_column
     id_column
+    column :name
     column :email
     column :current_sign_in_at
     column :sign_in_count
@@ -28,6 +29,8 @@ ActiveAdmin.register User do
 
   form do |f|
     f.inputs "Admin Details" do
+      f.input :last_name
+      f.input :first_name
       f.input :email
       f.input :password
       f.input :password_confirmation

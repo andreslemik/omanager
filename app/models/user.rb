@@ -7,4 +7,9 @@ class User < ActiveRecord::Base
 
   validates :password, :password_confirmation, presence: true, on: :create
   validates :password, confirmation: true
+
+  def name
+    [last_name, first_name].compact.join(' ')
+  end
+
 end
