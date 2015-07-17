@@ -85,3 +85,4 @@ gem 'authority'
 gem 'rolify'
 
 gem 'activeadmin', github: 'activeadmin'
+gem 'paranoia', '~> 2.0'
