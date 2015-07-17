@@ -1,5 +1,6 @@
 ActiveAdmin.register User do
-  permit_params :email, :password, :password_confirmation, :last_name, :first_name
+  permit_params :email, :password, :password_confirmation, :last_name, :first_name,
+                role_ids: []
 
   controller do
     def update
@@ -16,9 +17,7 @@ ActiveAdmin.register User do
     id_column
     column :name
     column :email
-    column :current_sign_in_at
-    column :sign_in_count
-    column :created_at
+    column :roles_s
     actions
   end
 

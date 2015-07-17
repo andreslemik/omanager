@@ -13,4 +13,9 @@ class User < ActiveRecord::Base
     [last_name, first_name].compact.join(' ')
   end
 
+  def roles_s
+    roles.map(&:caption).join ', '
+  end
+
+
 end
