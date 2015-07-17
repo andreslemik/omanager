@@ -2,6 +2,9 @@ ActiveAdmin.register User do
   permit_params :email, :password, :password_confirmation, :last_name, :first_name,
                 role_ids: []
 
+  filter :first_name_or_last_name_cont, as: :string, label: 'ФИО'
+  filter :email
+
   controller do
     def update
       if params[:user][:password].blank? && params[:user][:password_confirmation].blank?
@@ -20,11 +23,6 @@ ActiveAdmin.register User do
     column :roles_s
     actions
   end
-
-  filter :email
-  filter :current_sign_in_at
-  filter :sign_in_count
-  filter :created_at
 
   form do |f|
     f.inputs "Admin Details" do

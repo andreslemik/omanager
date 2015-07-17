@@ -2,6 +2,10 @@ ActiveAdmin.register Role do
   permit_params :name, :caption,
                 users_ids: []
 
+  filter :users
+  filter :caption
+
+
   index do
     selectable_column
     id_column
