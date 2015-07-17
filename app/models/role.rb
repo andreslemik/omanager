@@ -11,4 +11,8 @@ class Role < ActiveRecord::Base
   validates :name, presence: true, uniqueness: true
   validates :caption, presence: true
 
+  def users_s
+    users.map(&:name).join ', '
+  end
+
 end
