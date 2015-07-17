@@ -7,4 +7,8 @@ class Role < ActiveRecord::Base
             :allow_nil => true
 
   scopify
+
+  validates :name, presence: true, uniqueness: true
+  validates :caption, presence: true
+
 end

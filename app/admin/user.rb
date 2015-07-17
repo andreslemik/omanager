@@ -34,6 +34,7 @@ ActiveAdmin.register User do
       f.input :email
       f.input :password
       f.input :password_confirmation
+      f.input :roles, as: :select, collection: Role.all.map{|r| [r.caption, r.id]}
     end
     f.actions
   end
