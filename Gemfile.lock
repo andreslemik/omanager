@@ -18,7 +18,7 @@ GIT
 
 GIT
   remote: git://github.com/activerecord-hackery/ransack.git
-  revision: 746784acad3973eac01da380cb1efe86bbb8df44
+  revision: 4c0e81cb213d621f73baa2a444d9878dcf4ed9c9
   specs:
     ransack (1.6.6)
       actionpack (>= 3.0)
@@ -76,7 +76,7 @@ GEM
     arbre (1.0.3)
       activesupport (>= 3.0.0)
     arel (6.0.2)
-    authority (3.0.0)
+    authority (3.1.0)
       activesupport (>= 3.0.0)
       rake (>= 0.8.7)
     bcrypt (3.1.10)
