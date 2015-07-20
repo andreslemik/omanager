@@ -1,10 +1,9 @@
 ActiveAdmin.register Product do
 
-  permit_params :name, :image, :base_price, :category_id
+  permit_params :name, :image, :category_id
 
   filter :category
   filter :name
-  filter :base_price
 
   index do
     selectable_column
@@ -25,7 +24,6 @@ ActiveAdmin.register Product do
         ? image_tag(f.object.image.url(:thumb)) \
         : content_tag(:span, 'нет изображения')
       f.input :image_cache, as: :hidden
-      f.input :base_price
     end
     f.actions
   end
