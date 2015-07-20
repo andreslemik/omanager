@@ -16,7 +16,7 @@ ActiveAdmin.register Product do
     f.inputs 'Создание продукта...' do
       f.input :name
       f.input :image, hint: f.object.image.present? \
-        ? image_tag(f.object.image.url) \
+        ? image_tag(f.object.image.url(:thumb)) \
         : content_tag(:span, 'нет изображения')
       f.input :image_cache, as: :hidden
       f.input :base_price
