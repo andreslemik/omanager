@@ -4,6 +4,13 @@ ActiveAdmin.register Category do
 
   filter :name
 
+  index do
+    selectable_column
+    id_column
+    column :name
+    actions
+  end
+
   form do |f|
     f.inputs 'Категория...' do
       f.input :name
