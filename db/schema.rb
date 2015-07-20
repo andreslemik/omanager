@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150717121233) do
+ActiveRecord::Schema.define(version: 20150720175314) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,17 @@ ActiveRecord::Schema.define(version: 20150717121233) do
   end
 
   add_index "depts", ["deleted_at"], name: "index_depts_on_deleted_at", using: :btree
+
+  create_table "products", force: :cascade do |t|
+    t.string   "name"
+    t.string   "image"
+    t.decimal  "base_price", precision: 8, scale: 2
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.datetime "deleted_at"
+  end
+
+  add_index "products", ["deleted_at"], name: "index_products_on_deleted_at", using: :btree
 
   create_table "roles", force: :cascade do |t|
     t.string   "name"
