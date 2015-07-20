@@ -11,6 +11,9 @@ ActiveAdmin.register Product do
     id_column
     column :category
     column :name
+    column 'Изображение' do |p|
+      image_tag p.image.url(:thumb)
+    end
     actions
   end
 
