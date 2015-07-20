@@ -86,3 +86,6 @@ gem 'rolify'
 
 gem 'activeadmin', github: 'activeadmin'
 gem 'paranoia', '~> 2.0'
+
+gem 'carrierwave'
+gem 'mini_magick'
