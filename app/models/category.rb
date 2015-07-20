@@ -1,8 +1,9 @@
-class Product < ActiveRecord::Base
-  mount_uploader :image, ImageUploader
+class Category < ActiveRecord::Base
   acts_as_paranoid
 
-  belongs_to :category
-
   validates :name, uniqueness: { conditions: -> { where(deleted_at: nil) } }, presence: true
+
+  has_many :products
+
+  default_scope { order :name }
 end

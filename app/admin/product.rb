@@ -1,13 +1,15 @@
 ActiveAdmin.register Product do
 
-  permit_params :name, :image, :base_price
+  permit_params :name, :image, :base_price, :category_id
 
+  filter :category
   filter :name
   filter :base_price
 
   index do
     selectable_column
     id_column
+    column :category
     column :name
     actions
   end
@@ -15,6 +17,7 @@ ActiveAdmin.register Product do
   form html: { multipart: true } do |f|
     f.inputs 'Создание продукта...' do
       f.input :name
+      f.input :category
       f.input :image, hint: f.object.image.present? \
         ? image_tag(f.object.image.url(:thumb)) \
         : content_tag(:span, 'нет изображения')
