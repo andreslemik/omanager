@@ -32,7 +32,7 @@ ActiveAdmin.register User do
       f.input :password
       f.input :password_confirmation
       f.input :roles, as: :select,
-                      collection: Role.all.map { |r| [r.caption, r.id] }
+                      collection: Role.pluck(:caption, :id)
     end
     f.actions
   end
