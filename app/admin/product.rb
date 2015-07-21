@@ -1,6 +1,7 @@
 ActiveAdmin.register Product do
 
-  permit_params :name, :image, :category_id
+  permit_params :name, :image, :image_cache, :category_id,
+                product_properties_attributes: [ :property_id, :value, :_destroy ]
 
   filter :category
   filter :name
@@ -24,8 +25,32 @@ ActiveAdmin.register Product do
         ? image_tag(f.object.image.url(:thumb)) \
         : content_tag(:span, 'нет изображения')
       f.input :image_cache, as: :hidden
+      f.inputs do
+        f.has_many :product_properties, heading: 'Свойства', allow_destroy: true, new_record: true do |a|
+          a.input :property
+          a.input :value
+        end
+      end
     end
     f.actions
+  end
+
+  show do
+    panel 'Продукт' do
+      attributes_table_for product do
+        row :id
+        row :category
+        row :name
+        row :image do
+          image_tag product.image.url
+        end
+        table_for product.product_properties do
+          column :property
+          column :value
+        end
+
+      end
+    end
   end
 
 
