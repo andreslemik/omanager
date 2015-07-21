@@ -4,6 +4,7 @@ ActiveAdmin.register User do
 
   filter :first_name_or_last_name_cont, as: :string, label: 'ФИО'
   filter :email
+  filter :roles, collection: Role.pluck(:caption, :id)
 
   controller do
     def update
