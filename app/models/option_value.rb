@@ -4,4 +4,6 @@ class OptionValue < ActiveRecord::Base
 
   validates :name, presence: true, uniqueness: { scope: :option_type_id }
 
+  default_scope { order :name }
+
 end
