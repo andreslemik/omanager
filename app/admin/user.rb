@@ -25,15 +25,15 @@ ActiveAdmin.register User do
   end
 
   form do |f|
-    f.inputs "Admin Details" do
+    f.inputs 'Admin Details' do
       f.input :last_name
       f.input :first_name
       f.input :email
       f.input :password
       f.input :password_confirmation
-      f.input :roles, as: :select, collection: Role.all.map{|r| [r.caption, r.id]}
+      f.input :roles, as: :select,
+                      collection: Role.all.map { |r| [r.caption, r.id] }
     end
     f.actions
   end
-
 end

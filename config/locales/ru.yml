@@ -1,0 +1,44 @@
+ru:
+  helpers:
+    submit:
+      create: 'Создать %{model}'
+      update: 'Обновить %{model}'
+  formtastic:
+    :yes: 'Да'
+    :no: 'Нет'
+    :create: 'Создать %{model}'
+    :update: 'Обновить %{model}'
+    :submit: 'Сохранить %{model}'
+  activerecord:
+    attributes:
+      category:
+        id: 'ID'
+        name: 'Наименование'
+      user:
+        id: 'ID'
+        name: 'Имя'
+        roles_s: 'Роли пользователя'
+        first_name: 'Имя'
+        last_name: 'Фамилия'
+        password: 'Пароль'
+        password_confirmation: 'Пароль ещё раз'
+        roles: 'Роли пользователя'
+    models:
+      category:
+        zero: 'Категорий'
+        one: 'Категория'
+        few: 'Категории'
+        many: 'Категорий'
+        other: 'Категорий'
+      comment:
+        zero: 'Комментариев'
+        one: 'Комментарий'
+        few: 'Комментария'
+        many: 'Комментариев'
+        other: 'Комментарии'
+      user:
+        zero: 'Пользователей'
+        one: 'Пользователь'
+        few: 'Пользователей'
+        many: 'Пользователей'
+        other: 'Пользователи'
