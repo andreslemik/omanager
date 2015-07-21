@@ -86,3 +86,5 @@ gem 'rolify'
 
 gem 'activeadmin', github: 'activeadmin'
 gem 'paranoia', '~> 2.0'
+
+gem 'acts_as_list'
