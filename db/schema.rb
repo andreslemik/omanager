@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150720184807) do
+ActiveRecord::Schema.define(version: 20150721091409) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,6 +49,18 @@ ActiveRecord::Schema.define(version: 20150720184807) do
 
   add_index "depts", ["deleted_at"], name: "index_depts_on_deleted_at", using: :btree
 
+  create_table "product_properties", force: :cascade do |t|
+    t.string   "value"
+    t.integer  "product_id"
+    t.integer  "property_id"
+    t.integer  "position"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "product_properties", ["product_id"], name: "index_product_properties_on_product_id", using: :btree
+  add_index "product_properties", ["property_id"], name: "index_product_properties_on_property_id", using: :btree
+
   create_table "products", force: :cascade do |t|
     t.string   "name"
     t.string   "image"
@@ -60,6 +72,12 @@ ActiveRecord::Schema.define(version: 20150720184807) do
 
   add_index "products", ["category_id"], name: "index_products_on_category_id", using: :btree
   add_index "products", ["deleted_at"], name: "index_products_on_deleted_at", using: :btree
+
+  create_table "properties", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "roles", force: :cascade do |t|
     t.string   "name"
@@ -102,5 +120,7 @@ ActiveRecord::Schema.define(version: 20150720184807) do
 
   add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
 
+  add_foreign_key "product_properties", "products"
+  add_foreign_key "product_properties", "properties"
   add_foreign_key "products", "categories"
 end
