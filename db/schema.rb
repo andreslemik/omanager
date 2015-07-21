@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150721121907) do
+ActiveRecord::Schema.define(version: 20150721124932) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,6 +65,17 @@ ActiveRecord::Schema.define(version: 20150721121907) do
   end
 
   add_index "option_values", ["option_type_id"], name: "index_option_values_on_option_type_id", using: :btree
+
+  create_table "product_option_types", force: :cascade do |t|
+    t.integer  "product_id"
+    t.integer  "option_type_id"
+    t.integer  "position"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "product_option_types", ["option_type_id"], name: "index_product_option_types_on_option_type_id", using: :btree
+  add_index "product_option_types", ["product_id"], name: "index_product_option_types_on_product_id", using: :btree
 
   create_table "product_properties", force: :cascade do |t|
     t.string   "value"
@@ -138,6 +149,8 @@ ActiveRecord::Schema.define(version: 20150721121907) do
   add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
 
   add_foreign_key "option_values", "option_types"
+  add_foreign_key "product_option_types", "option_types"
+  add_foreign_key "product_option_types", "products"
   add_foreign_key "product_properties", "products"
   add_foreign_key "product_properties", "properties"
   add_foreign_key "products", "categories"

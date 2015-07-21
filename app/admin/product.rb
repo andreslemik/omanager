@@ -1,7 +1,7 @@
 ActiveAdmin.register Product do
-
   permit_params :name, :image, :image_cache, :category_id,
-                product_properties_attributes: [ :property_id, :value, :_destroy ]
+                product_properties_attributes: [:id, :property_id, :value, :_destroy],
+                product_option_types_attributes: [:id, :option_type_id, :_destroy]
 
   filter :category
   filter :name
@@ -21,10 +21,14 @@ ActiveAdmin.register Product do
     f.inputs 'Создание продукта...' do
       f.input :name
       f.input :category
-      f.input :image, hint: f.object.image.present? \
-        ? image_tag(f.object.image.url(:thumb)) \
-        : content_tag(:span, 'нет изображения')
+      f.input :image,
+              hint: f.object.image.present? ? image_tag(f.object.image.url(:thumb)) : content_tag(:span, 'нет изображения')
       f.input :image_cache, as: :hidden
+      f.inputs 'Опции' do
+        f.has_many :product_option_types, allow_destroy: true do |a|
+          a.input :option_type
+        end
+      end
       f.inputs do
         f.has_many :product_properties, heading: 'Свойства', allow_destroy: true, new_record: true do |a|
           a.input :property
@@ -48,10 +52,7 @@ ActiveAdmin.register Product do
           column :property
           column :value
         end
-
       end
     end
   end
-
-
 end
