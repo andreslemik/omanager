@@ -2,6 +2,8 @@ ActiveAdmin.register OptionType do
   permit_params :name,
                 option_values_attributes: [:id, :name, :_destroy]
 
+  filter :name
+
   index do
     selectable_column
     column :name
