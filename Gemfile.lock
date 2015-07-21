@@ -29,7 +29,7 @@ GIT
 
 GIT
   remote: git://github.com/paolochiodi/htmlcompressor.git
-  revision: f5487e92c8c792d428ee86555ac6644681ff1350
+  revision: 73e5c1231721a1bee30e37251fb1819254d6433f
   branch: master
   specs:
     htmlcompressor (0.2.0)
