@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150721091409) do
+ActiveRecord::Schema.define(version: 20150721121907) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,23 @@ ActiveRecord::Schema.define(version: 20150721091409) do
   end
 
   add_index "depts", ["deleted_at"], name: "index_depts_on_deleted_at", using: :btree
+
+  create_table "option_types", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "option_values", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "option_type_id"
+    t.integer  "position"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "option_values", ["option_type_id"], name: "index_option_values_on_option_type_id", using: :btree
 
   create_table "product_properties", force: :cascade do |t|
     t.string   "value"
@@ -120,6 +137,7 @@ ActiveRecord::Schema.define(version: 20150721091409) do
 
   add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
 
+  add_foreign_key "option_values", "option_types"
   add_foreign_key "product_properties", "products"
   add_foreign_key "product_properties", "properties"
   add_foreign_key "products", "categories"
