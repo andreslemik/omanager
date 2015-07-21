@@ -38,6 +38,10 @@ ru:
         image: 'Изображение'
       dept:
         name: 'Наименование'
+      option_type:
+        name: 'Наименование'
+        values: 'Значений'
+        option_values_string: 'Значения'
     models:
       product_option_type:
         zero: 'Опций продукта'
@@ -99,3 +103,9 @@ ru:
         few: 'Продразделения'
         many: 'Подразделений'
         other: 'Продразделения'
+      option_value:
+        zero: 'Значений опции'
+        one: 'Значение опции'
+        few: 'Значения опции'
+        many: 'Значений опции'
+        other: 'Значения опции'

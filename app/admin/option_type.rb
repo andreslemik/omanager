@@ -18,7 +18,7 @@ ActiveAdmin.register OptionType do
       f.inputs do
         f.has_many :option_values, heading: 'Значения опции',
                                    allow_destroy: true, new_record: true do |ff|
-          ff.input :name
+          ff.input :name, label: 'Значение'
         end
       end
     end
