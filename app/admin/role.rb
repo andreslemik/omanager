@@ -15,11 +15,8 @@ ActiveAdmin.register Role do
 
   form do |f|
     f.inputs 'Роль пользователей' do
-      f.input :name
       f.input :caption
-      f.inputs do
-        f.input :users, as: :select, multiple: true, member_label: :email
-        end
+      f.input :name
       end
     f.actions
   end

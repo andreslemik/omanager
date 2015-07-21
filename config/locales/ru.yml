@@ -23,13 +23,45 @@ ru:
         password: 'Пароль'
         password_confirmation: 'Пароль ещё раз'
         roles: 'Роли пользователя'
+      role:
+        id: 'ID'
+        name: 'Идентификатор (англ.)'
+        caption: 'Наименование'
+        users: 'Пользователи'
+      property:
+        id: 'ID'
+        name: 'Наименование'
+      product:
+        id: 'ID'
+        name: 'Наименование'
+        category: 'Категория'
+        image: 'Изображение'
+
     models:
+      product_option_type:
+        zero: 'Опций продукта'
+        one: 'Опция продукта'
+        few: 'Опции продукта'
+        many: 'Опций продукта'
+        other: 'Опции продукта'
+      product_property:
+        zero: 'Свойств продукта'
+        one: 'Свойство продукта'
+        few: 'Свойства продукта'
+        many: 'Свойств продукта'
+        other: 'Свойства продукта'
+      option_type:
+        zero: 'Опций'
+        one: 'Опция'
+        few: 'Опции'
+        many: 'Опций'
+        other: 'Опции'
       category:
         zero: 'Категорий'
         one: 'Категория'
         few: 'Категории'
         many: 'Категорий'
-        other: 'Категорий'
+        other: 'Категории'
       comment:
         zero: 'Комментариев'
         one: 'Комментарий'
@@ -42,3 +74,21 @@ ru:
         few: 'Пользователей'
         many: 'Пользователей'
         other: 'Пользователи'
+      role:
+        zero: 'Ролей'
+        one: 'Роль'
+        few: 'Роли'
+        many: 'Ролей'
+        other: 'Роли'
+      property:
+        zero: 'Свойств'
+        one: 'Свойство'
+        few: 'Свойства'
+        many: 'Свойств'
+        other: 'Свойства'
+      product:
+        zero: 'Продуктов'
+        one: 'Продукт'
+        few: 'Продукта'
+        many: 'Продуктов'
+        other: 'Продукты'

@@ -24,15 +24,15 @@ ActiveAdmin.register Product do
       f.input :image,
               hint: f.object.image.present? ? image_tag(f.object.image.url(:thumb)) : content_tag(:span, 'нет изображения')
       f.input :image_cache, as: :hidden
-      f.inputs 'Опции' do
+      f.inputs do
         f.has_many :product_option_types, allow_destroy: true do |a|
-          a.input :option_type
+          a.input :option_type, label: 'Опция'
         end
       end
       f.inputs do
         f.has_many :product_properties, heading: 'Свойства', allow_destroy: true, new_record: true do |a|
-          a.input :property
-          a.input :value
+          a.input :property, label: 'Свойство'
+          a.input :value, label: 'Значение'
         end
       end
     end
