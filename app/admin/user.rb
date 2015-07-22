@@ -1,5 +1,5 @@
 ActiveAdmin.register User do
-  permit_params :email, :password, :password_confirmation, :last_name, :first_name,
+  permit_params :email, :username, :password, :password_confirmation, :last_name, :first_name,
                 role_ids: []
 
   filter :first_name_or_last_name_cont, as: :string, label: 'ФИО'
@@ -20,6 +20,7 @@ ActiveAdmin.register User do
     selectable_column
     id_column
     column :name
+    column :username
     column :email
     column :roles_s
     actions
@@ -29,6 +30,7 @@ ActiveAdmin.register User do
     f.inputs 'Admin Details' do
       f.input :last_name
       f.input :first_name
+      f.input :username
       f.input :email
       f.input :password
       f.input :password_confirmation

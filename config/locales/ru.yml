@@ -1,4 +1,8 @@
 ru:
+  active_admin:
+    devise:
+      login_key:
+        title: 'Логин'
   helpers:
     submit:
       create: 'Создать %{model}'
@@ -76,7 +80,7 @@ ru:
       user:
         zero: 'Пользователей'
         one: 'Пользователь'
-        few: 'Пользователей'
+        few: 'Пользователя'
         many: 'Пользователей'
         other: 'Пользователи'
       role:
