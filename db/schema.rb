@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150722102135) do
+ActiveRecord::Schema.define(version: 20150722122243) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,6 +65,28 @@ ActiveRecord::Schema.define(version: 20150722102135) do
   end
 
   add_index "option_values", ["option_type_id"], name: "index_option_values_on_option_type_id", using: :btree
+
+  create_table "order_items", force: :cascade do |t|
+    t.integer  "order_id"
+    t.integer  "product_id"
+    t.integer  "amount"
+    t.string   "cloth_category"
+    t.string   "cloth"
+    t.decimal  "cost",           precision: 8, scale: 2
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+  end
+
+  add_index "order_items", ["order_id"], name: "index_order_items_on_order_id", using: :btree
+  add_index "order_items", ["product_id"], name: "index_order_items_on_product_id", using: :btree
+
+  create_table "orders", force: :cascade do |t|
+    t.date     "order_date"
+    t.text     "memo"
+    t.string   "aasm_state"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "product_option_types", force: :cascade do |t|
     t.integer  "product_id"
@@ -151,6 +173,8 @@ ActiveRecord::Schema.define(version: 20150722102135) do
   add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
 
   add_foreign_key "option_values", "option_types"
+  add_foreign_key "order_items", "orders"
+  add_foreign_key "order_items", "products"
   add_foreign_key "product_option_types", "option_types"
   add_foreign_key "product_option_types", "products"
   add_foreign_key "product_properties", "products"
