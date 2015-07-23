@@ -18,7 +18,7 @@ GIT
 
 GIT
   remote: git://github.com/activerecord-hackery/ransack.git
-  revision: 8146b68cbc7ef60beaa4f72626f6c435e77a150a
+  revision: eadbe1242e17734267a5c62a3b21cd60fef7ec1e
   specs:
     ransack (1.6.6)
       actionpack (>= 3.0)
@@ -159,7 +159,7 @@ GEM
       ruby-progressbar (~> 1.4)
     globalid (0.3.5)
       activesupport (>= 4.1.0)
-    guard (2.12.8)
+    guard (2.12.9)
       formatador (>= 0.2.4)
       listen (>= 2.7, <= 4.0)
       lumberjack (~> 1.0)
@@ -201,7 +201,7 @@ GEM
     kgio (2.9.3)
     launchy (2.4.3)
       addressable (~> 2.3)
-    listen (3.0.2)
+    listen (3.0.3)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
     loofah (2.0.2)
@@ -412,4 +412,4 @@ DEPENDENCIES
   web-console (~> 2.0)
 
 BUNDLED WITH
-   1.10.5
+   1.10.6
