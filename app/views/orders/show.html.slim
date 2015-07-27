@@ -1,2 +1,11 @@
 h2 Договор №#{@order.id}
-p Дата: #{@order.order_date}
+.row
+  .columns
+    ul.button-group
+      li = link_to 'Изменить', edit_order_path(@order), class: 'button tiny secondary'
+      li = link_to 'Список договоров', orders_path, class: 'button tiny secondary'
+.row.panel
+  large-4.columns
+    p Дата: #{I18n.l @order.order_date}
+  large-12.columns
+    p Описание: #{@order.memo}
