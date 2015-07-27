@@ -14,7 +14,9 @@ nav.top-bar role="navigation" data-topbar="" data-options="back_text: Назад
           li = link_to 'Новый заказ', '#'
 
     ul.right
+      - if current_user.has_role?(:admin)
+        li = link_to 'Администрирование', admin_dashboard_path
       li.has-dropdown
         = link_to current_user.name, '#'
         ul.dropdown
-          li = link_to 'Выход', destroy_user_session_path, method: :delete
+          li = link_to 'Выход', destroy_user_session_path
