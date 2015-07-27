@@ -1,8 +1,10 @@
 = form_for @order do |f|
   .row
     .large-2.columns.small-4
-      = f.text_field :order_date, label: 'Дата договора:', class: 'datepicker'
-    .large-10.small-8.columns
+      = f.text_field :order_date, label: 'Дата договора:', class: 'datepicker', value: l(Date.current)
+    .large-2.columns.small-6
+      = f.select :dept_id, Dept.pluck(:name, :id), label: 'Офис', include_blank: true
+    .large-8.small-12.columns
       = f.text_area :memo, label: 'Примечание:'
   .row
     = f.submit 'Сохранить'

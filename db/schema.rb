@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150727203004) do
+ActiveRecord::Schema.define(version: 20150727203207) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -87,7 +87,10 @@ ActiveRecord::Schema.define(version: 20150727203004) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
+    t.integer  "dept_id"
   end
+
+  add_index "orders", ["dept_id"], name: "index_orders_on_dept_id", using: :btree
 
   create_table "product_option_types", force: :cascade do |t|
     t.integer  "product_id"
@@ -176,6 +179,7 @@ ActiveRecord::Schema.define(version: 20150727203004) do
   add_foreign_key "option_values", "option_types"
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "products"
+  add_foreign_key "orders", "depts"
   add_foreign_key "product_option_types", "option_types"
   add_foreign_key "product_option_types", "products"
   add_foreign_key "product_properties", "products"
