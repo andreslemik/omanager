@@ -92,3 +92,5 @@ gem 'acts_as_list'
 gem 'foundation-rails', github: 'zurb/foundation-rails'
 gem 'foundation-icons-sass-rails'
 gem 'foundation_rails_helper'
+
+gem 'jquery-ui-themes'

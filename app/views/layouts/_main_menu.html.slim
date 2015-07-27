@@ -9,9 +9,9 @@ nav.top-bar role="navigation" data-topbar="" data-options="back_text: Назад
   section.top-bar-section
     ul.left
       li.has-dropdown
-        a(href='#') Заказы
+        a(href='#') Договоры
         ul.dropdown
-          li = link_to 'Новый заказ', '#'
+          li = link_to 'Новый договор', new_order_path
 
     ul.right
       - if current_user.has_role?(:admin)

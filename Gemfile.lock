@@ -193,6 +193,9 @@ GEM
     has_scope (0.6.0)
       actionpack (>= 3.2, < 5)
       activesupport (>= 3.2, < 5)
+    httparty (0.13.5)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
     i18n (0.7.0)
     inherited_resources (1.6.0)
       actionpack (>= 3.2, < 5)
@@ -211,6 +214,8 @@ GEM
       turbolinks
     jquery-ui-rails (5.0.5)
       railties (>= 3.2.16)
+    jquery-ui-themes (0.0.11)
+      httparty
     json (1.8.3)
     kaminari (0.16.3)
       actionpack (>= 3.0.0)
@@ -232,6 +237,7 @@ GEM
     mini_portile (0.6.2)
     minitest (5.7.0)
     multi_json (1.11.2)
+    multi_xml (0.5.5)
     nenv (0.2.0)
     nested_form (0.3.2)
     net-scp (1.2.1)
@@ -409,6 +415,7 @@ DEPENDENCIES
   jquery-rails
   jquery-turbolinks
   jquery-ui-rails
+  jquery-ui-themes
   kaminari
   launchy
   mini_magick
