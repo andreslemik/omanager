@@ -6,5 +6,6 @@
       = f.select :dept_id, Dept.pluck(:name, :id), label: 'Офис', include_blank: true
     .large-8.small-12.columns
       = f.text_area :memo, label: 'Примечание:'
+      = f.hidden_field :author_id, value: current_user.id
   .row
     = f.submit 'Сохранить'

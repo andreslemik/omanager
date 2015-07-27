@@ -94,3 +94,4 @@ gem 'foundation-icons-sass-rails'
 gem 'foundation_rails_helper'
 
 gem 'jquery-ui-themes'
+gem 'paper_trail', '~> 4.0.0.rc'
