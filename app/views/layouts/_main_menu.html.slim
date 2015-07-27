@@ -17,4 +17,4 @@ nav.top-bar role="navigation" data-topbar="" data-options="back_text: Назад
       li.has-dropdown
         = link_to current_user.name, '#'
         ul.dropdown
-          li = link_to 'Выход', destroy_user_session_path
+          li = link_to 'Выход', destroy_user_session_path, method: :delete
