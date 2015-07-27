@@ -11,4 +11,10 @@ nav.top-bar role="navigation" data-topbar="" data-options="back_text: Назад
       li.has-dropdown
         a(href='#') Заказы
         ul.dropdown
-          li = link_to 'Добавить новый', '#'
+          li = link_to 'Новый заказ', '#'
+
+    ul.right
+      li.has-dropdown
+        = link_to current_user.name, '#'
+        ul.dropdown
+          li = link_to 'Выход', destroy_user_session_path

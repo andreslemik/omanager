@@ -10,5 +10,5 @@ html lang='ru'
     = csrf_meta_tags
   body
     .row
-      = render 'layouts/main_menu'
+      = render 'layouts/main_menu' if current_user
       = yield
