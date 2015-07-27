@@ -1,0 +1,16 @@
+h2 Список договоров
+
+table
+  thead
+    tr
+      th
+      th.text-center(width="100") Дата
+      th.text-center(width="100") Номер
+      th.show-for-large-only(width="200") Примечение
+  tbody
+    - @orders.each do |o|
+      tr
+        td = link_to ficon(:pencil, :small), edit_order_path(o)
+        td = l(o.order_date)
+        td.text-center = o.id
+        td.show-for-large-only = o.memo
