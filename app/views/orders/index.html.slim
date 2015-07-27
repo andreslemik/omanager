@@ -7,6 +7,7 @@ table
       th.text-center(width="100") Дата
       th.text-center(width="100") Номер
       th.text-center Офис
+      th.text-center Добавил
       th.show-for-large-only(width="200") Примечение
   tbody
     - @orders.each do |o|
@@ -15,4 +16,5 @@ table
         td = l(o.order_date)
         td.text-center = o.id
         td = o.dept.try(:name)
+        td = o.author.name
         td.show-for-large-only = o.memo
