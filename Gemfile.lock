@@ -18,7 +18,7 @@ GIT
 
 GIT
   remote: git://github.com/activerecord-hackery/ransack.git
-  revision: eadbe1242e17734267a5c62a3b21cd60fef7ec1e
+  revision: c06fb77947b24a412aa60d89a3c1a7b78166f2f3
   specs:
     ransack (1.6.6)
       actionpack (>= 3.0)
@@ -176,7 +176,7 @@ GEM
       ruby-progressbar (~> 1.4)
     globalid (0.3.5)
       activesupport (>= 4.1.0)
-    guard (2.12.9)
+    guard (2.13.0)
       formatador (>= 0.2.4)
       listen (>= 2.7, <= 4.0)
       lumberjack (~> 1.0)
@@ -186,7 +186,7 @@ GEM
       shellany (~> 0.0)
       thor (>= 0.18.1)
     guard-compat (1.2.1)
-    guard-rspec (4.6.2)
+    guard-rspec (4.6.3)
       guard (~> 2.1)
       guard-compat (~> 1.1)
       rspec (>= 2.99.0, < 4.0)
@@ -245,7 +245,7 @@ GEM
     net-ssh (2.9.2)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
-    notiffany (0.0.6)
+    notiffany (0.0.7)
       nenv (~> 0.1)
       shellany (~> 0.0)
     orm_adapter (0.5.0)
