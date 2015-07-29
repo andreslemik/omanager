@@ -1,12 +1,30 @@
-= form_for @order do |f|
+= nested_form_for @order do |f|
   .row
     .large-2.columns.small-4
       = f.text_field :order_date, label: 'Дата договора:', class: 'datepicker', value: l(Date.current)
     .large-2.columns.small-6
-      = f.select :dept_id, Dept.pluck(:name, :id), label: 'Офис', include_blank: true
+      = f.select :dept_id, Dept.pluck(:name, :id), label: 'Офис', prompt: 'Офис'
     .large-8.small-12.columns
       = f.text_area :memo, label: 'Примечание:'
       = f.hidden_field :author_id, value: current_user.id
   .row
     .columns
-      = f.submit 'Сохранить'
+      fieldset#items
+        legend Содержание заказа
+        = f.link_to_add 'Добавить', :order_items,class: 'button tiny secondary', data: { target: '#items' }
+        = f.fields_for :order_items do |ff|
+          .row.panel
+            .large-6.columns
+              = ff.label :product_id, 'Продукт'
+              = ff.select :product_id, Product.pluck(:name, :id), include_blank: true
+            .large-3.columns
+              = ff.label :cost, 'Цена'
+              = ff.text_field :cost
+            .large-2.columns
+              = ff.label :amount, 'Кол-во'
+              = ff.text_field :amount
+            .large-1.columns.end
+              = ff.link_to_remove ficon(:trash, :medium), title: 'Удалить'
+  .row
+    .columns
+      = f.submit 'Сохранить', class: 'button'
