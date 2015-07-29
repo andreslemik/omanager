@@ -9,22 +9,24 @@
       = f.hidden_field :author_id, value: current_user.id
   .row
     .columns
-      fieldset#items
+      fieldset
         legend Содержание заказа
+        #items
+          = f.fields_for :order_items do |ff|
+            .row.panel
+              .large-6.columns
+                = ff.label :product_id, 'Продукт'
+                = ff.select :product_id, Product.pluck(:name, :id), include_blank: true
+              .large-3.columns
+                = ff.label :cost, 'Цена'
+                = ff.text_field :cost
+              .large-2.columns
+                = ff.label :amount, 'Кол-во'
+                = ff.text_field :amount
+              .large-1.columns.end
+                = ff.link_to_remove ficon(:trash, :medium), title: 'Удалить'
+        br
         = f.link_to_add 'Добавить', :order_items,class: 'button tiny secondary', data: { target: '#items' }
-        = f.fields_for :order_items do |ff|
-          .row.panel
-            .large-6.columns
-              = ff.label :product_id, 'Продукт'
-              = ff.select :product_id, Product.pluck(:name, :id), include_blank: true
-            .large-3.columns
-              = ff.label :cost, 'Цена'
-              = ff.text_field :cost
-            .large-2.columns
-              = ff.label :amount, 'Кол-во'
-              = ff.text_field :amount
-            .large-1.columns.end
-              = ff.link_to_remove ficon(:trash, :medium), title: 'Удалить'
   .row
     .columns
       = f.submit 'Сохранить', class: 'button'
