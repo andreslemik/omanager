@@ -4,7 +4,7 @@ ActiveAdmin.register User do
 
   filter :first_name_or_last_name_cont, as: :string, label: 'ФИО'
   filter :email
-  #filter :roles, collection: Role.pluck(:caption, :id)
+  filter :roles, collection: Role.pluck(:caption, :id)
 
   controller do
     def update
@@ -34,8 +34,8 @@ ActiveAdmin.register User do
       f.input :email
       f.input :password
       f.input :password_confirmation
-      #f.input :roles, as: :select,
-      #                collection: Role.pluck(:caption, :id)
+      f.input :roles, as: :select,
+                      collection: Role.pluck(:caption, :id)
     end
     f.actions
   end
