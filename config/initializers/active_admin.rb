@@ -248,6 +248,7 @@ end
 
 class OnlyAdmins < ActiveAdmin::AuthorizationAdapter
   def authorized?(action, subject = nil)
+    return unless ActiveRecord::Base.connection.table_exists? 'roles'
     user.has_role? :admin
   end
 end
