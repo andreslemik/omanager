@@ -50,11 +50,6 @@ namespace :deploy do
   after :publishing, :restart
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, waith: 10 do
-      within release_path do
-        with rails_env: fetch(:rails_env) do
-          execute :rake, 'utils:clear_cache'
-        end
-      end
       invoke 'deploy:cleanup_assets'
       invoke 'deploy:unicorn:restart'
     end
