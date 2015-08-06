@@ -56,7 +56,6 @@ gem 'ransack', github: 'activerecord-hackery/ransack'
 group :development do
   gem 'rspec-rails'
   gem 'guard-rspec'
-  gem 'capistrano', '~> 3.4.0'
   gem 'capistrano-rails', '~> 1.1'
   gem 'capistrano-rvm'
   gem 'bullet'

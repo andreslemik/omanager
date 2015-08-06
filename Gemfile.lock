@@ -399,7 +399,6 @@ DEPENDENCIES
   authority
   bullet
   byebug
-  capistrano (~> 3.4.0)
   capistrano-rails (~> 1.1)
   capistrano-rvm
   capybara
