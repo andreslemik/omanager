@@ -34,8 +34,8 @@ ActiveAdmin.register User do
       f.input :email
       f.input :password
       f.input :password_confirmation
-      f.input :roles, as: :select,
-                      collection: Role.pluck(:caption, :id)
+      #f.input :roles, as: :select,
+      #                collection: Role.pluck(:caption, :id)
     end
     f.actions
   end
