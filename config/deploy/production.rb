@@ -1,61 +1,90 @@
-# server-based syntax
-# ======================
-# Defines a single server with a list of roles and multiple properties.
-# You can define all roles on a single server, or split them:
+set :bundle_without, [:development, :test]
+set :server, 'hydrogen.locum.ru'
+set :user, 'hosting_andres'
+set :login, 'andres'
+set :application, 'sofa'
+set :unicorn_conf,    "/etc/unicorn/#{fetch(:application)}.#{fetch(:login)}.rb"
+set :unicorn_pid,     "/var/run/unicorn/#{fetch(:user)}/#{fetch(:application)}.#{fetch(:login)}.pid"
+set :shared_path, "/home/#{fetch(:user)}/projects/#{fetch(:application)}/shared"
 
-# server 'example.com', user: 'deploy', roles: %w{app db web}, my_property: :my_value
-# server 'example.com', user: 'deploy', roles: %w{app web}, other_property: :other_value
-# server 'db.example.com', user: 'deploy', roles: %w{db}
+role :app, "#{fetch(:user)}@#{fetch(:server)}"
+role :web, "#{fetch(:user)}@#{fetch(:server)}"
+role :db,  "#{fetch(:user)}@#{fetch(:server)}"
 
+set :repo_url, 'git@bitbucket.org:andreslemik/omanager.git'
 
+server fetch(:server), user: fetch(:user), roles: %w(web app), application: fetch(:application)
+set :rvm_type, :auto
+set :rvm_ruby_version, '2.2.2'
+set :rails_env, 'production'
+set :use_sudo, false
 
-# role-based syntax
-# ==================
+set :ssh_options,                     port: 22,
+                                      user: fetch(:user),
+                                      forward_agent: true
+set :deploy_to, "/home/#{fetch(:user)}/projects/#{fetch(:application)}"
+before 'deploy:updated', 'set_current_release'
+task :set_current_release do
+  on roles(:app) do
+    set :current_release, fetch(:latest_release_directory)
+  end
+end
 
-# Defines a role with one or multiple servers. The primary server in each
-# group is considered to be the first unless any  hosts have the primary
-# property set. Specify the username and a domain or IP for the server.
-# Don't use `:all`, it's a meta role.
+set :unicorn_start_cmd, "(cd #{deploy_to}/current; rvm use #{fetch(:rvm_ruby_version)} do bundle exec unicorn_rails -Dc #{fetch(:unicorn_conf)})"
+# - for unicorn -
+namespace :deploy do
+  unicorn_start_cmd = fetch(:unicorn_start_cmd)
+  desc 'restart application'
+  task :restart do
+    on roles(:app), in: :sequence, waith: 5 do
+      invoke 'deploy:unicorn:restart'
+    end
+  end
 
-# role :app, %w{deploy@example.com}, my_property: :my_value
-# role :web, %w{user1@primary.com user2@additional.com}, other_property: :other_value
-# role :db,  %w{deploy@example.com}
+  task :temp_clear do
+    on roles(:app) do
+      execute :rake, 'tmp:cache:clear'
+    end
+  end
 
+  after :publishing, :restart
+  after :restart, :clear_cache do
+    on roles(:web), in: :groups, limit: 3, waith: 10 do
+      within release_path do
+        with rails_env: fetch(:rails_env) do
+          execute :rake, 'utils:clear_cache'
+        end
+      end
+      invoke 'deploy:cleanup_assets'
+      invoke 'deploy:unicorn:restart'
+    end
+  end
 
+  namespace :unicorn do
+    def run_unicorn
+      execute "(cd #{fetch(:deploy_to)}/current; rvm use #{fetch(:rvm_ruby_version)} do bundle exec unicorn -Dc #{fetch(:unicorn_conf)})"
+    end
 
-# Configuration
-# =============
-# You can set any configuration variable like in config/deploy.rb
-# These variables are then only loaded and set in this stage.
-# For available Capistrano configuration variables see the documentation page.
-# http://capistranorb.com/documentation/getting-started/configuration/
-# Feel free to add new variables to customise your setup.
+    desc 'Start unicorn'
+    task :start do
+      on roles(:app) do
+        run_unicorn
+      end
+    end
 
+    desc 'Stop unicorn'
+    task :stop do
+      on roles(:app) do
+        execute "[ -f #{fetch(:unicorn_pid)} ] && kill -QUIT `cat #{fetch(:unicorn_pid)}`"
+      end
+    end
 
-
-# Custom SSH Options
-# ==================
-# You may pass any option but keep in mind that net/ssh understands a
-# limited set of options, consult the Net::SSH documentation.
-# http://net-ssh.github.io/net-ssh/classes/Net/SSH.html#method-c-start
-#
-# Global options
-# --------------
-#  set :ssh_options, {
-#    keys: %w(/home/rlisowski/.ssh/id_rsa),
-#    forward_agent: false,
-#    auth_methods: %w(password)
-#  }
-#
-# The server-based syntax can be used to override options:
-# ------------------------------------
-# server 'example.com',
-#   user: 'user_name',
-#   roles: %w{web app},
-#   ssh_options: {
-#     user: 'user_name', # overrides user setting above
-#     keys: %w(/home/user_name/.ssh/id_rsa),
-#     forward_agent: false,
-#     auth_methods: %w(publickey password)
-#     # password: 'please use keys'
-#   }
+    desc 'Restart unicorn'
+    task :restart do
+      on roles(:app) do
+        invoke 'deploy:unicorn:stop'
+        invoke 'deploy:unicorn:start'
+      end
+    end
+  end
+end
