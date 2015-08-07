@@ -13,4 +13,10 @@ class Product < ActiveRecord::Base
   accepts_nested_attributes_for :product_option_types, allow_destroy: true
 
   validates :name, uniqueness: { conditions: -> { where(deleted_at: nil) } }, presence: true
+
+
+  def long_name
+    "#{self.category.name}: #{self.name}"
+  end
+
 end

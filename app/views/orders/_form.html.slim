@@ -16,7 +16,7 @@
             .row.panel
               .large-6.columns
                 = ff.label :product_id, 'Продукт'
-                = ff.select :product_id, Product.pluck(:name, :id), include_blank: true
+                = ff.select :product_id, Product.all.collect {|p| [p.long_name, p.id]}, include_blank: true
               .large-3.columns
                 = ff.label :cost, 'Цена'
                 = ff.text_field :cost
