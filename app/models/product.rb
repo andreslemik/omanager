@@ -14,6 +14,8 @@ class Product < ActiveRecord::Base
 
   validates :name, uniqueness: { conditions: -> { where(deleted_at: nil) } }, presence: true
 
+  scope :long_order, -> { includes(:category).order('categories.name, products.name')  }
+
 
   def long_name
     "#{self.category.name}: #{self.name}"
