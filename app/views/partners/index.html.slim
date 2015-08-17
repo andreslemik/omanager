@@ -1,0 +1,15 @@
+- content_for :title, 'Расчёты с контрагентами'
+h1 Расчёты с контрагентами
+= paginate @partners
+
+table
+  thead
+    tr
+      th Название
+      th Баланс
+
+  tbody
+    - @partners.each do |p|
+      tr
+        td = p.name
+        td.text-right 0

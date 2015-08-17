@@ -17,7 +17,7 @@ nav.top-bar role="navigation" data-topbar="" data-options="back_text: Назад
         li.has-dropdown
           a(href='#') Расчёты
           ul.dropdown
-            li = link_to 'Расчеты с контрагентами', '#'
+            li = link_to 'Расчеты с контрагентами', partners_path
 
     ul.right
       - if current_user.has_role?(:admin)
