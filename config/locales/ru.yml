@@ -15,6 +15,10 @@ ru:
     :submit: 'Сохранить %{model}'
   activerecord:
     attributes:
+      partner:
+        id: 'ID'
+        name: 'Название'
+        memo: 'Примечание'
       category:
         id: 'ID'
         name: 'Наименование'
@@ -113,3 +117,9 @@ ru:
         few: 'Значения опции'
         many: 'Значений опции'
         other: 'Значения опции'
+      partner:
+        zero: 'Контрагентов'
+        one: 'Контрагент'
+        few: 'Контрагенты'
+        many: 'Контрагентов'
+        other: 'Контрагенты'

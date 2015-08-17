@@ -13,6 +13,11 @@ nav.top-bar role="navigation" data-topbar="" data-options="back_text: Назад
         ul.dropdown
           li = link_to 'Новый договор', new_order_path
           li = link_to 'Список договоров', orders_path
+      - if current_user.has_role? :admin
+        li.has-dropdown
+          a(href='#') Расчёты
+          ul.dropdown
+            li = link_to 'Расчеты с контрагентами', '#'
 
     ul.right
       - if current_user.has_role?(:admin)
