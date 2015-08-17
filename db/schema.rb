@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150817120641) do
+ActiveRecord::Schema.define(version: 20150817121242) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20150817120641) do
     t.string   "accountable_type"
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
+    t.text     "memo"
   end
 
   add_index "accounts", ["accountable_type", "accountable_id"], name: "index_accounts_on_accountable_type_and_accountable_id", using: :btree
