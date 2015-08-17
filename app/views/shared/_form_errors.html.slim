@@ -1,0 +1,5 @@
+.panel.formErrors
+  h2  #{model.errors.count} #{t(:error, count: model.errors.count)}:
+  ul
+    - model.errors.full_messages.each do |msg|
+      li = msg
