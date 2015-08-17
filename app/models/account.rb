@@ -7,4 +7,7 @@ class Account < ActiveRecord::Base
   validates :amount, numericality: { greater_than: 0 }
 
   belongs_to :accountable, polymorphic: true
+
+  scope :expense, -> { where operation_type: 0 }
+  scope :income, -> { where operation_type: 1 }
 end
