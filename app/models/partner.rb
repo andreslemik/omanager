@@ -6,8 +6,8 @@ class Partner < ActiveRecord::Base
   has_many :operations, as: :accountable, class_name: 'Account'
 
   def balance
-    income = operations.income.map { |i| i.amount }.sum
-    expense = operations.expense.map { |i| i.amount }.sum
+    income = operations.income.map(&:amount).sum
+    expense = operations.expense.map(&:amount).sum
     income - expense
   end
 end

@@ -5,11 +5,13 @@ h1 Расчёты с контрагентами
 table
   thead
     tr
+      th
       th Название
       th Баланс
 
   tbody
     - @partners.each do |p|
       tr
+        td = link_to ficon(:pencil), partner_path(p)
         td = p.name
         td.text-right = p.balance

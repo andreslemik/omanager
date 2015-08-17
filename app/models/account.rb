@@ -10,4 +10,5 @@ class Account < ActiveRecord::Base
 
   scope :expense, -> { where operation_type: 0 }
   scope :income, -> { where operation_type: 1 }
+
 end

@@ -1,0 +1,10 @@
+= form_for @account, url: accounts_path(accounter_type: 'partner', accounter_id: @partner.id) do |f|
+  fieldset
+    legend Новая операция
+    = render('shared/form_errors', model: @account) if @account.errors.any?
+    = f.text_field :operation_date, label: 'Дата операции', class: 'datepicker'
+    = f.select :operation_type, Account.operation_types.map { |k,v| [I18n.t(k), k.to_sym] }, include_blank: true, label: 'Тип операции'
+    = f.number_field :amount, label: 'Сумма'
+    = f.text_area :memo, label: 'Описание'
+
+    = f.submit 'Сохранить'

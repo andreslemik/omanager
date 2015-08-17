@@ -1,0 +1,27 @@
+- content_for :title, "Расчёты с #{@partner.name}"
+h1 Расчёты с #{@partner.name}
+
+= link_to 'Назад', partners_path, class: 'button tiny secondary'
+
+.row
+  .large-3.columns
+    p +
+  .large-6.columns
+    table
+      thead
+        tr
+          th.text-center Дата
+          th.text-center Тип
+          th.text-center Сумма
+          th.text-center Описание
+          th.text-center Добавлена
+      tbody
+        - @operations.each do |o|
+          tr
+            td = l o.operation_date
+            td = t(o.operation_type).mb_chars.capitalize
+            td.text-right = number_to_currency o.amount, unit: '', precision: 0
+            td = o.memo
+            td = l o.created_at
+  .large-3.columns
+    = render 'partners/account_form'

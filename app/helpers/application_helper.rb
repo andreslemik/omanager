@@ -1,6 +1,5 @@
 module ApplicationHelper
-
-  def ficon(icon, size=nil)
-    "<i class='fi-#{icon} #{size}'></i>".html_safe
+  def ficon(name, size = nil)
+    content_tag(:i, nil, class: "fi-#{name} #{size}")
   end
 end

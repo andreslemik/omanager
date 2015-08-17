@@ -11,5 +11,6 @@ html lang='ru'
   body
     .row
       = render 'layouts/main_menu' if current_user
-      = display_flash_messages
+      .large-6.large-centered.columns
+        = display_flash_messages
       = yield
