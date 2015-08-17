@@ -2,6 +2,7 @@ class Account < ActiveRecord::Base
   acts_as_paranoid
   has_paper_trail
   enum operation_type: { expense: 0, income: 1 }
+  paginates_per 8
 
   validates :operation_date, :operation_type, presence: true
   validates :amount, numericality: { greater_than: 0 }

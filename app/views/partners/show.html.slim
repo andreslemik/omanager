@@ -5,8 +5,9 @@ h1 Расчёты с #{@partner.name}
 
 .row
   .large-3.columns
-    p +
+    p Баланс на текущую дату: #{number_to_currency @partner.balance, unit: '', precision: 0}
   .large-6.columns
+    = paginate @operations
     table
       thead
         tr
@@ -14,7 +15,7 @@ h1 Расчёты с #{@partner.name}
           th.text-center Тип
           th.text-center Сумма
           th.text-center Описание
-          th.text-center Добавлена
+          th.text-center Добавлено
       tbody
         - @operations.each do |o|
           tr
