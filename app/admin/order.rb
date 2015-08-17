@@ -1,5 +1,5 @@
 ActiveAdmin.register Order do
-
+  menu parent: 'Управление заказами'
   permit_params :date, :memo,
                 order_items_attributes: [:order_id, :product_id, :amount, :cloth_category, :cloth, :cost]
 

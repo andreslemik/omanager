@@ -1,4 +1,5 @@
 ActiveAdmin.register Product do
+  menu parent: 'Управление продуктами', priority: 10
   permit_params :name, :image, :image_cache, :category_id,
                 product_properties_attributes: [:id, :property_id, :value, :_destroy],
                 product_option_types_attributes: [:id, :option_type_id, :_destroy]

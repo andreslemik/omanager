@@ -1,4 +1,5 @@
 ActiveAdmin.register Role do
+  menu parent: 'Управление пользователями'
   permit_params :name, :caption,
                 users_ids: []
 

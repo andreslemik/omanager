@@ -1,4 +1,5 @@
 ActiveAdmin.register OptionType do
+  menu parent: 'Управление продуктами', priority: 90
   permit_params :name,
                 option_values_attributes: [:id, :name, :_destroy]
 

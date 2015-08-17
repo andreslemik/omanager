@@ -1,4 +1,5 @@
 ActiveAdmin.register User do
+  menu parent: 'Управление пользователями'
   permit_params :email, :username, :password, :password_confirmation, :last_name, :first_name,
                 role_ids: []
 

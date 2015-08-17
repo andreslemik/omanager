@@ -1,5 +1,5 @@
 ActiveAdmin.register Property do
-
+  menu parent: 'Управление продуктами'
   permit_params :name
 
   filter :name
