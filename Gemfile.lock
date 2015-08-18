@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/activeadmin/activeadmin.git
-  revision: 8c98403c934053027e37779bbd7a0d7c40c79b45
+  revision: cdace51b2a5cbcc013eec24e8c1633229d4b7aec
   specs:
     activeadmin (1.0.0.pre1)
       arbre (~> 1.0, >= 1.0.2)
@@ -99,8 +99,7 @@ GEM
     bullet (4.14.7)
       activesupport (>= 3.0.0)
       uniform_notifier (~> 1.9.0)
-    byebug (5.0.0)
-      columnize (= 0.9.0)
+    byebug (6.0.0)
     capistrano (3.4.0)
       i18n
       rake (>= 10.0.0)
@@ -138,7 +137,6 @@ GEM
       execjs
     coffee-script-source (1.9.1.1)
     colorize (0.7.7)
-    columnize (0.9.0)
     dalli (2.7.4)
     database_cleaner (1.4.1)
     debug_inspector (0.0.2)
@@ -157,7 +155,7 @@ GEM
     factory_girl_rails (4.5.0)
       factory_girl (~> 4.5.0)
       railties (>= 3.0.0)
-    faker (1.4.3)
+    faker (1.5.0)
       i18n (~> 0.5)
     ffi (1.9.10)
     formatador (0.2.5)
@@ -228,7 +226,7 @@ GEM
     listen (3.0.3)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
-    loofah (2.0.2)
+    loofah (2.0.3)
       nokogiri (>= 1.5.9)
     lumberjack (1.0.9)
     mail (2.6.3)
