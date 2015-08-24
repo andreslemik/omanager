@@ -5,8 +5,9 @@ ActiveAdmin.register Product do
                 product_option_types_attributes: [:id, :option_type_id, :_destroy],
                 product_option_values_attributes: [:id, :option_value_id, :diff, :_destroy]
 
-  filter :category
   filter :name
+  filter :category
+  filter :manufacturer, as: :select, collection: Partner.joins(:products).uniq
 
   index do
     selectable_column
