@@ -15,3 +15,5 @@ table
         td = link_to ficon(:pencil), partner_path(p)
         td = p.name
         td.text-right = p.balance
+
+= paginate @partners
