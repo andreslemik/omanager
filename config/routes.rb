@@ -1,10 +1,16 @@
 Rails.application.routes.draw do
   root 'home#index'
+
+  devise_for :users#, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
+
   resources :orders
 
   resources :partners, only: [:index, :show]
   resources :accounts
 
-  devise_for :users#, ActiveAdmin::Devise.config
-  ActiveAdmin.routes(self)
+  get 'products/by_category_mfc/:category_id/:manufacturer_id', to: 'products#by_category_mfc', defaults: { format: 'json' }
+  get 'products/manufacturers/:category_id', to: 'products#manufacturers', defaults: { format: 'json' }
+
+
 end

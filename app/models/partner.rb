@@ -6,6 +6,8 @@ class Partner < ActiveRecord::Base
 
   has_many :operations, as: :accountable, class_name: 'Account', dependent: :destroy
 
+  has_many :products, foreign_key: :manufacturer_id
+
 
   enum partner_type: { supplier: 0, customer: 1 }
 

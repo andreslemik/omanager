@@ -40,11 +40,15 @@
           = f.fields_for :order_items do |ff|
             .row.panel
               .large-2.columns
-                = label_tag :category, 'Категория'
-                = select_tag :category, options_from_collection_for_select(Category.all, :id, :name), include_blank: true
+                = ff.label :category, 'Категория'
+                - categories = Category.joins(:products).group(:id)
+                = ff.select :category, options_from_collection_for_select(categories, :id, :name), {include_blank: true }, { class: 'categories' }
+              .large-3.columns
+                = ff.label :manufacturer, 'Производитель'
+                = ff.select :manufacturer, [], {}, { class: 'manufacturers' }
               .large-5.columns
                 = ff.label :product_id, 'Продукт'
-                = ff.select :product_id, Product.long_order.collect {|p| [p.long_name, p.id]}, include_blank: true
+                = ff.select :product_id, []
               .large-2.columns
                 = ff.label :cost, 'Цена'
                 = ff.text_field :cost

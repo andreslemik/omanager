@@ -5,6 +5,9 @@
 #= require jquery-ui/datepicker-ru
 #= require foundation
 #= require jquery_nested_form
+
+#= require order
+
 #= require turbolinks
 
 
