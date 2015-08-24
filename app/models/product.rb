@@ -5,6 +5,7 @@ class Product < ActiveRecord::Base
   belongs_to :category
 
   has_many :product_option_types, dependent: :destroy, inverse_of: :product
+  has_many :product_option_values, dependent: :destroy
   has_many :option_types, through: :product_option_types
   has_many :product_properties, dependent: :destroy, inverse_of: :product
   accepts_nested_attributes_for :product_properties,
