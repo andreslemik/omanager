@@ -7,8 +7,9 @@ class Order < ActiveRecord::Base
   belongs_to :dept, -> { with_deleted }
   belongs_to :author, -> { with_deleted }, class_name: User
 
-  validates :dept_id, presence: {message: 'Укажите офис'}
-  validates :order_date, presence: {message: 'Укажите дату'}
+  validates :dept_id, presence: { message: 'Укажите офис' }
+  validates :order_date, presence: { message: 'Укажите дату' }
+  validates :dog_num, presence: { message: 'Укажите номер договора' }
 
   accepts_nested_attributes_for :order_items, reject_if: proc { |attrs| attrs.blank? }
 

@@ -14,7 +14,7 @@ table
       tr
         td = link_to ficon(:pencil, :small), edit_order_path(o)
         td = l(o.order_date)
-        td.text-center = o.id
+        td.text-center = o.dog_num
         td = o.dept.try(:name)
         td = o.author.name
         td.show-for-large-only = o.memo
