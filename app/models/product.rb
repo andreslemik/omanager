@@ -14,6 +14,7 @@ class Product < ActiveRecord::Base
                                 allow_destroy: true,
                                 reject_if: ->(pp) { pp[:property_id].blank? || pp[:value].blank? }
   accepts_nested_attributes_for :product_option_types, allow_destroy: true
+  accepts_nested_attributes_for :product_option_values, allow_destroy: true
 
 
   scope :long_order, -> { includes(:category).order('categories.name, products.name')  }

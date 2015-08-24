@@ -2,7 +2,8 @@ ActiveAdmin.register Product do
   menu parent: 'Управление продуктами', priority: 10
   permit_params :name, :image, :image_cache, :category_id, :price, :manufacturer_id,
                 product_properties_attributes: [:id, :property_id, :value, :_destroy],
-                product_option_types_attributes: [:id, :option_type_id, :_destroy]
+                product_option_types_attributes: [:id, :option_type_id, :_destroy],
+                product_option_values_attributes: [:id, :option_value_id, :diff, :_destroy]
 
   filter :category
   filter :name
@@ -37,6 +38,12 @@ ActiveAdmin.register Product do
         f.has_many :product_properties, heading: 'Свойства', allow_destroy: true, new_record: true do |a|
           a.input :property, label: 'Свойство'
           a.input :value, label: 'Значение'
+        end
+      end
+      f.inputs do
+        f.has_many :product_option_values, heading: 'Модификаторы цены', allow_destroy: true, new_record: true do |m|
+          m.input :option_value, label: 'Опция', as: :select, collection: OptionValue.all.map { |ov| [ov.full_name, ov.id] }
+          m.input :diff, label: 'Изменение цены'
         end
       end
     end

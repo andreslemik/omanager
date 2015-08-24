@@ -4,6 +4,10 @@ class OptionValue < ActiveRecord::Base
 
   validates :name, presence: true, uniqueness: { scope: :option_type_id }
 
-  default_scope { order :name }
+  default_scope { order 'option_type_id, position' }
+
+  def full_name
+    "#{self.option_type.name}: #{self.name}"
+  end
 
 end
