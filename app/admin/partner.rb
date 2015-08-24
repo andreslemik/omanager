@@ -8,7 +8,7 @@ ActiveAdmin.register Partner do
     selectable_column
     column :name
     column :partner_type do |pt|
-      I18n.t pt.partner_type.to_s
+      I18n.translate pt.partner_type.to_s
     end
     column :balance do |pt|
       number_to_currency pt.balance, precision: 0
