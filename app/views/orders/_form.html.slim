@@ -39,10 +39,13 @@
         #items
           = f.fields_for :order_items do |ff|
             .row.panel
-              .large-6.columns
+              .large-2.columns
+                = label_tag :category, 'Категория'
+                = select_tag :category, options_from_collection_for_select(Category.all, :id, :name), include_blank: true
+              .large-5.columns
                 = ff.label :product_id, 'Продукт'
                 = ff.select :product_id, Product.long_order.collect {|p| [p.long_name, p.id]}, include_blank: true
-              .large-3.columns
+              .large-2.columns
                 = ff.label :cost, 'Цена'
                 = ff.text_field :cost
               .large-2.columns
