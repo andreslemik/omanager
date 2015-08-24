@@ -10,6 +10,9 @@ ActiveAdmin.register Partner do
     column :partner_type do |pt|
       I18n.t pt.partner_type.to_s
     end
+    column :balance do |pt|
+      number_to_currency pt.balance, precision: 0
+    end
     actions
   end
 

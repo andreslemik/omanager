@@ -20,6 +20,7 @@ ru:
         name: 'Название'
         memo: 'Примечание'
         partner_type: 'Тип'
+        balance: 'Баланс'
       category:
         id: 'ID'
         name: 'Наименование'
