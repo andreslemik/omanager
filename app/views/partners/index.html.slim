@@ -8,17 +8,16 @@ h1 Расчёты с контрагентами
 table
   thead
     tr
-      th
       th Название
       th.text-center Тип
       th Баланс
-
+      th
   tbody
     - @partners.each do |p|
       tr
-        td = link_to ficon(:pencil), partner_path(p)
-        td = p.name
+        td = link_to p.name, edit_admin_partner_path(p), title: 'Изменить контрагента'
         td = t(p.partner_type) if p.partner_type
         td.text-right = number_to_currency p.balance, precision: 0
+        td = link_to ficon(:dollar, :medium), partner_path(p)
 
 = paginate @partners
