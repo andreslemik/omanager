@@ -19,6 +19,7 @@ ru:
         id: 'ID'
         name: 'Название'
         memo: 'Примечание'
+        partner_type: 'Тип'
       category:
         id: 'ID'
         name: 'Наименование'
@@ -137,3 +138,5 @@ ru:
 
   income: приход
   expense: расход
+  supplier: поставщик
+  customer: покупатель
