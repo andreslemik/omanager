@@ -2,11 +2,13 @@ $(document).on 'change', '.categories', ->
   id = @.id.replace(/[^0-9\.]/g,'')
   category_id = @.value
   select = $('#order_order_items_attributes_' + id + '_manufacturer')
+  products = $('#order_order_items_attributes_'+id+'_product_id')
   $.ajax(
     url: '/products/manufacturers/' + category_id
     dataType: 'JSON'
     success: (data) ->
       select.html('')
+      products.html('')
       select.append('<option value></option>')
       $.each(data, (key, val) ->
         select.append('<option id="' + val.id + '" ctg="'+category_id+'">' + val.name + '</option>')
