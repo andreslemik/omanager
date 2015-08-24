@@ -44,6 +44,7 @@ ru:
         name: 'Наименование'
         category: 'Категория'
         image: 'Изображение'
+        price: 'Цена'
       dept:
         name: 'Наименование'
       option_type:

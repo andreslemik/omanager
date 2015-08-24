@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150817121242) do
+ActiveRecord::Schema.define(version: 20150824101656) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -131,6 +131,19 @@ ActiveRecord::Schema.define(version: 20150817121242) do
   add_index "product_option_types", ["option_type_id"], name: "index_product_option_types_on_option_type_id", using: :btree
   add_index "product_option_types", ["product_id"], name: "index_product_option_types_on_product_id", using: :btree
 
+  create_table "product_option_values", force: :cascade do |t|
+    t.integer  "product_id"
+    t.integer  "option_value_id"
+    t.decimal  "diff",            precision: 8, scale: 2
+    t.datetime "deleted_at"
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+  end
+
+  add_index "product_option_values", ["deleted_at"], name: "index_product_option_values_on_deleted_at", using: :btree
+  add_index "product_option_values", ["option_value_id"], name: "index_product_option_values_on_option_value_id", using: :btree
+  add_index "product_option_values", ["product_id"], name: "index_product_option_values_on_product_id", using: :btree
+
   create_table "product_properties", force: :cascade do |t|
     t.string   "value"
     t.integer  "product_id"
@@ -146,10 +159,11 @@ ActiveRecord::Schema.define(version: 20150817121242) do
   create_table "products", force: :cascade do |t|
     t.string   "name"
     t.string   "image"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
     t.datetime "deleted_at"
     t.integer  "category_id"
+    t.decimal  "price",       precision: 8, scale: 2
   end
 
   add_index "products", ["category_id"], name: "index_products_on_category_id", using: :btree
@@ -233,6 +247,8 @@ ActiveRecord::Schema.define(version: 20150817121242) do
   add_foreign_key "orders", "users", column: "author_id"
   add_foreign_key "product_option_types", "option_types"
   add_foreign_key "product_option_types", "products"
+  add_foreign_key "product_option_values", "option_values"
+  add_foreign_key "product_option_values", "products"
   add_foreign_key "product_properties", "products"
   add_foreign_key "product_properties", "properties"
   add_foreign_key "products", "categories"
