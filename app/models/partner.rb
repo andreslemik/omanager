@@ -9,7 +9,8 @@ class Partner < ActiveRecord::Base
 
   enum partner_type: { supplier: 0, customer: 1 }
 
-
+  scope :suppliers, -> { where partner_type: 0 }
+  scope :customers, -> { where partner_type: 1 }
 
   def balance
     income = operations.income.map(&:amount).sum

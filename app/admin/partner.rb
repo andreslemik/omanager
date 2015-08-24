@@ -1,11 +1,14 @@
 ActiveAdmin.register Partner do
-  permit_params :name, :memo, :partner_type
+  permit_params :name, :memo, :partner_type, :own
 
+  partner_types = Partner.partner_types.map { |k,v| [I18n.t(k), k.to_sym] }
   filter :name
-  filter :partner_type
+  filter :own
+  filter :partner_type, as: :select, collection: partner_types
 
   index do
     selectable_column
+    column :own
     column :name
     column :partner_type do |pt|
       I18n.translate(pt.partner_type) if pt.partner_type
@@ -19,7 +22,8 @@ ActiveAdmin.register Partner do
   form do |f|
     f.inputs 'Контрагент' do
       f.input :name
-      f.input :partner_type, as: :select, collection: Partner.partner_types.map { |k,v| [I18n.t(k), k.to_sym] }
+      f.input :partner_type, as: :select, collection: partner_types
+      f.input :own
       f.input :memo
     end
     f.actions

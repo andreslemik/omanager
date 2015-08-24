@@ -21,6 +21,7 @@ ru:
         memo: 'Примечание'
         partner_type: 'Тип'
         balance: 'Баланс'
+        own: 'Свой'
       category:
         id: 'ID'
         name: 'Наименование'
@@ -47,6 +48,7 @@ ru:
         category: 'Категория'
         image: 'Изображение'
         price: 'Цена'
+        manufacturer: 'Производитель'
       dept:
         name: 'Наименование'
       option_type:

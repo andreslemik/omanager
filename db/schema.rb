@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150824104830) do
+ActiveRecord::Schema.define(version: 20150824120335) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -114,9 +114,10 @@ ActiveRecord::Schema.define(version: 20150824104830) do
     t.string   "name"
     t.text     "memo"
     t.datetime "deleted_at"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.integer  "partner_type"
+    t.boolean  "own",          default: false
   end
 
   add_index "partners", ["deleted_at"], name: "index_partners_on_deleted_at", using: :btree
@@ -161,15 +162,17 @@ ActiveRecord::Schema.define(version: 20150824104830) do
   create_table "products", force: :cascade do |t|
     t.string   "name"
     t.string   "image"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
     t.datetime "deleted_at"
     t.integer  "category_id"
-    t.decimal  "price",       precision: 8, scale: 2
+    t.decimal  "price",           precision: 8, scale: 2
+    t.integer  "manufacturer_id"
   end
 
   add_index "products", ["category_id"], name: "index_products_on_category_id", using: :btree
   add_index "products", ["deleted_at"], name: "index_products_on_deleted_at", using: :btree
+  add_index "products", ["manufacturer_id"], name: "index_products_on_manufacturer_id", using: :btree
 
   create_table "properties", force: :cascade do |t|
     t.string   "name"
@@ -254,4 +257,5 @@ ActiveRecord::Schema.define(version: 20150824104830) do
   add_foreign_key "product_properties", "products"
   add_foreign_key "product_properties", "properties"
   add_foreign_key "products", "categories"
+  add_foreign_key "products", "partners", column: "manufacturer_id"
 end

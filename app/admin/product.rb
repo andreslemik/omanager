@@ -1,6 +1,6 @@
 ActiveAdmin.register Product do
   menu parent: 'Управление продуктами', priority: 10
-  permit_params :name, :image, :image_cache, :category_id, :price,
+  permit_params :name, :image, :image_cache, :category_id, :price, :manufacturer_id,
                 product_properties_attributes: [:id, :property_id, :value, :_destroy],
                 product_option_types_attributes: [:id, :option_type_id, :_destroy]
 
@@ -12,9 +12,10 @@ ActiveAdmin.register Product do
     id_column
     column :category
     column :name
-    column 'Изображение' do |p|
-      image_tag p.image.url(:thumb)
-    end
+    # column 'Изображение' do |p|
+    #   image_tag p.image.url(:thumb)
+    # end
+    column :manufacturer
     actions
   end
 
@@ -22,6 +23,7 @@ ActiveAdmin.register Product do
     f.inputs 'Создание продукта...' do
       f.input :name
       f.input :category
+      f.input :manufacturer, as: :select, collection: Partner.suppliers
       f.input :price
       f.input :image,
               hint: f.object.image.present? ? image_tag(f.object.image.url(:thumb)) : content_tag(:span, 'нет изображения')
