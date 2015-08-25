@@ -20,6 +20,14 @@ class ProductsController < ApplicationController
     @mods = params[:mods].split(',').map(&:to_i) if params[:mods]
   end
 
+  def option_values
+    @product = Product.find(params[:product_id])
+    respond_to do |f|
+      f.json
+      f.js
+    end
+  end
+
   protected
 
   def record_not_found

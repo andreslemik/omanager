@@ -1,0 +1,1 @@
+json.option_values @product.product_option_values.count
