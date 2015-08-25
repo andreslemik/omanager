@@ -28,3 +28,8 @@ $(document).on('ready page:load', initial)
 $(document).on 'click', '.clear-datepicker', (e) ->
   $(this).closest('.row.collapse input.datepicker').attr('value', '')
   false
+
+$(document).ajaxStart ->
+  Turbolinks.ProgressBar.start()
+$(document).ajaxSuccess ->
+  Turbolinks.ProgressBar.done()
