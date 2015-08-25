@@ -22,7 +22,9 @@ class ProductsController < ApplicationController
 
   def option_values
     @product = Product.find(params[:product_id])
-    @option_values = Product.product_option_values
+    @option_values = @product.product_option_values
+    @option_types = @product.product_option_types
+    @attr_id = params[:attr_id]
     respond_to do |f|
       f.json
       f.js

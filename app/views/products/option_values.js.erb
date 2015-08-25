@@ -1,1 +1,1 @@
-$('#option_values').html("<%=j render 'option_values_selects' %>")
+$('#option_values').html("<%=j render 'option_values_selects', locals: { attr_id: @attr_id } %>")

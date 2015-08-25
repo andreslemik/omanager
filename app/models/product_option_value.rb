@@ -3,4 +3,5 @@ class ProductOptionValue < ActiveRecord::Base
 
   belongs_to :product
   belongs_to :option_value
+  has_one :option_type, through: :option_value
 end

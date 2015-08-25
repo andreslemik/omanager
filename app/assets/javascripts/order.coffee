@@ -55,13 +55,14 @@ $(document).on 'change', '.products', ->
       price.val(data.price)
     error: ->
       price.val(0)
+      $('#option_values').html('')
   cnt = $.ajax(
     url: '/products/option_values/' + product_id
     async: false
   ).responseText
   if $.parseJSON(cnt).option_values > 0
     $.ajax(
-      url: '/products/option_values/' + product_id
+      url: '/products/option_values/' + product_id + '/' + id
       dataType: 'SCRIPT'
     )
   else
