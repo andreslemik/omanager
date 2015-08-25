@@ -34,6 +34,7 @@ $(document).on 'change', '.manufacturers', ->
     success: (data) ->
       select.html('')
       price.val('')
+      $('#option_values').html('')
       select.append('<option value></option>')
       $.each(data, (key, val) ->
         select.append('<option id="' + val.id + '">' + val.name + '</option')
