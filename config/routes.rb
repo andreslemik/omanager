@@ -11,6 +11,6 @@ Rails.application.routes.draw do
 
   get 'products/by_category_mfc/:category_id/:manufacturer_id', to: 'products#by_category_mfc', defaults: { format: 'json' }
   get 'products/manufacturers/:category_id', to: 'products#manufacturers', defaults: { format: 'json' }
-
+  get 'products/price/:product_id(/:mods)', to: 'products#price', defaults: { format: 'json' }
 
 end

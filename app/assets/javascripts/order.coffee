@@ -33,3 +33,15 @@ $(document).on 'change', '.manufacturers', ->
       )
     error: ->
       select.html('<option id="-1">Укажите категорию и производителя</option>')
+
+$(document).on 'change', '.products', ->
+  id = @.id.replace(/[^0-9\.]/g,'')
+  product_id = $(@).children(':selected').attr('id')
+  price = $('#order_order_items_attributes_' + id + '_cost')
+  $.ajax
+    url: '/products/price/' + product_id
+    dataType: 'JSON'
+    success: (data) ->
+      price.val(data.price)
+    error: ->
+      price.val(0)
