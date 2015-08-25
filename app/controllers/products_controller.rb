@@ -25,6 +25,8 @@ class ProductsController < ApplicationController
     @option_values = @product.product_option_values
     @option_types = @product.product_option_types
     @attr_id = params[:attr_id]
+
+    #p.product_option_values.joins(:option_value).map(&:option_type).uniq
     respond_to do |f|
       f.json
       f.js
