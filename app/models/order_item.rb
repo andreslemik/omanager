@@ -5,6 +5,8 @@ class OrderItem < ActiveRecord::Base
   attr_accessor :category, :manufacturer
   serialize :option_values, JSON
 
+  validates :product_id, :amount, :cost, presence: true
+
 
   def option_values=(val)
     self[:option_values] = val.map(&:to_i)

@@ -10,7 +10,7 @@ class Order < ActiveRecord::Base
                 'Не Ульяновск': 0
        }
 
-  has_many :order_items
+  has_many :order_items, dependent: :destroy, inverse_of: :order
   has_many :products, through: :order_items
   belongs_to :dept, -> { with_deleted }
   belongs_to :author, -> { with_deleted }, class_name: User
@@ -19,6 +19,8 @@ class Order < ActiveRecord::Base
   validates :order_date, presence: { message: 'Укажите дату' }
   validates :dog_num, presence: { message: 'Укажите номер договора' }
   validates :client, :phone, :address, :area, presence: true
+
+  validates :order_items, presence: true
 
   accepts_nested_attributes_for :order_items,
                                 reject_if: proc { |attrs| attrs.blank? }
