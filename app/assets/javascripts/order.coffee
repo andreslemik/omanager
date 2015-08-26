@@ -11,6 +11,7 @@ $(document).on 'change', '.categories', ->
       select.html('')
       products.html('')
       price.val('')
+      $('#option_values').html('')
       select.append('<option value></option>')
       $.each(data, (key, val) ->
         select.append('<option id="' + val.id + '" ctg="'+category_id+'">' + val.name + '</option>')
