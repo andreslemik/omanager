@@ -4,4 +4,11 @@ class OrderItem < ActiveRecord::Base
 
   attr_accessor :category, :manufacturer
   serialize :option_values, JSON
+
+
+  def option_values=(val)
+    self[:option_values] = val.map(&:to_i)
+  end
+
+
 end

@@ -1,5 +1,6 @@
 - @option_types.each do |ot|
   .large-4.columns
     = label_tag :option_value_name, ot.option_type.name
-    = collection_select :order_item_options, :option_values_ids, \
-      ot.option_values, :id, :name, { include_blank: true }, class: 'option_values'
+    = collection_select "order[order_items_attributes][0]", "option_values", \
+      ot.option_values, :id, :name, { include_blank: true }, \
+      { class: 'option_values', name: "order[order_items_attributes][0][option_values][]" }

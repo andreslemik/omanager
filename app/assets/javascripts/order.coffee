@@ -38,7 +38,7 @@ $(document).on 'change', '.manufacturers', ->
       $('#option_values').html('')
       select.append('<option value></option>')
       $.each(data, (key, val) ->
-        select.append('<option id="' + val.id + '">' + val.name + '</option')
+        select.append('<option value="' + val.id + '" id="' + val.id + '">' + val.name + '</option')
       )
     error: ->
       select.html('<option id="-1">Укажите категорию и производителя</option>')

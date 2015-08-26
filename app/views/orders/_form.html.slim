@@ -32,7 +32,7 @@
           = f.text_field :address
         .large-2.columns
           = f.label :area, 'Район*'
-          = f.select :area, Order.areas.map { |k,v| [k, v] }, include_blank: true
+          = f.select :area, Order.areas.map { |k,v| [k, k] }, include_blank: true
   .row
     .columns
       fieldset
