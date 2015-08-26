@@ -4,7 +4,8 @@ class ProductsController < ApplicationController
 
   def by_category_mfc
     category = Category.find(params[:category_id])
-    @products = Product.where(category: category)
+    manufacturer = Partner.find(params[:manufacturer_id])
+    @products = Product.where(category: category).where(manufacturer: manufacturer)
   end
 
   def manufacturers
