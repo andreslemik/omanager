@@ -11,7 +11,7 @@ $(document).on 'change', '.categories', ->
       select.html('')
       products.html('')
       price.val('')
-      $('#option_values').html('')
+      $('#option_values_' + id).html('')
       select.append('<option value></option>')
       $.each(data, (key, val) ->
         select.append('<option id="' + val.id + '" ctg="'+category_id+'">' + val.name + '</option>')
@@ -19,7 +19,7 @@ $(document).on 'change', '.categories', ->
     error: ->
       select.html('<option id="-1">Укажите категорию</option>')
       price.val('')
-      $('#option_values').html('')
+      $('#option_values_' + id).html('')
       products.html('')
   )
 
@@ -35,7 +35,7 @@ $(document).on 'change', '.manufacturers', ->
     success: (data) ->
       select.html('')
       price.val('')
-      $('#option_values').html('')
+      $('#option_values_' + id).html('')
       select.append('<option value></option>')
       $.each(data, (key, val) ->
         select.append('<option value="' + val.id + '" id="' + val.id + '">' + val.name + '</option')
@@ -43,7 +43,7 @@ $(document).on 'change', '.manufacturers', ->
     error: ->
       select.html('<option id="-1">Укажите категорию и производителя</option>')
       price.val('')
-      $('#option_values').html('')
+      $('#option_values_' +id).html('')
 
 $(document).on 'change', '.products', ->
   id = @.id.replace(/[^0-9\.]/g,'')
@@ -56,7 +56,7 @@ $(document).on 'change', '.products', ->
       price.val(data.price)
     error: ->
       price.val(0)
-      $('#option_values').html('')
+      $('#option_values_' +id).html('')
   cnt = $.ajax(
     url: '/products/option_values/' + product_id
     async: false
@@ -67,4 +67,4 @@ $(document).on 'change', '.products', ->
       dataType: 'SCRIPT'
     )
   else
-    $('#option_values').html('')
+    $('#option_values_' + id).html('')

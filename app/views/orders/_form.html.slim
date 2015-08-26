@@ -52,7 +52,7 @@
                   = ff.label :product_id, 'Продукт'
                   = ff.select :product_id, [], {}, { class: 'products' }
               .row
-                .columns#option_values
+                .columns.additional(id="option_values_#{ff.index}")
               .row
                 .large-2.columns
                   = ff.label :cost, 'Цена'
