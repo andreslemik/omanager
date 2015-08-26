@@ -12,7 +12,6 @@ $(document).on 'change', '.categories', ->
       products.html('')
       price.val('')
       $('#option_values_' + id).html('')
-      select.removeAttr('disabled')
       select.append('<option value></option>')
       $.each(data, (key, val) ->
         select.append('<option id="' + val.id + '" ctg="'+category_id+'">' + val.name + '</option>')
@@ -37,7 +36,6 @@ $(document).on 'change', '.manufacturers', ->
       select.html('')
       price.val('')
       $('#option_values_' + id).html('')
-      select.removeAttr('disabled')
       select.append('<option value></option>')
       $.each(data, (key, val) ->
         select.append('<option value="' + val.id + '" id="' + val.id + '">' + val.name + '</option')
