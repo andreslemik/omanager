@@ -47,10 +47,10 @@
                   = ff.select :category, options_from_collection_for_select(categories, :id, :name), {include_blank: true }, { class: 'categories' }
                 .large-4.columns
                   = ff.label :manufacturer, 'Производитель'
-                  = ff.select :manufacturer, [], {}, { class: 'manufacturers' }
+                  = ff.select :manufacturer, [], {}, { class: 'manufacturers', disabled: true }
                 .large-5.columns
                   = ff.label :product_id, 'Продукт'
-                  = ff.select :product_id, [], {}, { class: 'products' }
+                  = ff.select :product_id, [], {}, { class: 'products', disabled: true }
               .additional(id="option_values_#{ff.index}")
               .row
                 .large-2.columns
