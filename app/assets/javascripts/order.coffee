@@ -14,7 +14,7 @@ $(document).on 'change', '.categories', ->
       $('#option_values_' + id).html('')
       select.append('<option value></option>')
       $.each(data, (key, val) ->
-        select.append('<option id="' + val.id + '" ctg="'+category_id+'" val="'+val.id+'">' + val.name + '</option>')
+        select.append('<option id="' + val.id + '" ctg="'+category_id+'" value="'+val.id+'">' + val.name + '</option>')
       )
     error: ->
       select.html('<option id="-1">Укажите категорию</option>')
