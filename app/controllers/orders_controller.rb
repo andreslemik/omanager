@@ -19,6 +19,7 @@ class OrdersController < ApplicationController
 
   def create
     @order = Order.new order_params
+    @order.author_id = current_user.id
     respond_to do |f|
       if @order.save
         f.html { redirect_to @order, notice: 'Договор успешно добавлен' }
@@ -53,7 +54,7 @@ class OrdersController < ApplicationController
 
   def order_params
     params.require(:order).permit(:id, :order_date, :memo, :dept_id, :dog_num,
-      :author_id, :client, :phone, :address, :area,
+      :client, :phone, :address, :area,
       order_items_attributes: [:id, :product_id, :amount, :cost, :_destroy, option_values: []])
   end
 end

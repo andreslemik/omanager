@@ -16,7 +16,6 @@
     .large-6.small-12.columns
       = f.label :memo, 'Примечание'
       = f.text_area :memo, label: 'Примечание:', placeholder: 'Примечание'
-      = f.hidden_field :author_id, value: current_user.id
   .row
     .columns
       fieldset
