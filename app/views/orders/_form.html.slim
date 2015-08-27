@@ -42,7 +42,9 @@
             = f.label :area, 'Район*'
             = f.select :area, Order.areas.map { |k,v| [k, k] }, include_blank: true
         .corporate(style="display:none;")
-          p Hello
+          .large-12.columns
+            = f.label :partner, 'Заказчик'
+            = f.select :partner, options_from_collection_for_select(Partner.customers, :id, :name), {include_blank: true }
 
   .row
     .columns

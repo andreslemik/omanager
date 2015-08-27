@@ -14,6 +14,7 @@ class Order < ActiveRecord::Base
   has_many :products, through: :order_items
   belongs_to :dept, -> { with_deleted }
   belongs_to :author, -> { with_deleted }, class_name: User
+  belongs_to :partner
 
   validates :dept_id, presence: { message: 'Укажите офис' }
   validates :order_date, presence: { message: 'Укажите дату' }
