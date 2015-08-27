@@ -1,3 +1,4 @@
+# Product model class
 class Product < ActiveRecord::Base
   mount_uploader :image, ImageUploader
   acts_as_paranoid
@@ -15,7 +16,10 @@ class Product < ActiveRecord::Base
   accepts_nested_attributes_for :product_option_types, allow_destroy: true
   accepts_nested_attributes_for :product_option_values, allow_destroy: true
 
-  scope :long_order, -> { includes(:category).order('categories.name, products.name') }
+  scope :long_order, lambda {
+    includes(:category)
+      .order('categories.name, products.name')
+  }
 
   validates :name, :category, presence: true
   validates :manufacturer, presence: true
@@ -27,12 +31,11 @@ class Product < ActiveRecord::Base
   def price_mod(retail, *mods)
     # Стоимость продукта с учётом его модификаторов цены (значения опций)
     rt = retail.to_i
-    if mods.any?
-      result = product_option_values.where(option_value_id: mods.flatten).map(&:diff).sum + price
-    else
-      result = price
-    end
-    result *= (1 + margin.to_i / 100.0) if rt == 1
+    return price if rt == 0 && !mods.any?
+    result = product_option_values.where(option_value_id: mods.flatten)
+             .map(&:diff).sum + price
+    return result unless rt == 1
+    result *= (1 + margin.to_i / 100.0)
     result.round(-2)
   end
 end
