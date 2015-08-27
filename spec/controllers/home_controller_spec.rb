@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe HomeController, type: :controller do
-
   def login_as(role)
     @request.env['devise.mapping'] = Devise.mappings[:user]
     user = FactoryGirl.create role
@@ -17,16 +16,16 @@ RSpec.describe HomeController, type: :controller do
     end
 
     context 'as signed user with any role' do
-      before :each do
-        role = [:admin, :manager, :factories].sample
-        login_as role
-      end
-      it 'return http succes' do
-        get :index
-        expect(response).to have_http_status(:success)
+      roles = [:admin, :manager, :fabrication]
+      roles.each do |role|
+        before do
+          login_as role
+        end
+        it 'return http succes' do
+          get :index
+          expect(response).to have_http_status(:success)
+        end
       end
     end
-
   end
-
 end
