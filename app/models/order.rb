@@ -16,10 +16,11 @@ class Order < ActiveRecord::Base
   belongs_to :author, -> { with_deleted }, class_name: User
   belongs_to :partner
 
-  validates :dept_id, presence: { message: 'Укажите офис' }, if: :reatil?
-  validates :order_date, presence: { message: 'Укажите дату' }, if: :reatil?
-  validates :dog_num, presence: { message: 'Укажите номер договора' }, if: :reatil?
-  validates :client, :phone, :address, :area, presence: true, if: :reatil?
+  validates :dept_id, presence: { message: 'Укажите офис' }, if: :retail?
+  validates :order_date, presence: { message: 'Укажите дату' }, if: :retail?
+  validates :dog_num, presence: { message: 'Укажите номер договора' }, if: :retail?
+  validates :client, :phone, :address, :area, presence: true, if: :retail?
+  validates :partner_id, presence: true, unless: :retail?
 
   validates :order_items, presence: true
 
@@ -35,7 +36,7 @@ class Order < ActiveRecord::Base
   end
 
   def retail?
-
+    retail_client
   end
 
 end
