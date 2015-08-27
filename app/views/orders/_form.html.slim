@@ -52,12 +52,22 @@
                   = ff.select :product_id, [], {}, { class: 'products' }
               .additional(id="option_values_#{ff.index}")
               .row
+                .large-4.columns
+                  = ff.label :descr_basis, 'Цвет основа'
+                  = ff.text_area :descr_basis
+                .large-4.columns
+                  = ff.label :descr_assort, 'Цвет подбор'
+                  = ff.text_area :descr_assort
+                .large-4.columns
+                  = ff.label :special_notes, 'Специальные отметки'
+                  = ff.text_area :special_notes
+              .row
                 .large-2.columns
                   = ff.label :cost, 'Цена'
-                  = ff.text_field :cost
+                  = ff.number_field :cost
                 .large-2.columns
                   = ff.label :amount, 'Кол-во'
-                  = ff.text_field :amount
+                  = ff.number_field :amount
                 .large-1.columns.end
                 = ff.link_to_remove ficon(:trash, :medium), title: 'Удалить'
         br

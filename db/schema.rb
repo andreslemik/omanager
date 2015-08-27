@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150826072821) do
+ActiveRecord::Schema.define(version: 20150827071329) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,6 +91,9 @@ ActiveRecord::Schema.define(version: 20150826072821) do
     t.datetime "created_at",                            null: false
     t.datetime "updated_at",                            null: false
     t.string   "option_values"
+    t.text     "descr_basis"
+    t.text     "descr_assort"
+    t.text     "special_notes"
   end
 
   add_index "order_items", ["order_id"], name: "index_order_items_on_order_id", using: :btree
@@ -100,8 +103,8 @@ ActiveRecord::Schema.define(version: 20150826072821) do
     t.date     "order_date"
     t.text     "memo"
     t.string   "aasm_state"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.datetime "deleted_at"
     t.integer  "dept_id"
     t.integer  "author_id"
@@ -110,6 +113,7 @@ ActiveRecord::Schema.define(version: 20150826072821) do
     t.string   "address"
     t.string   "phone"
     t.integer  "area"
+    t.boolean  "retail_client", default: true
   end
 
   add_index "orders", ["dept_id"], name: "index_orders_on_dept_id", using: :btree
