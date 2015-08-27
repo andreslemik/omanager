@@ -82,7 +82,7 @@
                   = ff.number_field :cost
                 .large-2.columns
                   = ff.label :amount, 'Кол-во'
-                  = ff.number_field :amount
+                  = ff.number_field :amount, value: 1
                 .large-1.columns.end
                 = ff.link_to_remove ficon(:trash, :medium), title: 'Удалить'
         br
