@@ -19,6 +19,7 @@ ActiveAdmin.register Product do
     #   image_tag p.image.url(:thumb)
     # end
     column :manufacturer
+    column :margin
     actions
   end
 

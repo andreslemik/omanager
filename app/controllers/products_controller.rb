@@ -5,7 +5,8 @@ class ProductsController < ApplicationController
   def by_category_mfc
     category = Category.find(params[:category_id])
     manufacturer = Partner.find(params[:manufacturer_id])
-    @products = Product.where(category: category).where(manufacturer: manufacturer)
+    @products = Product.where(category: category)
+                .where(manufacturer: manufacturer)
   end
 
   def manufacturers
@@ -19,6 +20,7 @@ class ProductsController < ApplicationController
   def price
     @product = Product.find(params[:product_id])
     @mods = params[:mods].split(',').map(&:to_i) if params[:mods]
+    @type_id = params[:type_id]
   end
 
   def option_values
@@ -27,7 +29,6 @@ class ProductsController < ApplicationController
     @option_types = @product.product_option_types
     @attr_id = params[:attr_id]
 
-    #p.product_option_values.joins(:option_value).map(&:option_type).uniq
     respond_to do |f|
       f.json
       f.js

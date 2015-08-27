@@ -4,7 +4,6 @@ class Product < ActiveRecord::Base
 
   belongs_to :category
 
-
   belongs_to :manufacturer, class_name: 'Partner'
   has_many :product_option_types, dependent: :destroy, inverse_of: :product
   has_many :product_option_values, dependent: :destroy
@@ -16,24 +15,24 @@ class Product < ActiveRecord::Base
   accepts_nested_attributes_for :product_option_types, allow_destroy: true
   accepts_nested_attributes_for :product_option_values, allow_destroy: true
 
-
-  scope :long_order, -> { includes(:category).order('categories.name, products.name')  }
+  scope :long_order, -> { includes(:category).order('categories.name, products.name') }
 
   validates :name, :category, presence: true
   validates :manufacturer, presence: true
 
-
   def long_name
-    "#{self.category.name}: #{self.name}"
+    "#{category.name}: #{name}"
   end
 
-  def price_mod(*mods)
+  def price_mod(retail, *mods)
     # Стоимость продукта с учётом его модификаторов цены (значения опций)
+    rt = retail.to_i
     if mods.any?
-      self.product_option_values.where(option_value_id: mods.flatten).map(&:diff).sum + self.price
+      result = product_option_values.where(option_value_id: mods.flatten).map(&:diff).sum + price
     else
-      self.price
+      result = price
     end
+    result *= (1 + margin.to_i / 100.0) if rt == 1
+    result.round(-2)
   end
-
 end

@@ -1,3 +1,5 @@
+retail = ->
+  $('#retail').val()
 $(document).on 'change', '.categories', ->
   id = @.id.replace(/[^0-9\.]/g,'')
   category_id = @.value
@@ -50,7 +52,7 @@ $(document).on 'change', '.products', ->
   product_id = $(@).children(':selected').attr('id')
   price = $('#order_order_items_attributes_' + id + '_cost')
   $.ajax
-    url: '/products/price/' + product_id
+    url: '/products/price/'  + product_id + '/' + retail()
     dataType: 'JSON'
     success: (data) ->
       price.val(data.price)
@@ -73,9 +75,11 @@ $(document).on 'change', '#order_retail_client', ->
   if @.checked
     $('.retail').show()
     $('.corporate').hide()
+    $('#retail').val(1)
   else
     $('.retail').hide()
     $('.corporate').show()
+    $('#retail').val(0)
 
 $(document).on 'change', '.option_values_select', ->
   x= []
@@ -85,7 +89,7 @@ $(document).on 'change', '.option_values_select', ->
   id = @.id.replace(/[^0-9\.]/g,'')
   price = $('#order_order_items_attributes_' + id + '_cost')
   $.ajax
-    url: '/products/price/' + product_id + '/' + x
+    url: '/products/price/' + product_id + '/' + retail() + '/' + x
     dataType: 'JSON'
     success: (data) ->
       price.val(data.price)

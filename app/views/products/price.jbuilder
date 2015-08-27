@@ -1,2 +1,2 @@
 json.extract! @product, :id, :name
-json.price @product.price_mod(@mods)
+json.price @product.price_mod(@type_id, @mods)
