@@ -1,6 +1,7 @@
 ActiveAdmin.register Product do
   menu parent: 'Управление продуктами', priority: 10
   permit_params :name, :image, :image_cache, :category_id, :price, :manufacturer_id,
+                :margin,
                 product_properties_attributes: [:id, :property_id, :value, :_destroy],
                 product_option_types_attributes: [:id, :option_type_id, :_destroy],
                 product_option_values_attributes: [:id, :option_value_id, :diff, :_destroy]
@@ -27,6 +28,7 @@ ActiveAdmin.register Product do
       f.input :category
       f.input :manufacturer, as: :select, collection: Partner.suppliers
       f.input :price
+      f.input :margin
       f.input :image,
               hint: f.object.image.present? ? image_tag(f.object.image.url(:thumb)) : content_tag(:span, 'нет изображения')
       f.input :image_cache, as: :hidden
@@ -58,6 +60,7 @@ ActiveAdmin.register Product do
         row :category
         row :name
         row :price
+        row :margin
         row :image do
           image_tag product.image.url
         end
