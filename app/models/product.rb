@@ -30,12 +30,10 @@ class Product < ActiveRecord::Base
   def price_mod(*mods)
     # Стоимость продукта с учётом его модификаторов цены (значения опций)
     if mods.any?
-      self.product_option_values.find(mods).map(&:diff).sum + self.price
+      self.product_option_values.where(id: mods).map(&:diff).sum + self.price
     else
       self.price
     end
-  rescue ActiveRecord::RecordNotFound
-    self.price
   end
 
 end
