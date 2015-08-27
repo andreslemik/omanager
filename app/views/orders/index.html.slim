@@ -8,6 +8,7 @@ table
       th
       th.text-center(width="100") Дата
       th.text-center(width="100") Номер
+      th.text-center Сумма
       th.text-center Офис
       th.text-center Добавил
       th.show-for-large-only(width="200") Примечение
@@ -17,6 +18,7 @@ table
         td = link_to ficon(:pencil, :small), edit_order_path(o)
         td = l(o.order_date)
         td.text-center = o.dog_num
+        td.text-right = number_to_currency o.total, precision: 0
         td = o.dept.try(:name)
         td = o.author.name
         td.show-for-large-only = o.memo

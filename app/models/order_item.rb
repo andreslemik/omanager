@@ -12,6 +12,6 @@ class OrderItem < ActiveRecord::Base
   end
 
   def subtotal
-    amount * cost
+    amount.to_i * cost.to_f
   end
 end
