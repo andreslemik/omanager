@@ -30,7 +30,7 @@ class Product < ActiveRecord::Base
   def price_mod(*mods)
     # Стоимость продукта с учётом его модификаторов цены (значения опций)
     if mods.any?
-      self.product_option_values.where(id: mods).map(&:diff).sum + self.price
+      self.product_option_values.where(option_value_id: mods.flatten).map(&:diff).sum + self.price
     else
       self.price
     end

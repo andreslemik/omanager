@@ -76,3 +76,19 @@ $(document).on 'change', '#order_retail_client', ->
   else
     $('.retail').hide()
     $('.corporate').show()
+
+$(document).on 'change', '.option_values_select', ->
+  x= []
+  $('.option_values_select').each ->
+    x.push($(@).children(':selected').attr('value'))
+  product_id = $('.products').children(':selected').attr('value')
+  id = @.id.replace(/[^0-9\.]/g,'')
+  price = $('#order_order_items_attributes_' + id + '_cost')
+  $.ajax
+    url: '/products/price/' + product_id + '/' + x
+    dataType: 'JSON'
+    success: (data) ->
+      price.val(data.price)
+    error: ->
+      price.val(0)
+      $('#option_values_' +id).html('')
