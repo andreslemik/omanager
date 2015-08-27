@@ -35,4 +35,6 @@
         legend Содержимое заказа
         = render 'order_items'
     .row
-      = f.submit 'Сохранить'
+      ul.button-group
+        li = f.submit 'Сохранить'
+        li = link_to 'Назад', orders_path, class: 'button secondary tiny'
