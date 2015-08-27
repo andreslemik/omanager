@@ -68,3 +68,11 @@ $(document).on 'change', '.products', ->
     )
   else
     $('#option_values_' + id).html('')
+
+$(document).on 'change', '#order_retail_client', ->
+  if @.checked
+    $('.retail').show()
+    $('.corporate').hide()
+  else
+    $('.retail').hide()
+    $('.corporate').show()

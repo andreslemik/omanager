@@ -17,21 +17,33 @@
       = f.label :memo, 'Примечание'
       = f.text_area :memo, label: 'Примечание:', placeholder: 'Примечание'
   .row
+    .large-4.large-centered.small-6.small-centered.columns
+      .large-8.small-8.columns
+        p Частный клиент
+      .large-4.small-4.columns
+        .switch
+          = f.check_box :retail_client
+          = f.label :retail_client, ''
+  .row
     .columns
       fieldset
-        legend Клиент
-        .large-3.columns
-          = f.label :client, 'ФИО*'
-          = f.text_field :client
-        .large-3.columns
-          = f.label :phone, 'Телефон*'
-          = f.text_field :phone
-        .large-4.columns
-          = f.label :address, 'Адрес*'
-          = f.text_field :address
-        .large-2.columns
-          = f.label :area, 'Район*'
-          = f.select :area, Order.areas.map { |k,v| [k, k] }, include_blank: true
+        legend Заказчик
+        .retail
+          .large-3.columns
+            = f.label :client, 'ФИО*'
+            = f.text_field :client
+          .large-3.columns
+            = f.label :phone, 'Телефон*'
+            = f.text_field :phone
+          .large-4.columns
+            = f.label :address, 'Адрес*'
+            = f.text_field :address
+          .large-2.columns
+            = f.label :area, 'Район*'
+            = f.select :area, Order.areas.map { |k,v| [k, k] }, include_blank: true
+        .corporate(style="display:none;")
+          p Hello
+
   .row
     .columns
       fieldset
