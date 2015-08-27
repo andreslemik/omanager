@@ -6,6 +6,7 @@ table
   thead
     tr
       th
+      th.text-center Тип
       th.text-center(width="100") Дата
       th.text-center(width="100") Номер
       th.text-center Сумма
@@ -16,9 +17,10 @@ table
     - @orders.each do |o|
       tr
         td = link_to ficon(:pencil, :small), edit_order_path(o)
+        td = o.order_type
         td = l(o.order_date)
         td.text-center = o.dog_num
         td.text-right = number_to_currency o.total, precision: 0
-        td = o.dept.try(:name)
+        td = o.dept.name
         td = o.author.name
         td.show-for-large-only = o.memo

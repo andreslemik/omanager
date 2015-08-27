@@ -1,0 +1,16 @@
+table
+  thead
+    tr
+      th
+      th.text-center Наименование
+      th.text-center Цена
+      th.text-center Кол-во
+      th.text-center Сумма
+  tbody
+    - @order.order_items.each do |oi|
+      tr
+        td = link_to ficon(:pencil, :small), edit_order_order_item_path(@order, oi)
+        td = oi.product.long_name
+        td.text-right = number_to_currency oi.cost, precision: 0
+        td.text-center = oi.amount
+        td.text-right = number_to_currency oi.subtotal, precision: 0

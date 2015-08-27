@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   devise_for :users#, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
-  resources :orders
+  resources :orders do
+    resources :order_items
+  end
 
   resources :partners, only: [:index, :show]
   resources :accounts

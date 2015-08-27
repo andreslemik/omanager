@@ -25,7 +25,7 @@ class Product < ActiveRecord::Base
   validates :manufacturer, presence: true
 
   def long_name
-    "#{category.name}: #{name}"
+    "#{category.name}: #{name} (#{manufacturer.name})"
   end
 
   def price_mod(retail, *mods)

@@ -39,6 +39,11 @@ class Order < ActiveRecord::Base
     retail_client
   end
 
+  def order_type
+    return 'Частный' if retail_client
+    'Корп'
+  end
+
   def total
     order_items.map(&:subtotal).sum
   end

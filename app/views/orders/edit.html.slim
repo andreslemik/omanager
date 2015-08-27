@@ -16,3 +16,23 @@
         = f.select :dept_id, Dept.pluck(:name, :id), label: 'Офис'
       .large-6.small-12.columns
         = f.text_area :memo, label: 'Примечание:', placeholder: 'Примечание'
+    .row
+      fieldset
+        legend Заказчик
+        - if @order.retail?
+          .large-3.columns.small-6.columns
+            = f.text_field :client
+          .large-3.columns.small-6.columns
+            = f.text_field :phone
+          .large-4.columns
+            = f.text_field :address
+          .large-2.columns
+            = f.select :area, Order.areas.map { |k, v| [k, k] }, include_blank: true
+        - else
+          p = @order.partner.name
+    .row
+      fieldset
+        legend Содержимое заказа
+        = render 'order_items'
+    .row
+      = f.submit 'Сохранить'
