@@ -39,4 +39,7 @@ class Order < ActiveRecord::Base
     retail_client
   end
 
+  def total
+    order_items.map(&:subtotal).sum
+  end
 end

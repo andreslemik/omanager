@@ -7,10 +7,11 @@ class OrderItem < ActiveRecord::Base
 
   validates :product_id, :amount, :cost, presence: true
 
-
   def option_values=(val)
     self[:option_values] = val.map(&:to_i)
   end
 
-
+  def subtotal
+    amount * cost
+  end
 end
