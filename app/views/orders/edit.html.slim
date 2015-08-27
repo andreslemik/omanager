@@ -1,0 +1,18 @@
+.large-10.large-centered.columns
+  h2 Изменение договора #{@order.dog_num} от #{l(@order.order_date)}
+  = link_to 'Назад', orders_path, class: 'button secondary tiny'
+
+  = form_for @order do |f|
+    - if @order.errors.any?
+      .row
+        .large-12.columns
+          = render 'shared/form_errors', model: @order
+    .row
+      .large-2.columns.small-3
+        = f.text_field :order_date, class: 'datepicker', value: l(Date.current), placeholder: 'Дата договора'
+      .large-2.columns.small-3
+        = f.text_field :dog_num, placeholder: 'Номер договора'
+      .large-2.columns.small-6
+        = f.select :dept_id, Dept.pluck(:name, :id), label: 'Офис'
+      .large-6.small-12.columns
+        = f.text_area :memo, label: 'Примечание:', placeholder: 'Примечание'
