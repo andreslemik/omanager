@@ -58,7 +58,6 @@ group :development do
   gem 'guard-rspec'
   gem 'capistrano-rails', '~> 1.1'
   gem 'capistrano-rvm'
-  gem 'capistrano-faster-assets', '~> 1.0'
   gem 'bullet'
   gem 'quiet_assets'
 end
