@@ -17,7 +17,7 @@ FactoryGirl.define do
       after(:create) {|user| user.add_role :manager }
     end
     factory :fabrication do
-      after(:create) {|user| user.add_role :supplier }
+      after(:create) {|user| user.add_role :fabrication }
     end
   end
 end
