@@ -9,7 +9,7 @@
           = render 'shared/form_errors', model: @order
     .row
       .large-2.columns.small-3
-        = f.text_field :order_date, class: 'datepicker', value: l(Date.current), placeholder: 'Дата договора'
+        = f.text_field :order_date, value: l(@order.order_date), class: 'datepicker', placeholder: 'Дата договора'
       .large-2.columns.small-3
         = f.text_field :dog_num, placeholder: 'Номер договора'
       .large-2.columns.small-6
@@ -19,6 +19,13 @@
     .row
       fieldset
         legend Заказчик
+        .large-2.columns
+          .row.collapse
+            = f.label :desired_date
+              .small-9.columns
+                = f.text_field :desired_date, label: false, class: 'datepicker'
+              .small-3.columns
+                span.postfix = ficon :calendar, :large
         - if @order.retail?
           .large-3.columns.small-6.columns
             = f.text_field :client

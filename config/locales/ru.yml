@@ -64,6 +64,7 @@ ru:
         phone: Телефон
         address: Адрес
         area: Район
+        desired_date: 'Желаемая дата'
     models:
       product_option_type:
         zero: 'Опций продукта'

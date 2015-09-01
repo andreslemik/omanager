@@ -5,8 +5,12 @@
         = render 'shared/form_errors', model: @order
   .row
     .large-2.columns.small-3
-      = f.label :order_date, 'Дата договора*'
-      = f.text_field :order_date, class: 'datepicker', value: l(Date.current), placeholder: 'Дата договора'
+      .row.collapse
+        = f.label :order_date, 'Дата договора*'
+        .small-9.columns
+          = f.text_field :order_date, class: 'datepicker', value: l(Date.current), placeholder: 'Дата договора'
+        .small-3.columns
+          span.postfix = ficon :calendar, :large
     .large-2.columns.small-3
       = f.label :dog_num, 'Номер договора*'
       = f.text_field :dog_num, placeholder: 'Номер договора'
@@ -26,12 +30,8 @@
           = f.label :retail_client, ''
           = hidden_field_tag :retail, 1
     .large-2.small-3.columns.end
-      - unless browser.firefox? || browser.ie?
-        = f.label :desired_date, 'Желаемая дата'
-        = f.date_field :desired_date
-      - else
         .row.collapse
-          = f.label :desired_date, 'Желаемая дата'
+          = f.label :desired_date
           .small-9.columns
             = f.text_field :desired_date, label: false, class: 'datepicker'
           .small-3.columns
