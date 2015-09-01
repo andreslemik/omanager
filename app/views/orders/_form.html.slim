@@ -17,14 +17,25 @@
       = f.label :memo, 'Примечание'
       = f.text_area :memo, label: 'Примечание:', placeholder: 'Примечание'
   .row
-    .large-4.large-centered.small-6.small-centered.columns
-      .large-8.small-8.columns
+    .large-4.small-6.columns
+      .large-6.small-6.columns
         p Частный клиент
-      .large-4.small-4.columns
+      .large-6.small-6.columns
         .switch
           = f.check_box :retail_client
           = f.label :retail_client, ''
           = hidden_field_tag :retail, 1
+    .large-2.small-3.columns.end
+      - unless browser.firefox? || browser.ie?
+        = f.label :desired_date, 'Желаемая дата'
+        = f.date_field :desired_date
+      - else
+        .row.collapse
+          = f.label :desired_date, 'Желаемая дата'
+          .small-9.columns
+            = f.text_field :desired_date, label: false, class: 'datepicker'
+          .small-3.columns
+            span.postfix = ficon :calendar, :large
   .row
     .columns
       fieldset
