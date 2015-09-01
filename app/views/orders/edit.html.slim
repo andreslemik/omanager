@@ -23,7 +23,8 @@
           .row.collapse
             = f.label :desired_date
               .small-9.columns
-                = f.text_field :desired_date, label: false, class: 'datepicker'
+                = f.text_field :desired_date, label: false, class: 'datepicker', \
+                 value: @order.desired_date.blank? ? '' : l(@order.desired_date)
               .small-3.columns
                 span.postfix = ficon :calendar, :large
         - if @order.retail?
