@@ -65,6 +65,7 @@ ru:
         address: Адрес
         area: Район
         desired_date: 'Желаемая дата'
+        order_items: 'Содержимое заказа'
     models:
       product_option_type:
         zero: 'Опций продукта'
