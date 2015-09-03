@@ -36,7 +36,8 @@
     .row
       fieldset
         legend Содержимое заказа
-        = render 'order_items'
+        = f.fields_for :order_items do |builder|
+          = render 'order_items', f: builder
     .row
       = f.submit 'Сохранить'
       = link_to 'Назад', orders_path, class: 'button secondary tiny'

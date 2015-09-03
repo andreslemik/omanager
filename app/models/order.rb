@@ -25,7 +25,8 @@ class Order < ActiveRecord::Base
   validates :order_items, presence: true
 
   accepts_nested_attributes_for :order_items,
-                                reject_if: proc { |attrs| attrs.blank? }
+                                reject_if: proc { |attrs| attrs.blank? },
+                                allow_destroy: true
 
   def author
     User.unscoped { super }

@@ -96,3 +96,22 @@ $(document).on 'change', '.option_values_select', ->
     error: ->
       price.val(0)
       $('#option_values_' +id).html('')
+
+
+$(document).on 'click', '.delete_order_item', ->
+  id =  $(@).data('id')
+  select = 'tr[data-id=' + id + ']'
+  row = $(select)
+  destroy = $(select + ' input[name*="_destroy"]' )
+  if row.data('del') == 0
+    row.data('del', 1)
+    row.css('text-decoration', 'line-through')
+    destroy.val(true)
+    $(select + ' .delete_order_item i.icon').removeClass('fi-x')
+    $(select + ' .delete_order_item i.icon').addClass('fi-refresh')
+  else
+    row.data('del', 0)
+    destroy.val(false)
+    row.css('text-decoration', 'none')
+    $(select + ' .delete_order_item i.icon').removeClass('fi-refresh')
+    $(select + ' .delete_order_item i.icon').addClass('fi-x')
