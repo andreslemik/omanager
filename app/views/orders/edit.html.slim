@@ -20,13 +20,8 @@
       fieldset
         legend Заказчик
         .large-2.columns
-          .row.collapse
-            = f.label :desired_date
-              .small-9.columns
-                = f.text_field :desired_date, label: false, class: 'datepicker', \
-                 value: @order.desired_date.blank? ? '' : l(@order.desired_date)
-              .small-3.columns
-                span.postfix = ficon :calendar, :large
+          = f.text_field :desired_date, class: 'datepicker', \
+            value: @order.desired_date.blank? ? '' : l(@order.desired_date)
         - if @order.retail?
           .large-3.columns.small-6.columns
             = f.text_field :client
