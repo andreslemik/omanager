@@ -11,7 +11,7 @@ table
   tbody
     - @order.order_items.each do |oi|
       tr(data-id="#{f.object.id}" data-del="0")
-        td = link_to ficon(:pencil, :small), edit_order_order_item_path(@order, oi)
+        td = link_to ficon(:pencil, :small), edit_order_item_path(oi)
         td = oi.product.try(:long_name)
         td = oi.additional
         td.text-right = number_to_currency oi.cost, precision: 0

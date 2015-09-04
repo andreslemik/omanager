@@ -66,6 +66,16 @@ ru:
         area: Район
         desired_date: 'Желаемая дата'
         order_items: 'Содержимое заказа'
+      order_item:
+        descr_basis: Цвет основа
+        descr_assort: Цвет подбор
+        special_notes: Специальные отметки
+        cost: Цена
+        amount: Количесвтво
+        category: Категория
+        manufacturer: Производитель
+        product: Продукт
+        product_id: Продукт
     models:
       product_option_type:
         zero: 'Опций продукта'
@@ -139,6 +149,12 @@ ru:
         few: 'Контрагенты'
         many: 'Контрагентов'
         other: 'Контрагенты'
+      order_item:
+        zero: 'Позиций заказа'
+        one: 'Позиция заказа'
+        few: 'Позиции заказа'
+        many: 'Позиций заказа'
+        other: 'Позиции заказа'
 
   error:
     zero: ошибок

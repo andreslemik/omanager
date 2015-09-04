@@ -76,7 +76,7 @@
                 .large-5.columns
                   = ff.label :product_id, 'Продукт'
                   = ff.select :product_id, [], {}, { class: 'products' }
-              .additional(id="option_values_#{ff.index}")
+              .row.additional(id="option_values_#{ff.index}")
               .row
                 .large-4.columns
                   = ff.label :descr_basis, 'Цвет основа'

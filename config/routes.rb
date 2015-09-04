@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
 
   resources :orders do
-    resources :order_items
+    resources :order_items, shallow: true
   end
 
   resources :partners, only: [:index, :show]
