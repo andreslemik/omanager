@@ -41,3 +41,6 @@ h2 = title
       = f.submit
 
 = link_to 'Назад', :back, class: 'button secondary'
+
+= content_for :js do
+  = javascript_include_tag 'order_items'
