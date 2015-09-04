@@ -40,7 +40,7 @@ $(document).on 'change', '.manufacturers', ->
       $('#option_values_' + id).html('')
       select.append('<option value></option>')
       $.each(data, (key, val) ->
-        select.append('<option value="' + val.id + '" id="' + val.id + '">' + val.name + '</option')
+        select.append('<option value="' + val.id + '">' + val.name + '</option')
       )
     error: ->
       select.html('<option id="-1">Укажите категорию и производителя</option>')
@@ -49,7 +49,7 @@ $(document).on 'change', '.manufacturers', ->
 
 $(document).on 'change', '.products', ->
   id = @.id.replace(/[^0-9\.]/g,'')
-  product_id = $(@).children(':selected').attr('id')
+  product_id = @.value
   price = $('#order_order_items_attributes_' + id + '_cost')
   $.ajax
     url: '/products/price/'  + product_id + '/' + retail()
