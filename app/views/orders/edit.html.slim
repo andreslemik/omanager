@@ -38,6 +38,11 @@
         legend Содержимое заказа
         = f.fields_for :order_items do |builder|
           = render 'order_items', f: builder
+        = link_to 'Добавить', new_order_order_item_path(@order), class: 'button tiny'
     .row
-      = f.submit 'Сохранить'
-      = link_to 'Назад', orders_path, class: 'button secondary tiny'
+      .large-8.columns
+        = f.submit 'Сохранить'
+        = link_to 'Назад', orders_path, class: 'button secondary tiny'
+      .large-4.columns
+        = link_to 'Удалить', order_path(@order), class: 'button secondary tiny', \
+         method: :delete, data: { confirm: 'Вы уверены?' }

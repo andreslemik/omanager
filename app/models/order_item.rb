@@ -11,6 +11,10 @@ class OrderItem < ActiveRecord::Base
     self[:option_values] = val.map(&:to_i)
   end
 
+  def additional
+    "#{descr_basis} / #{descr_assort} / #{special_notes}"
+  end
+
   def subtotal
     amount.to_i * cost.to_f
   end
