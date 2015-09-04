@@ -1,3 +1,4 @@
+# OrderItem model
 class OrderItem < ActiveRecord::Base
   has_paper_trail
   belongs_to :order
@@ -14,6 +15,17 @@ class OrderItem < ActiveRecord::Base
 
   def additional
     "#{descr_basis} / #{descr_assort} / #{special_notes}"
+  end
+
+  def product_options
+    return '' if option_values.blank?
+    result = ''
+    ov = OptionValue.find(option_values)
+    ov.each do |v|
+      result << v.option_type.name << ': ' << v.name
+      result << ', ' unless v == ov.last
+    end
+    result
   end
 
   def subtotal

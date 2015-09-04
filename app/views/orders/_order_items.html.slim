@@ -4,6 +4,7 @@ table
       th
       th.text-center Наименование
       th.text-center Описание
+      th.text-center Опции
       th.text-center Цена
       th.text-center Кол-во
       th.text-center Сумма
@@ -14,6 +15,7 @@ table
         td = link_to ficon(:pencil, :small), edit_order_item_path(oi)
         td = oi.product.try(:long_name)
         td = oi.additional
+        td = oi.product_options
         td.text-right = number_to_currency oi.cost, precision: 0
         td.text-center = oi.amount
         td.text-right = number_to_currency oi.subtotal, precision: 0
