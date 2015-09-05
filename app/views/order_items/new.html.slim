@@ -1,2 +1,6 @@
-h1 OrderItems#new
-p Find me in app/views/order_items/new.html.slim
+- title = 'Новая позиция заказа'
+- content_for :title, title
+h2 = title
+
+= form_for [@order, @order_item] do |f|
+  = render 'form', f: f

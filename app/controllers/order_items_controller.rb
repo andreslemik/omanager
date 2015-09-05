@@ -1,8 +1,11 @@
 class OrderItemsController < ApplicationController
   before_action :set_order_item, only: [:edit, :update]
+  before_action :set_order, only: [:new, :create]
   def new
-    @order = Order.find params[:order_id]
-    @order_item = OrderItem.new
+    @order_item = @order.order_items.build(amount: 1)
+    @categories = Category.joins(:products).group(:id)
+    @manufacturers = []
+    @products = []
   end
 
   def edit
@@ -25,6 +28,15 @@ class OrderItemsController < ApplicationController
     end
   end
 
+  def create
+   @order_item = @order.order_items.build(item_params)
+   if @order_item.save
+     redirect_to edit_order_path(@order), notice: 'Позиция заказа добавлена'
+   else
+     render action: 'new'
+   end
+  end
+
   private
 
   def item_params
@@ -35,5 +47,9 @@ class OrderItemsController < ApplicationController
 
   def set_order_item
     @order_item = OrderItem.find params[:id]
+  end
+
+  def set_order
+    @order = Order.find(params[:order_id])
   end
 end

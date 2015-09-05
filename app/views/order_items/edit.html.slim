@@ -3,45 +3,4 @@
 h2 = title
 
 = form_for @order_item do |f|
-  - if @order_item.errors.any?
-    .row
-      .large-12.columns
-        = render 'shared/form_errors', model: @order_item
-
-  .row
-    .large-3.columns
-      = f.select :category, options_from_collection_for_select(@categories, :id, :name, @order_item.product.category_id)
-    .large-4.columns
-      = f.select :manufacturer, options_from_collection_for_select(@manufacturers, :id, :name, @order_item.product.manufacturer_id)
-    .large-5.columns
-      = f.select :product_id, options_from_collection_for_select(@products, :id, :name, @order_item.product.id)
-  .row.additional#option_values_0
-    .columns
-      - unless @order_item.option_values.blank?
-        - @order_item.option_values.each do |v|
-          - ov = OptionValue.find(v)
-          - ot = OptionType.find(ov.option_type.id)
-          = label_tag :option_values, ov.option_type.name
-          = f.collection_select :option_values, ot.option_values, :id, :name, {label: false}, \
-            {class: 'option_values_select', name: 'order_item[option_values][]'}
-  .row
-    .large-4.columns
-      = f.text_area :descr_basis
-    .large-4.columns
-      = f.text_area :descr_assort
-    .large-4.columns
-      = f.text_area :special_notes
-  .row
-    .large-2.columns
-      = f.number_field :cost
-    .large-2.columns.end
-      = f.number_field :amount
-      = f.hidden_field :retail
-  .row
-    .columns
-      = f.submit
-
-= link_to 'Назад', :back, class: 'button secondary'
-
-= content_for :js do
-  = javascript_include_tag 'order_items', 'data-turbolinks-track' => true
+  = render 'form', f: f
