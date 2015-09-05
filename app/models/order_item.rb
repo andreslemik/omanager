@@ -28,6 +28,11 @@ class OrderItem < ActiveRecord::Base
     result
   end
 
+  def retail
+    return 1 if self.order.retail_client
+    0
+  end
+
   def subtotal
     amount.to_i * cost.to_f
   end

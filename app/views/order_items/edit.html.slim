@@ -15,7 +15,7 @@ h2 = title
       = f.select :manufacturer, options_from_collection_for_select(@manufacturers, :id, :name, @order_item.product.manufacturer_id)
     .large-5.columns
       = f.select :product_id, options_from_collection_for_select(@products, :id, :name, @order_item.product.id)
-  .row.additional#option_values
+  .row.additional#option_values_0
     .columns
       - unless @order_item.option_values.blank?
         - @order_item.option_values.each do |v|
@@ -33,9 +33,9 @@ h2 = title
   .row
     .large-2.columns
       = f.number_field :cost
-    .large-2.columns
+    .large-2.columns.end
       = f.number_field :amount
-    .large-1.columns.end
+      = f.hidden_field :retail
   .row
     .columns
       = f.submit
