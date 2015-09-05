@@ -28,7 +28,15 @@ class ProductsController < ApplicationController
     @option_values = @product.product_option_values
     @option_types = @product.product_option_types
     @attr_id = params[:attr_id]
-    @attr_name = params[:attr_name]
+
+    case params[:m_name]
+    when 'order'
+      @select_id = "order[order_items_attributes][#{@attr_id}]"
+      @select_name = "order[order_items_attributes][#{@attr_id}][option_values][]"
+    when 'order_item'
+      @select_id = 'order_item[optoin_values]'
+      @select_name = 'order_item[option_values][]'
+    end
 
     respond_to do |f|
       f.json

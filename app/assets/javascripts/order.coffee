@@ -65,7 +65,7 @@ $(document).on 'change', '.products', ->
   ).responseText
   if $.parseJSON(cnt).option_values > 0
     $.ajax(
-      url: '/products/option_values/' + product_id + '/' + id
+      url: '/products/option_values/' + product_id + '/' + id + '?m_name=order'
       dataType: 'SCRIPT'
     )
   else

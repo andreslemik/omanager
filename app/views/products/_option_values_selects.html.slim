@@ -1,6 +1,6 @@
 .columns
   - @option_types.each do |ot|
     = label_tag :option_value_name, ot.option_type.name
-    = collection_select "#{@attr_name}[#{@attr_id}]", 'option_values', \
+    = collection_select @select_id, 'option_values', \
       ot.option_values, :id, :name, { include_blank: true }, \
-      { class: 'option_values_select', name: "#{@attr_name}[#{@attr_id}][option_values][]" }
+      { class: 'option_values_select', name: @select_name }
