@@ -15,7 +15,8 @@
   .columns
     - unless @order_item.option_values.blank?
       - @order_item.option_values.each do |v|
-        - ov = OptionValue.find(v)
+        - next if v == 0
+        - ov = OptionValue.where(id: v).first
         - ot = OptionType.find(ov.option_type.id)
         = label_tag :option_values, ov.option_type.name
         = f.collection_select :option_values, ot.option_values, :id, :name, {label: false}, \
