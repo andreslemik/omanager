@@ -6,4 +6,4 @@
   = link_to 'Назад', orders_path, class: 'button secondary'
 
   = content_for :js do
-    = javascript_include_tag 'order'
+    = javascript_include_tag 'order', 'data-turbolinks-track' => true
