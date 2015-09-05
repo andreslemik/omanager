@@ -3,6 +3,8 @@ class Order < ActiveRecord::Base
   acts_as_paranoid
   has_paper_trail
 
+  include AASM
+
   enum area: {  'Новый город': 11, 'Верхняя терраса': 12, 'Нижняя терраса': 13,
                 'Центр': 21, 'Север': 22,
                 'Ближнее засвияжье': 31, 'Дальнее засвияжье': 32,
@@ -47,5 +49,14 @@ class Order < ActiveRecord::Base
 
   def total
     order_items.map(&:subtotal).sum
+  end
+
+
+  ############ AASM ################
+  aasm do
+    state :pending, inital: true
+    state :working
+    state :done
+
   end
 end

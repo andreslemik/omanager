@@ -66,6 +66,10 @@ ru:
         area: Район
         desired_date: 'Желаемая дата'
         order_items: 'Содержимое заказа'
+        aasm_state:
+          pending: В ожидании
+          working: В работе
+          done: Исполнен
       order_item:
         descr_basis: Цвет основа
         descr_assort: Цвет подбор

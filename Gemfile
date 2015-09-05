@@ -96,3 +96,4 @@ gem 'jquery-ui-themes'
 gem 'paper_trail', '~> 4.0.0.rc'
 
 gem 'browser'
+gem 'aasm'
