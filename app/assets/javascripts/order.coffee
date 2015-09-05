@@ -82,14 +82,15 @@ $(document).on 'change', '#order_retail_client', ->
     $('#retail').val(0)
 
 $(document).on 'change', '.option_values_select', ->
-  x= []
+  values= []
   $('.option_values_select').each ->
-    x.push($(@).children(':selected').attr('value'))
+    values.push($(@).children(':selected').attr('value'))
   product_id = $('.products').children(':selected').attr('value')
   id = @.id.replace(/[^0-9\.]/g,'')
   price = $('#order_order_items_attributes_' + id + '_cost')
+  url = '/products/price/' + product_id + '/' + retail() + '/' + values
   $.ajax
-    url: '/products/price/' + product_id + '/' + retail() + '/' + x
+    url: url + '?attr_name=order[order_items_attributes]'
     dataType: 'JSON'
     success: (data) ->
       price.val(data.price)

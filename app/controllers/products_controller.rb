@@ -28,6 +28,7 @@ class ProductsController < ApplicationController
     @option_values = @product.product_option_values
     @option_types = @product.product_option_types
     @attr_id = params[:attr_id]
+    @attr_name = params[:attr_name]
 
     respond_to do |f|
       f.json
