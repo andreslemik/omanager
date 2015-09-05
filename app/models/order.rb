@@ -51,12 +51,24 @@ class Order < ActiveRecord::Base
     order_items.map(&:subtotal).sum
   end
 
-
   ############ AASM ################
   aasm do
     state :pending, inital: true
     state :working
     state :done
+    state :canceled
 
+    event :to_work do
+      transitions from: :pending, to: :working
+    end
+    event :stop_work do
+      transitions from: :working, to: :pending
+    end
+    event :done do
+      transitions from: :working, to: :done
+    end
+    event :cancel do
+      transitions from: [:pending, :working], to: :canceled
+    end
   end
 end

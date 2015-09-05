@@ -70,6 +70,7 @@ ru:
           pending: В ожидании
           working: В работе
           done: Исполнен
+          canceled: Отменен
       order_item:
         descr_basis: Цвет основа
         descr_assort: Цвет подбор
