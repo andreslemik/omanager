@@ -20,7 +20,7 @@ class OrderItem < ActiveRecord::Base
   def product_options
     return '' if option_values.blank?
     result = ''
-    ov = OptionValue.find(option_values)
+    ov = OptionValue.where(id: option_values)
     ov.each do |v|
       result << v.option_type.name << ': ' << v.name
       result << ', ' unless v == ov.last
