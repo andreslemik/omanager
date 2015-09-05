@@ -1,5 +1,4 @@
 Authority.configure do |config|
-
   # USER_METHOD
   # ===========
   # Authority needs the name of a method, available in any controller, which
@@ -8,7 +7,7 @@ Authority.configure do |config|
   #
   # Default is:
   #
-  # config.user_method = :current_user
+  config.user_method = :current_user
 
   # CONTROLLER_ACTION_MAP
   # =====================
@@ -20,15 +19,15 @@ Authority.configure do |config|
   #
   # Defaults are as follows:
   #
-  # config.controller_action_map = {
-  #   :index   => 'read',
-  #   :show    => 'read',
-  #   :new     => 'create',
-  #   :create  => 'create',
-  #   :edit    => 'update',
-  #   :update  => 'update',
-  #   :destroy => 'delete'
-  # }
+  config.controller_action_map = {
+    index: 'read',
+    show: 'read',
+    new: 'create',
+    create: 'create',
+    edit: 'update',
+    update: 'update',
+    destroy: 'delete'
+  }
 
   # ABILITIES
   # =========
@@ -38,12 +37,15 @@ Authority.configure do |config|
   #
   # Defaults are as follows:
   #
-  # config.abilities =  {
-  #   :create => 'creatable',
-  #   :read   => 'readable',
-  #   :update => 'updatable',
-  #   :delete => 'deletable'
-  # }
+  config.abilities = {
+    create: 'creatable',
+    read: 'readable',
+    update: 'updatable',
+    delete: 'deletable',
+    work: 'workable',
+    stop_work: 'stopworkable',
+    done: 'can_done'
+  }
 
   # LOGGER
   # ======
@@ -59,5 +61,4 @@ Authority.configure do |config|
   # config.logger = Rails.logger                     # Log with all your app's other messages
   # config.logger = Logger.new('log/authority.log')  # Use this file
   # config.logger = Logger.new('/dev/null')          # Don't log at all (on a Unix system)
-
 end

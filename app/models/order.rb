@@ -1,9 +1,11 @@
 # Order model class
 class Order < ActiveRecord::Base
+  include Authority::Abilities
+  include AASM
   acts_as_paranoid
   has_paper_trail
 
-  include AASM
+  self.authorizer_name = 'OrderAuthorizer'
 
   enum area: {  'Новый город': 11, 'Верхняя терраса': 12, 'Нижняя терраса': 13,
                 'Центр': 21, 'Север': 22,
@@ -58,7 +60,7 @@ class Order < ActiveRecord::Base
     state :done
     state :canceled
 
-    event :to_work do
+    event :work do
       transitions from: :pending, to: :working
     end
     event :stop_work do

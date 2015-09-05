@@ -2,6 +2,8 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
 
+  authorize_actions_for Order
+
   def index
     @orders = Order.includes(:dept, :author).order(order_date: :desc).page(params[:page])
   end
@@ -10,6 +12,7 @@ class OrdersController < ApplicationController
   end
 
   def edit
+    authorize_action_for(@order)
   end
 
   def new
