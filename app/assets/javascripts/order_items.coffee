@@ -69,3 +69,19 @@ $(document).on 'change', '#order_item_product_id', ->
     )
   else
     $('#option_values_' + id).html('')
+
+$(document).on 'change', '.option_values_select', ->
+  x= []
+  $('.option_values_select').each ->
+    x.push($(@).children(':selected').attr('value'))
+  product_id = $('#order_item_product_id').children(':selected').attr('value')
+  id = 0
+  price = $('#order_item_cost')
+  $.ajax
+    url: '/products/price/' + product_id + '/' + retail() + '/' + x
+    dataType: 'JSON'
+    success: (data) ->
+      price.val(data.price)
+    error: ->
+      price.val(0)
+      $('#option_values_' +id).html('')
