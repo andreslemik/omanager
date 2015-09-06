@@ -17,7 +17,7 @@ table
   tbody
     - @orders.each do |o|
       tr
-        td = link_to(ficon(:pencil, :small), edit_order_path(o)) if current_user.can_update?(o)
+        td = link_to(ficon(:pencil, :small), edit_order_path(o), data: { no_turbolink: true }) if current_user.can_update?(o)
         td = o.order_type
         td = o.aasm.human_state
         td = l(o.order_date)

@@ -11,7 +11,7 @@ nav.top-bar role="navigation" data-topbar="" data-options="back_text: Назад
       li.has-dropdown
         a(href='#') Договоры
         ul.dropdown
-          li = link_to 'Новый договор', new_order_path
+          li = link_to 'Новый договор', new_order_path, data: { no_turbolink: true }
           li = link_to 'Список договоров', orders_path
       - if current_user.has_role? :admin
         li.has-dropdown
