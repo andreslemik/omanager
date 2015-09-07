@@ -29,6 +29,7 @@ h2 Список договоров
 
   .large-9.columns.large-pull-3
     = paginate @orders
+    p = "Записей: #{@orders.size} из #{Order.count}"
 
     table
       thead
