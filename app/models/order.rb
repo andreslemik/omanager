@@ -32,6 +32,11 @@ class Order < ActiveRecord::Base
                                 reject_if: proc { |attrs| attrs.blank? },
                                 allow_destroy: true
 
+  # scopes by order state
+  Order.aasm.states.map(&:name).each do |s|
+    scope s, -> { where aasm_state: s }
+  end
+
   def author
     User.unscoped { super }
   end
