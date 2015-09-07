@@ -67,8 +67,9 @@ ru:
         desired_date: 'Желаемая дата'
         order_items: 'Содержимое заказа'
         aasm_state:
-          pending: В ожидании
-          working: В работе
+          pending: Ожидает
+          working: Производство
+          ready: Готов
           done: Исполнен
           canceled: Отменен
       order_item:

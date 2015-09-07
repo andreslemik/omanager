@@ -66,6 +66,7 @@ class Order < ActiveRecord::Base
   aasm do
     state :pending, inital: true
     state :working
+    state :ready
     state :done
     state :canceled
 
@@ -75,8 +76,11 @@ class Order < ActiveRecord::Base
     event :stop_work do
       transitions from: :working, to: :pending
     end
+    event :get_ready do
+      transitions from: :working, to: :ready
+    end
     event :done do
-      transitions from: :working, to: :done
+      transitions from: :ready, to: :done
     end
     event :cancel do
       transitions from: [:pending, :working], to: :canceled

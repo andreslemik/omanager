@@ -46,7 +46,7 @@ h2 Список договоров
         - @orders.each do |o|
           tr
             td = link_to(ficon(:pencil, :small), edit_order_path(o), data: { no_turbolink: true }) if current_user.can_update?(o)
-            td.text-center = o.dog_num
+            td.text-center = link_to o.dog_num, order_path(o)
             td = l(o.order_date)
             td = o.order_type
             td = o.aasm.human_state
