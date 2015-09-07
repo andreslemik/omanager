@@ -1,28 +1,52 @@
 h2 Список договоров
 
-= paginate @orders
+.row
+  .large-9.columns
+    = paginate @orders
 
-table
-  thead
-    tr
-      th
-      th.text-center Тип
-      th.text-center Статус
-      th.text-center(width="100") Дата
-      th.text-center(width="100") Номер
-      th.text-center Сумма
-      th.text-center Офис
-      th.text-center Добавил
-      th.show-for-large-only(width="200") Примечение
-  tbody
-    - @orders.each do |o|
-      tr
-        td = link_to(ficon(:pencil, :small), edit_order_path(o), data: { no_turbolink: true }) if current_user.can_update?(o)
-        td = o.order_type
-        td = o.aasm.human_state
-        td = l(o.order_date)
-        td.text-center = o.dog_num
-        td.text-right = number_to_currency o.total, precision: 0
-        td = o.dept.name
-        td = o.author.name
-        td.show-for-large-only = o.memo
+    table
+      thead
+        tr
+          th
+          th.text-center Тип
+          th.text-center Статус
+          th.text-center(width="100") Дата
+          th.text-center(width="100") Номер
+          th.text-center Сумма
+          th.text-center Офис
+          th.text-center Добавил
+          th.show-for-large-only(width="200") Примечение
+      tbody
+        - @orders.each do |o|
+          tr
+            td = link_to(ficon(:pencil, :small), edit_order_path(o), data: { no_turbolink: true }) if current_user.can_update?(o)
+            td = o.order_type
+            td = o.aasm.human_state
+            td = l(o.order_date)
+            td.text-center = o.dog_num
+            td.text-right = number_to_currency o.total, precision: 0
+            td = o.dept.name
+            td = o.author.name
+            td.show-for-large-only = o.memo
+
+  .large-3.columns
+    = search_form_for @q do |f|
+      .row
+        .large-6.columns
+          = f.label :registered_date_gteq, 'C'
+          = f.text_field :registered_date_gteq, class: 'datepicker', placeholder: 'даты'
+        .large-6.columns
+          = f.label :registered_date_lteq, 'По'
+          = f.text_field :registered_date_lteq, class: 'datepicker', placeholder: 'дату'
+      .row
+        .large-6.columns
+          = f.label :dog_num_eq, 'Номер'
+          = f.search_field :dog_num_eq
+        .large-6.columns
+          = f.label :aasm_state_eq, 'Статус'
+          = f.select :aasm_state_eq, Order.aasm.states_for_select, include_blank: true
+
+
+        .large-12.columns
+          = f.submit 'Найти', class: 'button tiny'
+          = link_to 'Очистить', orders_path, class: 'button tiny secondary'

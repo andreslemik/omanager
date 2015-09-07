@@ -58,6 +58,10 @@ class Order < ActiveRecord::Base
     order_items.map(&:subtotal).sum
   end
 
+  ransacker :registered do |parent|
+    Arel.sql('date(order_date)')
+  end
+
   ############ AASM ################
   aasm do
     state :pending, inital: true
