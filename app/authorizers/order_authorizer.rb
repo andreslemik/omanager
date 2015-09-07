@@ -1,12 +1,19 @@
 # Order authorizer class
 class OrderAuthorizer < ApplicationAuthorizer
-  def self.readable_by?(user)
-    user.has_any_role? :admin, :manager, :fabrication
+  class << self
+    def readable_by?(user)
+      user.has_any_role? :admin, :manager, :fabrication
+    end
+
+    def creatable_by?(user)
+      user.has_any_role? :manager, :admin
+    end
+
+    def updatable_by?(user)
+      user.has_any_role? :manager, :admin
+    end
   end
 
-  def self.updatable_by?(user)
-    user.has_any_role? :manager, :admin
-  end
 
   def updatable_by?(user)
     return true if user.has_role? :admin
@@ -14,6 +21,6 @@ class OrderAuthorizer < ApplicationAuthorizer
   end
 
   def readable_by?(_user)
-    true
+    user.has_any_role? :admin, :manager, :fabrication
   end
 end
