@@ -56,22 +56,6 @@ ru:
         name: 'Наименование'
         values: 'Значений'
         option_values_string: 'Значения'
-      order:
-        dept_id: 'Офис'
-        order_date: Дата заказа
-        dog_num: Номер договора
-        client: ФИО
-        phone: Телефон
-        address: Адрес
-        area: Район
-        desired_date: 'Желаемая дата'
-        order_items: 'Содержимое заказа'
-        aasm_state:
-          pending: Ожидает
-          working: Производство
-          ready: Готов
-          done: Исполнен
-          canceled: Отменен
       order_item:
         descr_basis: Цвет основа
         descr_assort: Цвет подбор
