@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150905091222) do
+ActiveRecord::Schema.define(version: 20150907113739) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -119,6 +119,7 @@ ActiveRecord::Schema.define(version: 20150905091222) do
   end
 
   add_index "orders", ["aasm_state"], name: "index_orders_on_aasm_state", using: :btree
+  add_index "orders", ["deleted_at"], name: "index_orders_on_deleted_at", using: :btree
   add_index "orders", ["dept_id"], name: "index_orders_on_dept_id", using: :btree
   add_index "orders", ["partner_id"], name: "index_orders_on_partner_id", using: :btree
 
