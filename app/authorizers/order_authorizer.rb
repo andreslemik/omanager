@@ -20,7 +20,7 @@ class OrderAuthorizer < ApplicationAuthorizer
     resource.aasm_state == 'pending' && user.has_role?(:manager)
   end
 
-  def readable_by?(_user)
+  def readable_by?(user)
     user.has_any_role? :admin, :manager, :fabrication
   end
 end
