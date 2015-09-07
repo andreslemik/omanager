@@ -51,6 +51,6 @@ h2 Список договоров
             td = o.order_type
             td = o.aasm.human_state
             td.text-right = number_to_currency o.total, precision: 0
-            td = o.dept.name
+            td = o.dept.try(:name)
             td.show-for-large-only = o.memo
 

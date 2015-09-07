@@ -20,9 +20,13 @@ class Order < ActiveRecord::Base
   belongs_to :author, -> { with_deleted }, class_name: User
   belongs_to :partner
 
+  has_many :operations, as: :accountable,
+                        class_name: 'Account', dependent: :destroy
+
   validates :dept_id, presence: { message: 'Укажите офис' }, if: :retail?
   validates :order_date, presence: { message: 'Укажите дату' }, if: :retail?
-  validates :dog_num, presence: { message: 'Укажите номер договора' }, if: :retail?
+  validates :dog_num, presence: { message: 'Укажите номер договора' },
+                      if: :retail?
   validates :client, :phone, :address, :area, presence: true, if: :retail?
   validates :partner_id, presence: true, unless: :retail?
 
@@ -31,6 +35,8 @@ class Order < ActiveRecord::Base
   accepts_nested_attributes_for :order_items,
                                 reject_if: proc { |attrs| attrs.blank? },
                                 allow_destroy: true
+
+  after_create :add_accounts
 
   # scopes by order state
   Order.aasm.states.map(&:name).each do |s|
@@ -58,7 +64,7 @@ class Order < ActiveRecord::Base
     order_items.map(&:subtotal).sum
   end
 
-  ransacker :registered do |parent|
+  ransacker :registered do |_parent|
     Arel.sql('date(order_date)')
   end
 
@@ -85,5 +91,17 @@ class Order < ActiveRecord::Base
     event :cancel do
       transitions from: [:pending, :working], to: :canceled
     end
+  end
+
+  private
+
+  def add_accounts
+    operation = operations.new(
+      operation_date: Time.now,
+      operation_type: :expense,
+      amount: total,
+      memo: "Договор №#{dog_num} от #{I18n.l(order_date)}"
+    )
+    operation.save!
   end
 end
