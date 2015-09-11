@@ -18,7 +18,7 @@ GIT
 
 GIT
   remote: git://github.com/activerecord-hackery/ransack.git
-  revision: cd0fb88dc23353283c381fdde0b83a3785f58560
+  revision: d6208db6efaefba984a6dda60223d47a1913ca2b
   specs:
     ransack (1.7.0)
       actionpack (>= 3.0)
@@ -29,10 +29,10 @@ GIT
 
 GIT
   remote: git://github.com/paolochiodi/htmlcompressor.git
-  revision: 73e5c1231721a1bee30e37251fb1819254d6433f
+  revision: 3e2ec3873a3e4ce88c255cb4f59f60cec59017e3
   branch: master
   specs:
-    htmlcompressor (0.2.0)
+    htmlcompressor (0.3.0)
 
 GIT
   remote: git://github.com/zurb/foundation-rails.git
@@ -52,7 +52,7 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
-    aasm (4.2.0)
+    aasm (4.3.0)
     actionmailer (4.2.4)
       actionpack (= 4.2.4)
       actionview (= 4.2.4)
@@ -240,7 +240,7 @@ GEM
       mime-types (>= 1.16, < 3)
     method_source (0.8.2)
     mime-types (2.6.1)
-    mini_magick (4.3.2)
+    mini_magick (4.3.3)
     mini_portile (0.6.2)
     minitest (5.8.0)
     multi_json (1.11.2)
@@ -362,7 +362,7 @@ GEM
     spring (1.3.6)
     sprockets (3.3.4)
       rack (~> 1.0)
-    sprockets-rails (2.3.2)
+    sprockets-rails (2.3.3)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
