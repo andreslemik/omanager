@@ -8,6 +8,11 @@ class AccountAuthorizer < ApplicationAuthorizer
     def updatable_by?(user)
       user.has_any_role? :admin, :accountant
     end
+
+    def creatable_by?(user)
+      user.has_any_role? :admin, :accountant
+    end
+
   end
 
   def updatable_by?(user)

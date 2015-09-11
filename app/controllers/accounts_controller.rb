@@ -49,7 +49,7 @@ class AccountsController < ApplicationController
 
   def find_accounter
     klass = params[:accounter_type].capitalize.constantize
-    @accounter = @klass.find(params[:accounter_id])
+    @accounter = klass.find(params[:accounter_id])
   end
 
   def set_account
