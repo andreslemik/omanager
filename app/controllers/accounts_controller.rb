@@ -1,6 +1,27 @@
 # Accounts controller
 class AccountsController < ApplicationController
-  before_action :find_accounter
+  before_action :find_accounter, only: [:create]
+  before_action :set_account, only: [:edit, :update]
+
+  def edit
+  end
+
+  def update
+    @accounter = @account
+    respond_to do |f|
+      if @account.update(account_params)
+        case @account.accountable_type
+        when 'Partner'
+          redirect = -> { redirect_to partner_path(@account.accountable_id), notice: 'Запись успешно изменена' }
+        when 'Order'
+          redirect = -> { redirect_to edit_order_path(@account.accountable_id), notice: 'Запись успешно изменена' }
+        end
+        f.html { redirect.call }
+      else
+        f.html { render :edit }
+      end
+    end
+  end
 
   def create
     @account = @accounter.operations.new(account_params)
@@ -24,8 +45,14 @@ class AccountsController < ApplicationController
   private
 
   def find_accounter
-    @klass = params[:accounter_type].capitalize.constantize
+    klass = params[:accounter_type].capitalize.constantize
     @accounter = @klass.find(params[:accounter_id])
+  end
+
+  def set_account
+    @account = Account.find params[:id]
+    klass = @account.accountable_type.capitalize.constantize
+    @accounter = klass.find(@account.accountable_id)
   end
 
   def account_params

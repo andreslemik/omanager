@@ -11,6 +11,7 @@ h1 Расчёты с #{@partner.name}
     table
       thead
         tr
+          th
           th.text-center Дата
           th.text-center Тип
           th.text-center Сумма
@@ -19,6 +20,7 @@ h1 Расчёты с #{@partner.name}
       tbody
         - @operations.each do |o|
           tr
+            td = link_to ficon(:pencil, :small), edit_account_path(o)
             td = l o.operation_date
             td = t(o.operation_type).mb_chars.capitalize
             td.text-right = number_to_currency o.amount, unit: '', precision: 0
