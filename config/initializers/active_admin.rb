@@ -248,6 +248,16 @@ end
 
 class OnlyAdmins < ActiveAdmin::AuthorizationAdapter
   def authorized?(action, subject = nil)
-    user.has_role? :admin
+    true if user.has_role?(:admin)
+    case subject
+      when normalized(Partner)
+        if action == :create || action == :update
+          user.has_role? :accountant
+        else
+          false
+        end
+      else
+        false
+    end
   end
 end

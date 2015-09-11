@@ -1,6 +1,19 @@
 ActiveAdmin.register Partner do
   permit_params :name, :memo, :partner_type, :own
 
+  controller do
+    def create
+      super do |format|
+        redirect_to partners_path and return if resource.valid?
+      end
+    end
+    def update
+      super do |format|
+        redirect_to partners_path and return if resource.valid?
+      end
+    end
+  end
+
   partner_types = Partner.partner_types.map { |k,v| [I18n.t(k), k.to_sym] }
   filter :name
   filter :own

@@ -14,7 +14,7 @@ nav.top-bar role="navigation" data-topbar="" data-options="back_text: Назад
           - if current_user.can_create?(Order)
             li = link_to 'Новый договор', new_order_path, data: { no_turbolink: true }
           li = link_to 'Список договоров', orders_path
-      - if current_user.has_role? :admin
+      - if Account.readable_by? current_user
         li.has-dropdown
           a(href='#') Расчёты
           ul.dropdown

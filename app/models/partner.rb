@@ -22,4 +22,6 @@ class Partner < ActiveRecord::Base
     expense = operations.expense.map(&:amount).sum
     income - expense
   end
+
+
 end
