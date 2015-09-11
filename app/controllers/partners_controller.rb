@@ -1,5 +1,7 @@
 # Partners controller
 class PartnersController < ApplicationController
+  authorize_actions_for Partner
+
   def index
     @partners = Partner.page(params[:page])
   end

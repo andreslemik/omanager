@@ -6,6 +6,7 @@ class AccountsController < ApplicationController
   authorize_actions_for Account
 
   def edit
+    authorize_action_for @account
   end
 
   def update

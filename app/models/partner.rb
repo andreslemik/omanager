@@ -1,4 +1,6 @@
 class Partner < ActiveRecord::Base
+  include Authority::Abilities
+  self.authorizer_name = 'PartnerAuthorizer'
   acts_as_paranoid
 
   validates :name, uniqueness: { conditions: -> { where(deleted_at: nil) } }, presence: true

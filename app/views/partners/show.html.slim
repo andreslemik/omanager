@@ -20,7 +20,7 @@ h1 Расчёты с #{@partner.name}
       tbody
         - @operations.each do |o|
           tr
-            td = link_to ficon(:pencil, :small), edit_account_path(o)
+            td = link_to(ficon(:pencil, :small), edit_account_path(o)) if o.updatable_by?(current_user)
             td = l o.operation_date
             td = t(o.operation_type).mb_chars.capitalize
             td.text-right = number_to_currency o.amount, unit: '', precision: 0
