@@ -96,12 +96,15 @@ class Order < ActiveRecord::Base
   private
 
   def add_accounts
-    operation = operations.new(
-      operation_date: Time.now,
-      operation_type: :expense,
-      amount: total,
-      memo: "Договор №#{dog_num} от #{I18n.l(order_date)}"
-    )
+    operation = operations.new
+    unless retail?
+      partner = Partner.find partner_id
+      operation = partner.operations.new
+    end
+    operation.operation_date = Time.now
+    operation.operation_type = :expense
+    operation.amount = total
+    operation.memo = "Договор №#{dog_num} от #{I18n.l(order_date)}"
     operation.save!
   end
 end
