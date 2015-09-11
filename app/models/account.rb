@@ -1,4 +1,6 @@
 class Account < ActiveRecord::Base
+  include Authority::Abilities
+  self.authorizer_name = 'AccountAuthorizer'
   acts_as_paranoid
   has_paper_trail
   enum operation_type: { expense: 0, income: 1 }

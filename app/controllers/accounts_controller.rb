@@ -3,6 +3,8 @@ class AccountsController < ApplicationController
   before_action :find_accounter, only: [:create]
   before_action :set_account, only: [:edit, :update]
 
+  authorize_actions_for Account
+
   def edit
   end
 
