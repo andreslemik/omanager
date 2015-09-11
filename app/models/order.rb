@@ -100,7 +100,8 @@ class Order < ActiveRecord::Base
     operation = Partner.find(partner_id).operations.new unless retail?
     operation.attributes = { operation_date: Time.now,
                              operation_type: :expense, amount: total,
-                             memo: "Договор №#{dog_num} от #{I18n.l(order_date)}"
+                             memo: "Договор №#{dog_num} от #{I18n.l(order_date)}",
+                             order_id: id
     }
     operation.save!
   end

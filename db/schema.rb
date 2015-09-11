@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150907113739) do
+ActiveRecord::Schema.define(version: 20150911140413) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,12 +26,14 @@ ActiveRecord::Schema.define(version: 20150907113739) do
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
     t.text     "memo"
+    t.integer  "order_id"
   end
 
   add_index "accounts", ["accountable_type", "accountable_id"], name: "index_accounts_on_accountable_type_and_accountable_id", using: :btree
   add_index "accounts", ["deleted_at"], name: "index_accounts_on_deleted_at", using: :btree
   add_index "accounts", ["operation_date"], name: "index_accounts_on_operation_date", using: :btree
   add_index "accounts", ["operation_type"], name: "index_accounts_on_operation_type", using: :btree
+  add_index "accounts", ["order_id"], name: "index_accounts_on_order_id", using: :btree
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -259,6 +261,7 @@ ActiveRecord::Schema.define(version: 20150907113739) do
   add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
   add_index "versions", ["transaction_id"], name: "index_versions_on_transaction_id", using: :btree
 
+  add_foreign_key "accounts", "orders"
   add_foreign_key "option_values", "option_types"
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "products"
