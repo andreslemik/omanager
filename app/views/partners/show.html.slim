@@ -24,7 +24,7 @@ h1 Расчёты с #{@partner.name}
             td = l o.operation_date
             td = t(o.operation_type).mb_chars.capitalize
             td.text-right = number_to_currency o.amount, unit: '', precision: 0
-            td = o.memo
+            td = o.order_id.nil? ? o.memo : link_to(o.memo, order_path(o.order_id))
             td = l o.created_at
   .large-3.columns
     = render 'partners/account_form'
