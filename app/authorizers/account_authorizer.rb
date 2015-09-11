@@ -16,7 +16,7 @@ class AccountAuthorizer < ApplicationAuthorizer
   end
 
   def updatable_by?(user)
-    true if user.has_role? :admin
+    return true if user.has_role? :admin
     Time.now - resource.created_at < 30.days && user.has_role?(:accountant)
   end
 
