@@ -10,6 +10,11 @@ class OrderItem < ActiveRecord::Base
 
   validates :product_id, :amount, :cost, presence: true
 
+  scope :by_desired_date, lambda {
+    joins(:order)
+      .order('orders.desired_date asc NULLS last, orders.created_at desc, orders.id')
+  }
+
   def option_values=(val)
     self[:option_values] = val.map(&:to_i)
   end

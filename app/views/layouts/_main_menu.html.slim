@@ -19,6 +19,11 @@ nav.top-bar role="navigation" data-topbar="" data-options="back_text: Назад
           a(href='#') Расчёты
           ul.dropdown
             li = link_to 'Расчеты с контрагентами', partners_path
+      - if current_user.has_any_role? :admin, :fabrication
+        li.has-dropdown
+          a(href='#') Производство
+          ul.dropdown
+            li = link_to 'Список изделий', fabrication_index_path
 
     ul.right
       - if current_user.has_role?(:admin)
