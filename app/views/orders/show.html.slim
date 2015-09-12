@@ -1,11 +1,34 @@
-h2 Договор №#{@order.id}
+h2 Договор №#{@order.dog_num} от #{I18n.l(@order.order_date)}
 .row
   .columns
     ul.button-group
       li = link_to 'Изменить', edit_order_path(@order), class: 'button tiny secondary'
       li = link_to 'Список договоров', orders_path, class: 'button tiny secondary'
-.row.panel
-  large-4.columns
+      li = link_to 'Назад', :back, class: 'button tiny secondary'
+.row
+  .large-4.columns.panel
+    p Номер: #{@order.dog_num}
     p Дата: #{I18n.l @order.order_date}
-  large-12.columns
-    p Описание: #{@order.memo}
+    p Сумма догвора: #{number_to_currency @order.total, precision: 0}
+    p Статус: #{@order.aasm.human_state}
+    p Комментарий: #{@order.memo}
+
+  .large-8.columns.panel
+    table
+      thead
+        tr
+          th Изделие
+          th Описание
+          th Опции
+          th Цена
+          th Кол-во
+          th Сумма
+      tbody
+        - @order.order_items.each do |oi|
+          tr
+            td = oi.product.long_name
+            td = oi.additional
+            td = oi.product_options
+            td.text-right = number_to_currency oi.cost, precision: 0
+            td.text-center = oi.amount
+            td.text-right = number_to_currency oi.subtotal, precision: 0
