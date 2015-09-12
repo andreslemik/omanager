@@ -2,7 +2,8 @@ h2 Договор №#{@order.dog_num} от #{I18n.l(@order.order_date)}
 .row
   .columns
     ul.button-group
-      li = link_to 'Изменить', edit_order_path(@order), class: 'button tiny secondary'
+      - if @order.updatable_by?(current_user)
+        li = link_to 'Изменить', edit_order_path(@order), class: 'button tiny secondary'
       li = link_to 'Список договоров', orders_path, class: 'button tiny secondary'
       li = link_to 'Назад', :back, class: 'button tiny secondary'
 .row
