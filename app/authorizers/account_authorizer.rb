@@ -15,11 +15,16 @@ class AccountAuthorizer < ApplicationAuthorizer
   end
 
   def updatable_by?(user)
-    if resource.accountable_type == 'Partner'
-      # Нельзя редактировать расход, ссылающийся на договор,для операций контрагентов
-      return false if !resource.order_id.nil? && resource.operation_type == 'expense'
-    end
+    return false if partner_order_expense?(resource)
     return true if user.has_role?(:admin)
     Time.now - resource.created_at < 30.days && user.has_role?(:accountant)
+  end
+
+  private
+
+  def partner_order_expense?(resource)
+    !resource.order_id.nil? &&
+      resource.operation_type == 'expense' &&
+      resource.accountable_type == 'Partner'
   end
 end
