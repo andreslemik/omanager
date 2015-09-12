@@ -2,7 +2,7 @@
 class OrderItem < ActiveRecord::Base
   include AASM
   has_paper_trail
-  belongs_to :order
+  belongs_to :order, autosave: true
   belongs_to :product
 
   attr_accessor :category, :manufacturer
@@ -36,5 +36,31 @@ class OrderItem < ActiveRecord::Base
 
   def subtotal
     amount.to_i * cost.to_f
+  end
+
+  aasm do
+    state :pending, initial: true
+    state :working
+    state :ready
+    state :delivery
+    state :done
+    state :canceled
+
+    event :work do
+      after do
+        self.order.work!
+      end
+      transitions from: :pending, to: :working
+    end
+    event :stop_work do
+      transitions from: :working, to: :pending
+    end
+    event :get_ready do
+      transitions from: :working, to: :ready
+    end
+    event :to_delivery do
+      transitions from: :ready, to: :delivery
+    end
+
   end
 end
