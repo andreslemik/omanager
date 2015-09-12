@@ -69,7 +69,7 @@ class Order < ActiveRecord::Base
   end
 
   ############ AASM ################
-  aasm do
+  aasm requires_new_transaction: true do
     state :pending, inital: true
     state :working
     state :ready
@@ -80,7 +80,7 @@ class Order < ActiveRecord::Base
       transitions from: :pending, to: :working
     end
     event :stop_work do
-      transitions from: :working, to: :pending
+      transitions from: :working, to: :pending, guard: :all_items_pending?
     end
     event :get_ready do
       transitions from: :working, to: :ready
@@ -91,6 +91,11 @@ class Order < ActiveRecord::Base
     event :cancel do
       transitions from: [:pending, :working], to: :canceled
     end
+
+  end
+
+  def all_items_pending?
+    order_items.pluck(:aasm_state).all? { |s| s == 'pending' }
   end
 
   private
@@ -105,4 +110,5 @@ class Order < ActiveRecord::Base
     }
     operation.save!
   end
+
 end

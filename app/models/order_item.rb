@@ -30,7 +30,7 @@ class OrderItem < ActiveRecord::Base
   end
 
   def retail
-    return 1 if self.order.retail_client
+    return 1 if order.retail_client
     0
   end
 
@@ -48,11 +48,14 @@ class OrderItem < ActiveRecord::Base
 
     event :work do
       after do
-        self.order.work!
+        order.work! if order.aasm_state == 'pending'
       end
       transitions from: :pending, to: :working
     end
     event :stop_work do
+      after_commit do
+        order.stop_work! if order.aasm_state == 'working'
+      end
       transitions from: :working, to: :pending
     end
     event :get_ready do
@@ -61,6 +64,5 @@ class OrderItem < ActiveRecord::Base
     event :to_delivery do
       transitions from: :ready, to: :delivery
     end
-
   end
 end
