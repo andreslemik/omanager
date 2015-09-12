@@ -69,7 +69,7 @@ class Order < ActiveRecord::Base
   end
 
   ############ AASM ################
-  aasm requires_new_transaction: true do
+  aasm do
     state :pending, inital: true
     state :working
     state :ready
