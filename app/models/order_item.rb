@@ -1,5 +1,6 @@
 # OrderItem model
 class OrderItem < ActiveRecord::Base
+  include AASM
   has_paper_trail
   belongs_to :order
   belongs_to :product
