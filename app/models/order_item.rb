@@ -49,7 +49,6 @@ class OrderItem < ActiveRecord::Base
     state :ready
     state :delivery
     state :done
-    state :canceled
 
     event :work do
       after do
