@@ -20,7 +20,7 @@ table
         td.text-right = i.id
         td.text-center = I18n.l(i.order.desired_date) unless i.order.desired_date.blank?
         td.text-center = link_to i.order.dog_num, order_path(i.order)
-        td = i.product.name
+        td = "#{i.product.name} (#{i.product.category.name})"
         td = i.additional
         td = i.product_options
         td = i.aasm.human_state
