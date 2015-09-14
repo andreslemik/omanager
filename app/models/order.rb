@@ -58,7 +58,13 @@ class Order < ActiveRecord::Base
 
   def order_type
     return 'Частный' if retail_client
-    'Корп'
+    'Дилер'
+  end
+
+  def order_type_s
+    # short order_type
+    return 'Ч' if retail_client
+    "Д: #{partner.name}"
   end
 
   def total
