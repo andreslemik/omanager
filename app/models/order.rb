@@ -37,6 +37,7 @@ class Order < ActiveRecord::Base
                                 allow_destroy: true
 
   after_create :add_accounts
+  after_save :update_accounts
 
   # scopes by order state
   Order.aasm.states.map(&:name).each do |s|
@@ -109,6 +110,14 @@ class Order < ActiveRecord::Base
                              order_id: id
     }
     operation.save!
+  end
+
+  def update_accounts
+    case retail_client
+    when true
+      operation = operations.where(order_id: id).first
+      operation.amount = total
+    end
   end
 
 end

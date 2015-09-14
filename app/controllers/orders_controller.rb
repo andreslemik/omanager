@@ -44,9 +44,13 @@ class OrdersController < ApplicationController
   end
 
   def destroy
-    @order.destroy
+    authorize_action_for @order
     respond_to do |f|
-      f.html { redirect_to orders_url, notice: 'Договор удалён' }
+      if @order.destroy
+        f.html { redirect_to orders_url, notice: 'Договор удалён' }
+      else
+        f.html { render :edit, notice: 'Невозможно удалить договор'}
+      end
     end
   end
 
