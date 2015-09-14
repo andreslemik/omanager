@@ -17,3 +17,5 @@ h2 Изменение операции
 
       = f.submit 'Сохранить'
       = link_to 'Назад', :back, class: 'small radius button secondary'
+      - if @account.deletable_by?(current_user)
+        = link_to 'Удалить', account_path(@account), method: :delete, data: { confirm: 'Вы уверены?' }, class: 'button secondaty tiny'

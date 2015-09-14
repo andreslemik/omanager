@@ -1,7 +1,7 @@
 # Accounts controller
 class AccountsController < ApplicationController
   before_action :find_accounter, only: [:create]
-  before_action :set_account, only: [:edit, :update]
+  before_action :set_account, only: [:edit, :update, :destroy]
 
   authorize_actions_for Account
 
@@ -42,6 +42,14 @@ class AccountsController < ApplicationController
                       action: :show, id: @accounter.id
         end
       end
+    end
+  end
+
+  def destroy
+    authorize_action_for @account
+    @account.destroy
+    respond_to do |f|
+      f.html { redirect_to partner_path(@account.accountable_id), notice: 'Запись удалена' }
     end
   end
 

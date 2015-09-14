@@ -2,7 +2,7 @@
 class OrderAuthorizer < ApplicationAuthorizer
   class << self
     def readable_by?(user)
-      user.has_any_role? :admin, :manager, :fabrication
+      user.has_any_role? :admin, :manager, :fabrication, :accountant
     end
 
     def creatable_by?(user)
@@ -21,7 +21,7 @@ class OrderAuthorizer < ApplicationAuthorizer
   end
 
   def readable_by?(user)
-    user.has_any_role? :admin, :manager, :fabrication
+    user.has_any_role? :admin, :manager, :fabrication, :accountant
   end
 
   def deletable_by?(user)
