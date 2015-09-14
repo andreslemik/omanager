@@ -7,7 +7,7 @@ ru:
         dog_num: Номер договора
         client: ФИО
         phone: Телефон
-        address: Адрес
+        address: Адрес доставки
         area: Район
         desired_date: 'Желаемая дата'
         order_items: 'Содержимое заказа'
