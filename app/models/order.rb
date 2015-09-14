@@ -14,7 +14,7 @@ class Order < ActiveRecord::Base
                 'Не Ульяновск': 0
        }
 
-  has_many :order_items, dependent: :destroy, inverse_of: :order
+  has_many :order_items, dependent: :destroy, inverse_of: :order, autosave: true
   has_many :products, through: :order_items
   belongs_to :dept, -> { with_deleted }
   belongs_to :author, -> { with_deleted }, class_name: User
@@ -36,7 +36,7 @@ class Order < ActiveRecord::Base
                                 reject_if: proc { |attrs| attrs.blank? },
                                 allow_destroy: true
 
-  after_create :add_accounts
+  #after_create :add_accounts
   after_save :update_accounts
 
   # scopes by order state
@@ -101,23 +101,21 @@ class Order < ActiveRecord::Base
 
   private
 
-  def add_accounts
-    operation = operations.new
-    operation = Partner.find(partner_id).operations.new unless retail?
+  def update_accounts
+    case retail_client
+    when true
+      operation = operations.where(order_id: id).first
+      operation = operations.new if operation.blank?
+    when false
+      operation = Partner.find(partner_id).operations.first
+      operation = Partner.find(partner_id).operations.new if operation.blank?
+    end
     operation.attributes = { operation_date: Time.now,
                              operation_type: :expense, amount: total,
                              memo: "Договор №#{dog_num} от #{I18n.l(order_date)}",
                              order_id: id
     }
     operation.save!
-  end
-
-  def update_accounts
-    case retail_client
-    when true
-      operation = operations.where(order_id: id).first
-      operation.amount = total
-    end
   end
 
 end

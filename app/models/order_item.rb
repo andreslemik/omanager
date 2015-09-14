@@ -3,7 +3,7 @@ class OrderItem < ActiveRecord::Base
   include AASM
   acts_as_paranoid
   has_paper_trail
-  belongs_to :order, autosave: true
+  belongs_to :order
   belongs_to :product
 
   attr_accessor :category, :manufacturer
@@ -15,6 +15,8 @@ class OrderItem < ActiveRecord::Base
     joins(:order)
       .order('orders.desired_date asc NULLS last, orders.created_at desc, orders.id')
   }
+
+  after_save :update_order
 
   def option_values=(val)
     self[:option_values] = val.map(&:to_i)
@@ -69,5 +71,11 @@ class OrderItem < ActiveRecord::Base
     event :to_delivery do
       transitions from: :ready, to: :delivery
     end
+  end
+
+  private
+
+  def update_order
+    order.update_attribute(:updated_at, Time.now)
   end
 end
