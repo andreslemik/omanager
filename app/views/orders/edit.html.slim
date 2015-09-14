@@ -1,9 +1,6 @@
 .large-10.large-centered.columns
   h2 Изменение договора #{@order.dog_num} от #{l(@order.order_date)}
   = link_to 'Назад', orders_path, class: 'button secondary tiny'
-  - if @order.deletable_by?(current_user)
-    = link_to 'Удалить', order_path(@order), class: 'button secondary small tiny', \
-      method: :delete, data: { confirm: 'Вы уверены?' }
 
   = form_for @order do |f|
     - if @order.errors.any?
@@ -59,8 +56,9 @@
         = f.submit 'Сохранить'
         = link_to 'Назад', orders_path, class: 'button secondary tiny'
       .large-4.columns
-        = link_to 'Удалить', order_path(@order), class: 'button secondary tiny', \
-         method: :delete, data: { confirm: 'Вы уверены?' }
+        - if @order.deletable_by?(current_user)
+          = link_to 'Удалить', order_path(@order), class: 'button secondary tiny', \
+           method: :delete, data: { confirm: 'Вы уверены?' }
 
 = content_for :js do
   = javascript_include_tag 'order', 'data-turbolinks-track' => true
