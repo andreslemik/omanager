@@ -1,6 +1,7 @@
 # OrderItem model
 class OrderItem < ActiveRecord::Base
   include AASM
+  acts_as_paranoid
   has_paper_trail
   belongs_to :order, autosave: true
   belongs_to :product
