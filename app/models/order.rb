@@ -107,7 +107,7 @@ class Order < ActiveRecord::Base
       operation = operations.where(order_id: id).first
       operation = operations.new if operation.blank?
     when false
-      operation = Partner.find(partner_id).operations.(where order_id: id).first
+      operation = Partner.find(partner_id).operations.where(order_id: id).first
       operation = Partner.find(partner_id).operations.new if operation.blank?
     end
     operation.attributes = { operation_date: Time.now,
