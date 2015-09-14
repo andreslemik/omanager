@@ -36,8 +36,8 @@ class Order < ActiveRecord::Base
                                 reject_if: proc { |attrs| attrs.blank? },
                                 allow_destroy: true
 
-  #after_create :add_accounts
   after_save :update_accounts
+  after_destroy :delete_accounts
 
   # scopes by order state
   Order.aasm.states.map(&:name).each do |s|
@@ -107,7 +107,7 @@ class Order < ActiveRecord::Base
       operation = operations.where(order_id: id).first
       operation = operations.new if operation.blank?
     when false
-      operation = Partner.find(partner_id).operations.first
+      operation = Partner.find(partner_id).operations.(where order_id: id).first
       operation = Partner.find(partner_id).operations.new if operation.blank?
     end
     operation.attributes = { operation_date: Time.now,
@@ -116,6 +116,10 @@ class Order < ActiveRecord::Base
                              order_id: id
     }
     operation.save!
+  end
+
+  def delete_accounts
+    Account.destroy_all(order_id: id)
   end
 
 end
