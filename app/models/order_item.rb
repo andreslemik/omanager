@@ -19,14 +19,14 @@ class OrderItem < ActiveRecord::Base
   }
 
   scope :to_fabrication, lambda {
-          joins(:category)
-              .where('categories.fabrication = ?', true)
-                       }
+    joins(:category)
+      .where('categories.fabrication = ?', true)
+  }
   scope :own_supplier, lambda {
-          joins(:partner)
-          .where('partners.own = ?', true)
-          .where('partners.partner_type = ?', 0)
-                     }
+    joins(:partner)
+      .where('partners.own = ?', true)
+      .where('partners.partner_type = ?', 0)
+  }
 
   after_save :update_order
 
@@ -40,13 +40,10 @@ class OrderItem < ActiveRecord::Base
 
   def product_options
     return '' if option_values.blank?
-    result = ''
+    result = []
     ov = OptionValue.where(id: option_values)
-    ov.each do |v|
-      result << v.option_type.name << ': ' << v.name
-      result << ', ' unless v == ov.last
-    end
-    result
+    ov.map { |v| "#{v.option_type}: #{v.name}" }
+    result.join(', ')
   end
 
   def retail

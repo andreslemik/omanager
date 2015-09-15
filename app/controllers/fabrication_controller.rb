@@ -5,7 +5,7 @@ class FabricationController < ApplicationController
                  .to_fabrication
                   .own_supplier
                  .by_desired_date
-                 .includes(:order)
+                 .includes(:order, :product)
                  .page(params[:page])
   end
 end
