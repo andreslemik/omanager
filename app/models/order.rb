@@ -71,6 +71,11 @@ class Order < ActiveRecord::Base
     order_items.map(&:subtotal).sum
   end
 
+  def items_names
+    order_items.map { |oi| "#{oi.product.name} (#{oi.product.category.name})" }
+      .join(', ')
+  end
+
   ransacker :registered do |_parent|
     Arel.sql('date(order_date)')
   end
@@ -98,7 +103,6 @@ class Order < ActiveRecord::Base
     event :cancel do
       transitions from: [:pending, :working], to: :canceled
     end
-
   end
 
   def all_items_pending?
@@ -127,5 +131,4 @@ class Order < ActiveRecord::Base
   def delete_accounts
     Account.destroy_all(order_id: id)
   end
-
 end
