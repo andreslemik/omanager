@@ -5,8 +5,8 @@ class OrdersController < ApplicationController
   authorize_actions_for Order
 
   def index
-    @q = Order.ransack params[:q]
-    @orders = @q.result.includes(:dept, :author).order(order_date: :desc).page(params[:page])
+    @q = Order.ransack(params[:q])
+    @orders = @q.result(distinct: true).includes(:dept, :author, :products, :categories).order(order_date: :desc).page(params[:page])
   end
 
   def show

@@ -21,6 +21,14 @@ h2 Список договоров
         .large-12.columns
           = f.label :dept_id_eq, 'Офис'
           = f.select :dept_id_eq, options_from_collection_for_select(Dept.all, :id, :name), include_blank: true
+      .row
+        .large-12.columns
+          = f.label :products_name_cont, 'Изделия содержат'
+          = f.text_field :products_name_or_categories_name_cont, placeholder: 'Изделия содержат...'
+      .row
+        .large-12.columns
+          = f.label :memo_cont, 'Примечание содержит'
+          = f.text_field :memo_cont, placeholder: 'Примечание содержит...'
 
 
         .large-12.columns
@@ -37,10 +45,9 @@ h2 Список договоров
           th
           th.text-center(width="100") Номер
           th.text-center(width="100") Дата
-          th.text-center Тип
           th.text-center Статус
-          th.text-center Сумма
           th.text-center Офис
+          th.text-center Изделия
           th.show-for-large-only(width="200") Примечение
       tbody
         - @orders.each do |o|
@@ -48,9 +55,8 @@ h2 Список договоров
             td = link_to(ficon(:pencil, :small), edit_order_path(o), data: { no_turbolink: true }) if current_user.can_update?(o)
             td.text-center = link_to o.dog_num, order_path(o)
             td = l(o.order_date)
-            td = o.order_type
             td = o.aasm.human_state
-            td.text-right = number_to_currency o.total, precision: 0
             td = o.dept.try(:name)
+            td = o.items_names.truncate(40)
             td.show-for-large-only = o.memo
 

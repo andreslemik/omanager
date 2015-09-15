@@ -16,6 +16,7 @@ class Order < ActiveRecord::Base
 
   has_many :order_items, dependent: :destroy, inverse_of: :order, autosave: true
   has_many :products, through: :order_items
+  has_many :categories, through: :products
   belongs_to :dept, -> { with_deleted }
   belongs_to :author, -> { with_deleted }, class_name: User
   belongs_to :partner
