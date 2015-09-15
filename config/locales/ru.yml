@@ -25,6 +25,7 @@ ru:
       category:
         id: 'ID'
         name: 'Наименование'
+        fabrication: 'Производство'
       user:
         id: 'ID'
         name: 'Имя'

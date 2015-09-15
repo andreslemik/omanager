@@ -16,6 +16,7 @@ class Partner < ActiveRecord::Base
 
   scope :suppliers, -> { where partner_type: 0 }
   scope :customers, -> { where partner_type: 1 }
+  scope :own, -> { where own: true }
 
   def balance
     income = operations.income.map(&:amount).sum

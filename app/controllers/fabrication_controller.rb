@@ -1,6 +1,11 @@
 # Fabrication controller
 class FabricationController < ApplicationController
   def index
-    @items = OrderItem.pending.by_desired_date.includes(:order).page(params[:page])
+    @items = OrderItem.pending
+                 .to_fabrication
+                  .own_supplier
+                 .by_desired_date
+                 .includes(:order)
+                 .page(params[:page])
   end
 end

@@ -5,6 +5,8 @@ class OrderItem < ActiveRecord::Base
   has_paper_trail
   belongs_to :order
   belongs_to :product
+  has_one :category, through: :product
+  has_one :partner, through: :product, foreign_key: :manufacturer_id, source: :manufacturer
 
   attr_accessor :category, :manufacturer
   serialize :option_values, JSON
@@ -15,6 +17,16 @@ class OrderItem < ActiveRecord::Base
     joins(:order)
       .order('orders.desired_date asc NULLS last, orders.created_at desc, orders.id')
   }
+
+  scope :to_fabrication, lambda {
+          joins(:category)
+              .where('categories.fabrication = ?', true)
+                       }
+  scope :own_supplier, lambda {
+          joins(:partner)
+          .where('partners.own = ?', true)
+          .where('partners.partner_type = ?', 0)
+                     }
 
   after_save :update_order
 
