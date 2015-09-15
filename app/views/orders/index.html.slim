@@ -57,6 +57,6 @@ h2 Список договоров
             td = l(o.order_date)
             td = o.aasm.human_state
             td = o.dept.try(:name)
-            td = o.items_names.truncate(40)
+            td = o.items_names.truncate(120)
             td.show-for-large-only = o.memo
 
