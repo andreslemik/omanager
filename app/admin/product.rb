@@ -1,14 +1,18 @@
 ActiveAdmin.register Product do
   menu parent: 'Управление продуктами', priority: 10
-  permit_params :name, :image, :image_cache, :category_id, :price, :manufacturer_id,
-                :margin,
+  permit_params :name, :image, :image_cache, :category_id,
+                :price, :manufacturer_id, :margin,
                 product_properties_attributes: [:id, :property_id, :value, :_destroy],
                 product_option_types_attributes: [:id, :option_type_id, :_destroy],
                 product_option_values_attributes: [:id, :option_value_id, :diff, :_destroy]
 
   filter :name
   filter :category
-  filter :manufacturer, as: :select, collection: Partner.joins(:products).uniq
+  filter :manufacturer, as: :select,
+                        collection: proc {
+                          Hash[Partner.order(:name)
+                            .joins(:products).uniq.map { |p| [p.name, p.id] }]
+                        }
 
   index do
     selectable_column
