@@ -30,6 +30,11 @@ h2 Список договоров
           = f.label :memo_cont, 'Примечание содержит'
           = f.text_field :memo_cont, placeholder: 'Примечание содержит...'
 
+      .row
+        .large-4.columns
+          = f.label :order_items_id_eq, 'Номер по цеху'
+          = f.text_field :order_items_id_eq
+
 
         .large-12.columns
           = f.submit 'Найти', class: 'button tiny'

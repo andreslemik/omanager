@@ -1,6 +1,7 @@
 - oi = f.object
 tr(data-id="#{oi.id}" data-del="0")
   td = link_to ficon(:pencil, :small), edit_order_item_path(oi)
+  td = oi.id
   td = oi.product.try(:long_name)
   td = oi.additional
   td = oi.product_options

@@ -26,6 +26,7 @@ h2 Договор №#{@order.dog_num} от #{I18n.l(@order.order_date)}
     table
       thead
         tr
+          th.text-center № цех
           th Изделие
           th Описание
           th Опции
@@ -35,6 +36,7 @@ h2 Договор №#{@order.dog_num} от #{I18n.l(@order.order_date)}
       tbody
         - @order.order_items.each do |oi|
           tr
+            td = oi.id
             td = oi.product.long_name
             td = oi.additional
             td = oi.product_options
