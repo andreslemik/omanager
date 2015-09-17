@@ -48,20 +48,20 @@ h2 Список договоров
       thead
         tr
           th
+          th.text-center Изделия
+          th.text-center Офис
           th.text-center(width="100") Номер
           th.text-center(width="100") Дата
           th.text-center Статус
-          th.text-center Офис
-          th.text-center Изделия
           th.show-for-large-only(width="200") Примечение
       tbody
         - @orders.each do |o|
           tr
             td = link_to(ficon(:pencil, :small), edit_order_path(o), data: { no_turbolink: true }) if current_user.can_update?(o)
+            td = o.items_names.truncate(120)
+            td = o.dept.try(:name)
             td.text-center = link_to o.dog_num, order_path(o)
             td = l(o.order_date)
             td = o.aasm.human_state
-            td = o.dept.try(:name)
-            td = o.items_names.truncate(120)
             td.show-for-large-only = o.memo
 
