@@ -1,0 +1,10 @@
+- content_for :title, @title
+
+h3 = @title
+.large-2.columns
+  = form_for @order_item, url: fabrication_path(@order_item) do |f|
+    = f.text_field :fabrication_date, class: 'datepicker', label: 'Дата производства'
+    = f.submit 'Сохранить'
+    = link_to 'Отмена', fabrication_index_path, class: 'button secondary tiny'
+.large-10.columns
+  = render 'schedule'

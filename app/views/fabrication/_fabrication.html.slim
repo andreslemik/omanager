@@ -21,6 +21,6 @@ table
         td = "#{i.product.name} (#{i.product.category.name})"
         td = i.additional
         td = i.product_options
-        td = i.aasm.human_state
+        td = link_to i.aasm.human_state, edit_fabrication_path(i)
 
 = paginate @items

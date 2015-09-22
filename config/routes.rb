@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   resources :partners, only: [:index, :show]
   resources :accounts
-  resources :fabrication, only: [:index] do
+  resources :fabrication, only: [:index, :edit, :update] do
     collection do
       get 'schedule'
     end

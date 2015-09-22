@@ -1,5 +1,6 @@
 # OrderItem model
 class OrderItem < ActiveRecord::Base
+  include ActiveModel::Dirty
   include AASM
   acts_as_paranoid
   has_paper_trail
@@ -29,6 +30,7 @@ class OrderItem < ActiveRecord::Base
   }
 
   after_save :update_order
+  after_save :change_state, if: :fabrication_date_changed?
 
   def option_values=(val)
     self[:option_values] = val.map(&:to_i)
@@ -70,6 +72,7 @@ class OrderItem < ActiveRecord::Base
     end
     event :stop_work do
       after_commit do
+        update_attribute(:fabrication_date, nil)
         order.stop_work! if order.aasm_state == 'working'
       end
       transitions from: :working, to: :pending
@@ -86,5 +89,10 @@ class OrderItem < ActiveRecord::Base
 
   def update_order
     order.update_attribute(:updated_at, Time.now)
+  end
+
+  def change_state
+    return if fabrication_date.blank?
+    self.work! if aasm_state == 'pending' && !fabrication_date.blank?
   end
 end
