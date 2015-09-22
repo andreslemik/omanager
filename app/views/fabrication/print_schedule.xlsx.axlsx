@@ -1,0 +1,11 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: 'График производства') do |sheet|
+  sheet.add_row ['№ цех', 'Тип договора', 'Название', 'Ткань', 'Параметры']
+  @items.each do |item|
+    sheet.add_row [item.id,
+                   item.order.order_type_s,
+                   "#{item.product.name} (#{item.product.category.name})",
+                   item.additional,
+                   item.product_options]
+  end
+end

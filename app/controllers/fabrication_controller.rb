@@ -33,6 +33,13 @@ class FabricationController < ApplicationController
     render :index
   end
 
+  def print_schedule
+    @items = OrderItem.working.where(fabrication_date: params[:fdate])
+    respond_to do |format|
+      format.xlsx
+    end
+  end
+
   private
 
   def set_order_item

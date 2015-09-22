@@ -13,8 +13,11 @@ Rails.application.routes.draw do
   resources :fabrication, only: [:index, :edit, :update] do
     collection do
       get 'schedule'
+      get 'print_schedule/:fdate', to: 'fabrication#print_schedule',
+          defaults: { format: 'xlsx' }, as: :print_schedule
     end
   end
+
 
   get 'products/by_category_mfc/:category_id/:manufacturer_id', to: 'products#by_category_mfc', defaults: { format: 'json' }
   get 'products/manufacturers/:category_id', to: 'products#manufacturers', defaults: { format: 'json' }
