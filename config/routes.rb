@@ -10,7 +10,11 @@ Rails.application.routes.draw do
 
   resources :partners, only: [:index, :show]
   resources :accounts
-  resources :fabrication, only: [:index]
+  resources :fabrication, only: [:index] do
+    collection do
+      get 'schedule'
+    end
+  end
 
   get 'products/by_category_mfc/:category_id/:manufacturer_id', to: 'products#by_category_mfc', defaults: { format: 'json' }
   get 'products/manufacturers/:category_id', to: 'products#manufacturers', defaults: { format: 'json' }
