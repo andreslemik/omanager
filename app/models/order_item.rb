@@ -93,6 +93,6 @@ class OrderItem < ActiveRecord::Base
 
   def change_state
     return if fabrication_date.blank?
-    self.work! if aasm_state == 'pending' && !fabrication_date.blank?
+    self.work! if aasm_state == 'pending'
   end
 end
