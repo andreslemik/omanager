@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150915143258) do
+ActiveRecord::Schema.define(version: 20150922082504) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,19 +90,21 @@ ActiveRecord::Schema.define(version: 20150915143258) do
     t.integer  "order_id"
     t.integer  "product_id"
     t.integer  "amount"
-    t.decimal  "cost",          precision: 8, scale: 2
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
+    t.decimal  "cost",             precision: 8, scale: 2
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
     t.string   "option_values"
     t.text     "descr_basis"
     t.text     "descr_assort"
     t.text     "special_notes"
     t.string   "aasm_state"
     t.datetime "deleted_at"
+    t.date     "fabrication_date"
   end
 
   add_index "order_items", ["aasm_state"], name: "index_order_items_on_aasm_state", using: :btree
   add_index "order_items", ["deleted_at"], name: "index_order_items_on_deleted_at", using: :btree
+  add_index "order_items", ["fabrication_date"], name: "index_order_items_on_fabrication_date", using: :btree
   add_index "order_items", ["order_id"], name: "index_order_items_on_order_id", using: :btree
   add_index "order_items", ["product_id"], name: "index_order_items_on_product_id", using: :btree
 
