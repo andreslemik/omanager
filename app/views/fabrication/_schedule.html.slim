@@ -1,0 +1,25 @@
+- dates = @items.pluck(:fabrication_date).uniq.sort
+
+- dates.each do |d|
+  .row
+    .large-9.large-centered.columns
+      table.full-width
+        caption = I18n.l d
+        thead
+          tr
+            th
+            th.text-center № цех
+            th.text-center Тип<br />договора
+            th.text-center Название
+            th.text-center Ткань
+            th.text-center Параметры
+        tbody
+          - items = @items.where(fabrication_date: d)
+          - items.each do |i|
+            tr
+              td = link_to ficon(:pencil, :small), edit_fabrication_path(i)
+              td.text-right = i.id
+              td = i.order.order_type_s
+              td = "#{i.product.name} (#{i.product.category.name})"
+              td = i.additional
+              td = i.product_options

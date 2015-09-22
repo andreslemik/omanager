@@ -1,6 +1,7 @@
 # Fabrication controller
 class FabricationController < ApplicationController
   before_action :set_order_item, only: [:edit, :update]
+  before_action :working_items, only: [:schedule, :edit]
   def index
     @template = 'fabrication'
     @title = 'Поставить в очередь'
@@ -29,9 +30,6 @@ class FabricationController < ApplicationController
   def schedule
     @template = 'schedule'
     @title = 'Очередь производства'
-    @items = OrderItem.working
-                 .includes(:order, :product)
-                 .page(params[:page])
     render :index
   end
 
@@ -39,6 +37,11 @@ class FabricationController < ApplicationController
 
   def set_order_item
     @order_item = OrderItem.find params[:id]
+  end
+
+  def working_items
+    @items = OrderItem.working
+                 .includes(:order, :product)
   end
 
   def item_params
