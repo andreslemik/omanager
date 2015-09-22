@@ -9,9 +9,9 @@ FactoryGirl.define do
     client { Faker::Name.name }
     address { Faker::Address.street_address }
     phone { Faker::PhoneNumber.cell_phone }
+    area 13
 
     factory :retail_order do
-      area 13
       retail_client true
     end
 
