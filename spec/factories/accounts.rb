@@ -3,7 +3,14 @@ FactoryGirl.define do
     amount { Faker::Number.number 4 }
     operation_date { Faker::Date.between 6.months.ago, Date.today }
     #TODO add other associations when they will appear
-    association :accountable, factory: [:partner, :customer]
+    trait :partner_operation do
+      association :accountable, factory: [:partner, :customer]
+    end
+
+    trait :order_operation do
+      association :accountable, factory: :retail_order
+    end
+
 
     operation_type :income
 
