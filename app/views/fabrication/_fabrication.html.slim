@@ -11,6 +11,7 @@ table
       th.text-center Ткань
       th.text-center Параметры
       th.text-center Статус
+      th
   tbody
     - @items.each do |i|
       tr
@@ -21,6 +22,7 @@ table
         td = "#{i.product.name} (#{i.product.category.name})"
         td = i.additional
         td = i.product_options
-        td = link_to i.aasm.human_state, edit_fabrication_path(i)
+        td = i.aasm.human_state
+        td = link_to ficon(:calendar, :large), edit_fabrication_path(i)
 
 = paginate @items
