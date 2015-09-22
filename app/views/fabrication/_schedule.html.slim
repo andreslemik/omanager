@@ -4,7 +4,7 @@
   .row
     .large-9.columns
       table.full-width
-        caption = I18n.l d
+        caption == "#{I18n.l(d)} #{link_to ficon(:print, :medium), '#', title: 'Распечатать'}"
         thead
           tr
             th
