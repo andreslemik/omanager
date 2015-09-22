@@ -18,7 +18,7 @@ GIT
 
 GIT
   remote: git://github.com/activerecord-hackery/ransack.git
-  revision: 1c5cb64e25983cc1724a01c03db8704c40c1172d
+  revision: 45e5c2f4ff5679aacfc83e2473a4fe67630fa499
   specs:
     ransack (1.7.0)
       actionpack (>= 3.0)
@@ -44,7 +44,7 @@ GIT
 
 GIT
   remote: https://github.com/rails/turbolinks.git
-  revision: 6d2ffc0e9eadb047ca5febbc08da8d92acab78c4
+  revision: eac0a3e43a69b341abdd55ef1bc45d1d4cfaf8a9
   specs:
     turbolinks (3.0.0)
       coffee-rails
@@ -100,7 +100,7 @@ GEM
     bcrypt (3.1.10)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    bourbon (4.2.4)
+    bourbon (4.2.5)
       sass (~> 3.4)
       thor (~> 0.19)
     browser (1.0.1)
@@ -200,7 +200,7 @@ GEM
     has_scope (0.6.0)
       actionpack (>= 3.2, < 5)
       activesupport (>= 3.2, < 5)
-    httparty (0.13.5)
+    httparty (0.13.6)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
     i18n (0.7.0)
