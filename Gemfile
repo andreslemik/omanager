@@ -97,3 +97,4 @@ gem 'paper_trail', '~> 4.0.0.rc'
 
 gem 'browser'
 gem 'aasm'
+gem 'active_link_to'

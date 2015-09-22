@@ -2,29 +2,38 @@
 - content_for :title, title
 h3 = title
 
-= paginate @items
-table
-  caption Список изделий, ожидающих производства
-  thead
-    tr
-      th.text-center № цех
-      th.text-center Желаемая<br />дата
-      th.text-center Номер<br />договора
-      th.text-center Тип<br />договора
-      th.text-center Название
-      th.text-center Ткань
-      th.text-center Параметры
-      th.text-center Статус
-  tbody
-    - @items.each do |i|
+.large-2.columns
+  ul.side-nav
+    = active_link_to 'Поставить в очередь', \
+      fabrication_index_path, active: [['fabrication'], ['index']], \
+       wrap_tag: :li
+    = active_link_to 'Очередь производства', '#', \
+      active: [['fabrication'], ['schedule']], \
+      wrap_tag: :li
+.large-10.columns
+  = paginate @items
+  table
+    caption Список изделий, ожидающих производства
+    thead
       tr
-        td.text-right = i.id
-        td.text-center = I18n.l(i.order.desired_date) unless i.order.desired_date.blank?
-        td.text-center = link_to i.order.dog_num, order_path(i.order)
-        td = i.order.order_type_s
-        td = "#{i.product.name} (#{i.product.category.name})"
-        td = i.additional
-        td = i.product_options
-        td = i.aasm.human_state
+        th.text-center № цех
+        th.text-center Желаемая<br />дата
+        th.text-center Номер<br />договора
+        th.text-center Тип<br />договора
+        th.text-center Название
+        th.text-center Ткань
+        th.text-center Параметры
+        th.text-center Статус
+    tbody
+      - @items.each do |i|
+        tr
+          td.text-right = i.id
+          td.text-center = I18n.l(i.order.desired_date) unless i.order.desired_date.blank?
+          td.text-center = link_to i.order.dog_num, order_path(i.order)
+          td = i.order.order_type_s
+          td = "#{i.product.name} (#{i.product.category.name})"
+          td = i.additional
+          td = i.product_options
+          td = i.aasm.human_state
 
-= paginate @items
+  = paginate @items
