@@ -1,11 +1,24 @@
 wb = xlsx_package.workbook
-wb.add_worksheet(name: 'График производства') do |sheet|
-  sheet.add_row ['№ цех', 'Тип договора', 'Название', 'Ткань', 'Параметры']
-  @items.each do |item|
-    sheet.add_row [item.id,
-                   item.order.order_type_s,
-                   "#{item.product.name} (#{item.product.category.name})",
-                   item.additional,
-                   item.product_options]
+setup = { fit_to_width: 1, orientation: :landscape,
+          paper_width: '297mm', paper_height: '210mm' }
+wb.styles do |s|
+  header_cell = s.add_style sz: 16, alignment: { horizontal: :center },
+                            border: { style: :thin, color: '00' }
+  bordered_cell = s.add_style border: { style: :thin, color: '00' }
+  centered_cell = s.add_style alignment: { horizontal: :center },
+                              border: { style: :thin, color: '00' }
+  wb.add_worksheet(name: 'График производства', page_setup: setup) do |sheet|
+    sheet.add_row ['№ цех', 'Тип договора', 'Название', 'Ткань', 'Параметры'],
+                  style: header_cell
+    @items.each do |item|
+      sheet.add_row [item.id,
+                     item.order.order_type_s,
+                     "#{item.product.name} (#{item.product.category.name})",
+                     item.additional,
+                     item.product_options],
+                    style: bordered_cell
+      sheet.rows.last.cells[0].style = centered_cell
+    end
+    sheet.column_widths 10, 15, 40, 40, 40
   end
 end
