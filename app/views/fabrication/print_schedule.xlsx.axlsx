@@ -4,8 +4,9 @@ setup = { fit_to_width: 1, orientation: :landscape,
 wb.styles do |s|
   header_cell = s.add_style sz: 16, alignment: { vertical: :center, horizontal: :center, wrap_text: true },
                             border: { style: :thin, color: '00' }
-  bordered_cell = s.add_style border: { style: :thin, color: '00' }
-  centered_cell = s.add_style alignment: { horizontal: :center },
+  bordered_cell = s.add_style border: { style: :thin, color: '00' },
+                              alignment: { vertical: :top, horizontal: :left, wrap_text: true }
+  centered_cell = s.add_style alignment: { vertical: :top, horizontal: :center },
                               border: { style: :thin, color: '00' }
   wb.add_worksheet(name: 'График производства', page_setup: setup) do |sheet|
     sheet.add_row ['№ цех', 'Тип договора', 'Название', 'Ткань', 'Параметры'],
@@ -19,6 +20,6 @@ wb.styles do |s|
                     style: bordered_cell
       sheet.rows.last.cells[0].style = centered_cell
     end
-    sheet.column_widths 10, 15, 40, 40, 40
+    sheet.column_widths nil, 15, 40, 40, 40
   end
 end
