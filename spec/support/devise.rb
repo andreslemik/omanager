@@ -12,10 +12,21 @@ module ValidUserRequestHelper
   end
 end
 
+module ControllerHelper
+  def login_as(role)
+    before :each do
+      @request.env['devise.mapping'] = Devise.mappings[:user]
+      user = FactoryGirl.create role
+      sign_in user
+    end
+  end
+end
+
 # Configure these to modules as helpers in the appropriate tests.
 RSpec.configure do |config|
 # Include the help for the request specs.
   config.include ValidUserRequestHelper, type: :request
   config.include Devise::TestHelpers, type: :controller
+  config.extend ControllerHelper, type: :controller
   config.include Devise::TestHelpers, type: :view
 end
