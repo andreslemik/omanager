@@ -1,6 +1,6 @@
 FactoryGirl.define do
   Faker::Config.locale = :en
-  factory :user do
+  factory :user, aliases: [:author] do
     email { Faker::Internet.email }
     pwd = Faker::Internet.password(8)
     username { Faker::Internet.user_name }
