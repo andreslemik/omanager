@@ -1,11 +1,11 @@
 - dates = @items.pluck(:fabrication_date).uniq.sort
-
+h4 == link_to ficon(:print, :medium), \
+          print_schedule_fabrication_index_path, title: 'Распечатать'
 - dates.each do |d|
   .row
     .large-9.columns
       table.full-width
-        caption == "#{I18n.l(d)} #{link_to ficon(:print, :medium), \
-          print_schedule_fabrication_index_path(d), title: 'Распечатать'}"
+        caption = I18n.l(d)
         thead
           tr
             th

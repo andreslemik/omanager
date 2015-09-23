@@ -2,24 +2,33 @@ wb = xlsx_package.workbook
 setup = { fit_to_width: 1, orientation: :landscape,
           paper_width: '297mm', paper_height: '210mm' }
 wb.styles do |s|
-  header_cell = s.add_style sz: 16, alignment: { vertical: :center, horizontal: :center, wrap_text: true },
-                            border: { style: :thin, color: '00' }
-  bordered_cell = s.add_style border: { style: :thin, color: '00' },
+  header_cell = s.add_style alignment: { vertical: :center, horizontal: :center, wrap_text: true },
+                            border: Axlsx::STYLE_THIN_BORDER, b: true
+  bordered_cell = s.add_style border: Axlsx::STYLE_THIN_BORDER,
                               alignment: { vertical: :top, horizontal: :left, wrap_text: true }
-  centered_cell = s.add_style alignment: { vertical: :top, horizontal: :center },
-                              border: { style: :thin, color: '00' }
+  centered_cell = s.add_style alignment: { vertical: :top, horizontal: :center, wrap_text: true },
+                              border: Axlsx::STYLE_THIN_BORDER,
+                              alignment: { vertical: :top, horizontal: :center, wrap_text: true }
+  date_time = s.add_style format_code: 'dd.mm.yyyy', border: Axlsx::STYLE_THIN_BORDER
   wb.add_worksheet(name: 'График производства', page_setup: setup) do |sheet|
-    sheet.add_row ['№ цех', 'Тип договора', 'Название', 'Ткань', 'Параметры'],
+    sheet.add_row ["График производства по состоянию на #{I18n.l Time.now}"], width: 10
+    sheet.merge_cells 'A1:F1'
+    sheet.add_row
+
+    sheet.add_row ['№ цех', 'Дата готовности (примерно)',
+                   'Тип договора', 'Название', 'Ткань', 'Параметры'],
                   style: header_cell
     @items.each do |item|
-      sheet.add_row [item.id,
+      sheet.add_row [item.id, item.fabrication_date,
                      item.order.order_type_s,
                      "#{item.product.name} (#{item.product.category.name})",
                      item.additional,
                      item.product_options],
-                    style: bordered_cell
+                    style: bordered_cell, width: [:auto, 12, 10, 40, 40, :auto]
       sheet.rows.last.cells[0].style = centered_cell
+      sheet.rows.last.cells[1].style = date_time
+      sheet.rows.last.cells[2].style = centered_cell
     end
-    sheet.column_widths nil, 15, 40, 40, 40
+    sheet.column_widths 10,12, 10, 40, 40, 40
   end
 end

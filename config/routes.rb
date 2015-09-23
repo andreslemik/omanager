@@ -13,8 +13,7 @@ Rails.application.routes.draw do
   resources :fabrication, only: [:index, :edit, :update] do
     collection do
       get 'schedule'
-      get 'print_schedule/:fdate', to: 'fabrication#print_schedule',
-          defaults: { format: 'xlsx' }, as: :print_schedule
+      get 'print_schedule', defaults: { format: 'xlsx' }, as: :print_schedule
     end
   end
 

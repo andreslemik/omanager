@@ -34,9 +34,11 @@ class FabricationController < ApplicationController
   end
 
   def print_schedule
-    @items = OrderItem.working.where(fabrication_date: params[:fdate])
+    @items = OrderItem.working.order(:fabrication_date, :id)
     respond_to do |format|
-      format.xlsx
+      format.xlsx {
+        response.headers['Content-Disposition'] = 'attachment; filename="График производства.xlsx"'
+      }
     end
   end
 
