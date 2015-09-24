@@ -60,13 +60,10 @@ class AccountsController < ApplicationController
 
   def find_accounter
     allowed_types = %w(order partner)
-    if allowed_types.include? params[:accounter_type]
-      accounter_type = params[:accounter_type]
-      klass = accounter_type.capitalize.constantize
-      @accounter = klass.find(params[:accounter_id])
-    else
-      fail 'Not allowed parameter'
-    end
+    fail 'Not allowed parameter' unless allowed_types.include? params[:accounter_type]
+    accounter_type = params[:accounter_type]
+    klass = accounter_type.capitalize.constantize
+    @accounter = klass.find(params[:accounter_id])
   end
 
   def set_account
