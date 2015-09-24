@@ -49,15 +49,24 @@ class AccountsController < ApplicationController
     authorize_action_for @account
     @account.destroy
     respond_to do |f|
-      f.html { redirect_to partner_path(@account.accountable_id), notice: 'Запись удалена' }
+      f.html do
+        redirect_to partner_path(@account.accountable_id),
+                    notice: 'Запись удалена'
+      end
     end
   end
 
   private
 
   def find_accounter
-    klass = params[:accounter_type].capitalize.constantize
-    @accounter = klass.find(params[:accounter_id])
+    allowed_types = %w(order partner)
+    if allowed_types.include? params[:accounter_type]
+      accounter_type = params[:accounter_type]
+      klass = accounter_type.capitalize.constantize
+      @accounter = klass.find(params[:accounter_id])
+    else
+      fail 'Not allowed parameter'
+    end
   end
 
   def set_account
@@ -67,6 +76,7 @@ class AccountsController < ApplicationController
   end
 
   def account_params
-    params.require(:account).permit(:operation_type, :operation_date, :amount, :memo)
+    params.require(:account)
+      .permit(:operation_type, :operation_date, :amount, :memo)
   end
 end
