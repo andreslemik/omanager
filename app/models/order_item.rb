@@ -56,6 +56,11 @@ class OrderItem < ActiveRecord::Base
     result.join(', ')
   end
 
+  def client_name
+    return order.partner.name unless order.retail_client?
+    order.client
+  end
+
   def retail
     return 1 if order.retail_client
     0

@@ -2,6 +2,10 @@
 
 .row
   .large-2.columns
+    .panel
+      p Район: #{@order_item.order.area}
+      p Адрес: #{@order_item.order.address}
+      p Изделие: #{@order_item.product.name} (#{@order_item.product.category.name})
     = form_for @order_item, url: delivery_path(@order_item) do |f|
       = f.text_field :delivery_date, class: 'datepicker'
       = f.submit 'Сохранить'

@@ -1,3 +1,5 @@
 ul.side-nav
   = active_link_to "Поставить на доставку (#{OrderItem.ready.count})", delivery_index_path, \
     active: [['delivery'], ['index']], wrap_tag: :li
+  = active_link_to "Очередь доставки (#{OrderItem.delivery.count})", schedule_delivery_index_path, \
+      active: [['delivery'], ['schedule']], wrap_tag: :li

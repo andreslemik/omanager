@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   end
 
   resources :delivery, only: [:index, :edit, :update] do
+    get :schedule, on: :collection
     put :well_done, on: :member
   end
 

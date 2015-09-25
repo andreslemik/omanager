@@ -1,0 +1,26 @@
+h2 = @title
+
+- @items.group_by(&:delivery_date).each do |date, items|
+  table
+    caption = I18n.l date
+    thead
+      tr
+        th № цех
+        th Договор
+        th Район
+        th Адрес
+        th Телефон
+        th Изделие
+        th
+    tbody
+      - items.each do |item|
+        tr
+          td.text-center = item.id
+          td.text-center = link_to item.order.dog_num, order_path(item.order)
+          td = item.order.area
+          td = item.order.address
+          td #{item.order.phone} (#{item.client_name})
+          td #{item.product.name} (#{item.product.category.name})
+          td = link_to 'Доставлено', well_done_delivery_path(item), \
+            class: 'button tiny secondary', method: :put, \
+            data: { confirm: 'Вы уверены?' }
