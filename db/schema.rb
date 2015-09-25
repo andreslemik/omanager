@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150922082504) do
+ActiveRecord::Schema.define(version: 20150925104427) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -143,6 +143,7 @@ ActiveRecord::Schema.define(version: 20150922082504) do
   end
 
   add_index "partners", ["deleted_at"], name: "index_partners_on_deleted_at", using: :btree
+  add_index "partners", ["own"], name: "index_partners_on_own", using: :btree
   add_index "partners", ["partner_type"], name: "index_partners_on_partner_type", using: :btree
 
   create_table "product_option_types", force: :cascade do |t|
