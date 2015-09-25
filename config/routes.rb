@@ -19,6 +19,10 @@ Rails.application.routes.draw do
     put :get_ready, on: :member
   end
 
+  resources :delivery, only: [:index, :edit, :update] do
+    put :well_done, on: :member
+  end
+
 
   get 'products/by_category_mfc/:category_id/:manufacturer_id', to: 'products#by_category_mfc', defaults: { format: 'json' }
   get 'products/manufacturers/:category_id', to: 'products#manufacturers', defaults: { format: 'json' }
