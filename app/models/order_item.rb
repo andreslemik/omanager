@@ -29,6 +29,12 @@ class OrderItem < ActiveRecord::Base
       .where('partners.partner_type = ?', 0)
   }
 
+  scope :to_order, lambda {
+          joins(:partner, :category)
+            .where('partners.own = ?', false)
+            .where('categories.fabrication = ?', true)
+                 }
+
   after_save :update_order
   after_save :change_state, if: :fabrication_date_changed?
 

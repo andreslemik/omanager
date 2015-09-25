@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :fabrication, only: [:index, :edit, :update] do
     collection do
       get 'schedule'
+      get 'to_order'
       get 'print_schedule', defaults: { format: 'xlsx' }, as: :print_schedule
     end
     put :get_ready, on: :member

@@ -38,6 +38,12 @@ class FabricationController < ApplicationController
     render :index
   end
 
+  def to_order
+    @items = OrderItem.to_order
+    @template = 'to_order'
+    render :index
+  end
+
   def print_schedule
     @items = OrderItem.working.order(:fabrication_date, :id)
     respond_to do |format|

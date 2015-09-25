@@ -1,0 +1,10 @@
+table
+  thead
+    tr
+      th Поставщик
+      th Кол-во
+  tbody
+    - @items.group_by(&:product).sort.each do |product, item|
+      tr
+        td = product.manufacturer.name
+        td.text-right = item.count
