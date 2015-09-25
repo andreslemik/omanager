@@ -1,6 +1,6 @@
 # Fabrication controller
 class FabricationController < ApplicationController
-  before_action :set_order_item, only: [:edit, :update]
+  before_action :set_order_item, only: [:edit, :update, :get_ready]
   before_action :working_items, only: [:schedule, :edit]
   def index
     @template = 'fabrication'
@@ -25,6 +25,11 @@ class FabricationController < ApplicationController
         f.html { render :edit }
       end
     end
+  end
+
+  def get_ready
+    @order_item.get_ready!
+    redirect_to schedule_fabrication_index_path
   end
 
   def schedule

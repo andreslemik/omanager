@@ -14,6 +14,7 @@ h4 == link_to ficon(:print, :medium), \
             th.text-center Название
             th.text-center Ткань
             th.text-center Параметры
+            th
         tbody
           - items = @items.where(fabrication_date: d)
           - items.each do |i|
@@ -24,3 +25,5 @@ h4 == link_to ficon(:print, :medium), \
               td = "#{i.product.name} (#{i.product.category.name})"
               td = i.additional
               td = i.product_options
+              td = link_to 'Готово', get_ready_fabrication_path(i), class: 'button tiny secondary', \
+                     data: { confirm: 'Вы уверены?' }, method: :put

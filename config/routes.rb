@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       get 'schedule'
       get 'print_schedule', defaults: { format: 'xlsx' }, as: :print_schedule
     end
+    put :get_ready, on: :member
   end
 
 

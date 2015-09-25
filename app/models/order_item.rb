@@ -83,6 +83,9 @@ class OrderItem < ActiveRecord::Base
     event :to_delivery do
       transitions from: :ready, to: :delivery
     end
+    event :well_done do
+      transitions from: :delivery, to: :done
+    end
   end
 
   private
