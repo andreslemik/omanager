@@ -42,7 +42,7 @@ class FabricationController < ApplicationController
     @items = OrderItem.working.order(:fabrication_date, :id)
     respond_to do |format|
       format.xlsx {
-        response.headers['Content-Disposition'] = "attachment; filename='График производства #{I18n.l Time.now}.xlsx'"
+        response.headers['Content-Disposition'] = 'attachment; filename="График производства.xlsx"'
       }
     end
   end
