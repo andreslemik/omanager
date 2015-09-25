@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/activeadmin/activeadmin.git
-  revision: 105e70bc1a2630ffae8cc475985a972426f151ff
+  revision: 470817d8b43bb2fee78f10e288f02ae37407cb94
   specs:
     activeadmin (1.0.0.pre2)
       arbre (~> 1.0, >= 1.0.2)
@@ -18,7 +18,7 @@ GIT
 
 GIT
   remote: git://github.com/activerecord-hackery/ransack.git
-  revision: 45e5c2f4ff5679aacfc83e2473a4fe67630fa499
+  revision: c9d2297ff72401196e044a822e26f0b136186b6c
   specs:
     ransack (1.7.0)
       actionpack (>= 3.0)
@@ -275,7 +275,7 @@ GEM
     pg (0.18.3)
     polyamorous (1.2.0)
       activerecord (>= 3.0)
-    pry (0.10.1)
+    pry (0.10.2)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
