@@ -37,6 +37,7 @@ class OrderItem < ActiveRecord::Base
 
   after_save :update_order
   after_save :change_state, if: :fabrication_date_changed?
+  after_save :delivery_state, if: :delivery_date_changed?
 
   def option_values=(val)
     self[:option_values] = val.map(&:to_i)
@@ -79,7 +80,6 @@ class OrderItem < ActiveRecord::Base
     event :stop_work do
       after_commit do
         update_attribute(:fabrication_date, nil)
-        order.stop_work! if order.aasm_state == 'working'
       end
       transitions from: :working, to: :pending
     end
@@ -88,6 +88,12 @@ class OrderItem < ActiveRecord::Base
     end
     event :to_delivery do
       transitions from: :ready, to: :delivery
+    end
+    event :undo_delivery do
+      after_commit do
+        update_attribute(:delivery_date, nil)
+      end
+      transitions from: :delivery, to: :ready
     end
     event :well_done do
       transitions from: :delivery, to: :done
@@ -103,5 +109,10 @@ class OrderItem < ActiveRecord::Base
   def change_state
     return if fabrication_date.blank?
     self.work! if aasm_state == 'pending'
+  end
+
+  def delivery_state
+    return if delivery_date.blank?
+    self.to_delivery! if aasm_state == 'ready'
   end
 end

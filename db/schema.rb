@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150925104427) do
+ActiveRecord::Schema.define(version: 20150925113209) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -100,10 +100,12 @@ ActiveRecord::Schema.define(version: 20150925104427) do
     t.string   "aasm_state"
     t.datetime "deleted_at"
     t.date     "fabrication_date"
+    t.date     "delivery_date"
   end
 
   add_index "order_items", ["aasm_state"], name: "index_order_items_on_aasm_state", using: :btree
   add_index "order_items", ["deleted_at"], name: "index_order_items_on_deleted_at", using: :btree
+  add_index "order_items", ["delivery_date"], name: "index_order_items_on_delivery_date", using: :btree
   add_index "order_items", ["fabrication_date"], name: "index_order_items_on_fabrication_date", using: :btree
   add_index "order_items", ["order_id"], name: "index_order_items_on_order_id", using: :btree
   add_index "order_items", ["product_id"], name: "index_order_items_on_product_id", using: :btree
