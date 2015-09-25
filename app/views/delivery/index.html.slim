@@ -1,3 +1,35 @@
 - content_for :title, @title
 
-h2 = @title
+.row
+  .large-2.columns
+    = render 'delivery/navigation'
+  .large-10.columns
+    h2 = @title
+    = paginate @items
+    table
+      thead
+        tr
+          th № цех
+          th Договор
+          th Желаемая дата
+          th Район
+          th Адрес
+          th Телефон
+          th Тип договора
+          th Изделие
+          th Статус
+          th
+      tbody
+        - @items.each do |item|
+          tr
+            td.text-center = item.id
+            td.text-center = link_to item.order.dog_num, order_path(item.order)
+            td.text-center = I18n.l item.order.desired_date
+            td = item.order.area
+            td = item.order.address
+            td = "#{item.order.phone} (#{item.order.client})"
+            td = item.order.order_type_s
+            td = "#{item.product.name} (#{item.product.category.name})"
+            td = item.aasm.human_state
+            td = link_to ficon(:calendar, :large), edit_delivery_path(item)
+    = paginate @items

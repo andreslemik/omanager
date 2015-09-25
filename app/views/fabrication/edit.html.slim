@@ -8,7 +8,7 @@ h3 = @title
       p Ткань: #{@order_item.additional}
       p Опции: #{@order_item.product_options}
   = form_for @order_item, url: fabrication_path(@order_item) do |f|
-    = f.text_field :fabrication_date, class: 'datepicker', label: 'Дата производства'
+    = f.text_field :fabrication_date, class: 'datepicker'
     = f.submit 'Сохранить'
     = link_to 'Отмена', fabrication_index_path, class: 'button secondary tiny'
 .large-10.columns

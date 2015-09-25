@@ -17,6 +17,8 @@ ru:
           ready: Готов
           delivery: На доставке
           done: Доставлен
+        delivery_date: Дата доставки
+        fabrication_date: Дата производства
 
     models:
       order_item:

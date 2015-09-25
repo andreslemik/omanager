@@ -1,0 +1,10 @@
+- content_for :title, @title
+
+.row
+  .large-2.columns
+    = form_for @order_item, url: delivery_path(@order_item) do |f|
+      = f.text_field :delivery_date, class: 'datepicker'
+      = f.submit 'Сохранить'
+      = link_to 'Отмена', :back, class: 'button secondary tiny'
+  .large-10.columns
+    = render 'delivery/scheduled_items'

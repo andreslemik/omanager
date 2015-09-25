@@ -33,6 +33,7 @@ class OrderItem < ActiveRecord::Base
           joins(:partner, :category)
             .where('partners.own = ?', false)
             .where('categories.fabrication = ?', true)
+            .where(aasm_state: :pending)
                  }
 
   after_save :update_order
@@ -84,7 +85,7 @@ class OrderItem < ActiveRecord::Base
       transitions from: :working, to: :pending
     end
     event :get_ready do
-      transitions from: :working, to: :ready
+      transitions from: [:working, :pending], to: :ready
     end
     event :to_delivery do
       transitions from: :ready, to: :delivery
