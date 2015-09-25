@@ -6,11 +6,11 @@ class FabricationController < ApplicationController
     @template = 'fabrication'
     @title = 'Поставить в очередь'
     @items = OrderItem.pending
-                 .to_fabrication
-                 .own_supplier
-                 .by_desired_date
-                 .includes(:order, :product)
-                 .page(params[:page])
+             .to_fabrication
+             .own_supplier
+             .by_desired_date
+             .includes(:order, :product)
+             .page(params[:page])
   end
 
   def edit
@@ -39,7 +39,10 @@ class FabricationController < ApplicationController
   end
 
   def to_order
-    @items = OrderItem.to_order.page(params[:page])
+    @items = OrderItem.to_order
+             .joins(:product)
+             .order('partners.name', 'products.name')
+             .page(params[:page])
     @template = 'to_order'
     render :index
   end
@@ -47,9 +50,9 @@ class FabricationController < ApplicationController
   def print_schedule
     @items = OrderItem.working.order(:fabrication_date, :id)
     respond_to do |format|
-      format.xlsx {
+      format.xlsx do
         response.headers['Content-Disposition'] = 'attachment; filename="График производства.xlsx"'
-      }
+      end
     end
   end
 
@@ -61,8 +64,8 @@ class FabricationController < ApplicationController
 
   def working_items
     @items = OrderItem.working
-                 .includes(:order, :product)
-                 .order(:fabrication_date, :id)
+             .includes(:order, :product)
+             .order(:fabrication_date, :id)
   end
 
   def item_params
