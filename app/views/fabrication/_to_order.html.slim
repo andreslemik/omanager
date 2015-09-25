@@ -1,10 +1,34 @@
-table
-  thead
-    tr
-      th Поставщик
-      th Кол-во
-  tbody
-    - @items.group_by(&:product).sort.each do |product, item|
-      tr
-        td = product.manufacturer.name
-        td.text-right = item.count
+.row
+  .large-9.columns
+    = paginate @items
+    table
+      caption Список изделий, которые нужно заказать
+      thead
+        tr
+          th Поставщик
+          th Изделие
+          th Ткань
+          th Параметры
+      tbody
+        - @items.each do |item|
+          tr
+            td = item.partner.name
+            td = "#{item.product.name} (#{item.product.category.name})"
+            td = item.additional
+            td = item.product_options
+    = paginate @items
+
+  .large-3.columns
+    table
+      caption Сводно
+      thead
+        tr
+          th Поставщик
+          th Кол-во
+          th
+      tbody
+        - @items.group_by(&:product).each do |product, item|
+          tr
+            td = product.manufacturer.name
+            td.text-right = item.count
+            td = ficon :print, :medium

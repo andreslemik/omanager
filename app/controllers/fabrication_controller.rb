@@ -39,7 +39,7 @@ class FabricationController < ApplicationController
   end
 
   def to_order
-    @items = OrderItem.to_order
+    @items = OrderItem.to_order.page(params[:page])
     @template = 'to_order'
     render :index
   end
