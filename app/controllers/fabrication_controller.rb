@@ -3,7 +3,6 @@ class FabricationController < ApplicationController
   before_action :set_order_item, only: [:edit, :update, :get_ready]
   before_action :working_items, only: [:schedule, :edit]
   def index
-    @template = 'fabrication'
     @title = 'Поставить в очередь'
     @items = OrderItem.pending
              .to_fabrication
@@ -33,9 +32,7 @@ class FabricationController < ApplicationController
   end
 
   def schedule
-    @template = 'schedule'
     @title = 'Очередь производства'
-    render :index
   end
 
   def to_order
@@ -43,8 +40,6 @@ class FabricationController < ApplicationController
              .joins(:product)
              .order('partners.name', 'products.name')
              .page(params[:page])
-    @template = 'to_order'
-    render :index
   end
 
   def print_schedule

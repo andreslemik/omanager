@@ -1,0 +1,10 @@
+ul.side-nav
+  = active_link_to "Поставить в очередь (#{OrderItem.pending.to_fabrication.own_supplier.count})", \
+      fabrication_index_path, active: [['fabrication'], ['index']], \
+       wrap_tag: :li
+  = active_link_to "Очередь производства (#{OrderItem.working.count})", schedule_fabrication_index_path, \
+      active: [['fabrication'], ['schedule']], \
+      wrap_tag: :li
+  = active_link_to "Заказать (#{OrderItem.to_order.count})", to_order_fabrication_index_path, \
+      active: [['fabrication'], ['to_order']], \
+      wrap_tag: :li

@@ -1,0 +1,23 @@
+- @items.group_by(&:fabrication_date).each do |date, items|
+  table.full-width
+    caption = I18n.l(date)
+    thead
+      tr
+        th
+        th.text-center № цех
+        th.text-center Тип<br />договора
+        th.text-center Название
+        th.text-center Ткань
+        th.text-center Параметры
+        th
+    tbody
+      - items.each do |item|
+        tr
+          td = link_to ficon(:pencil, :small), edit_fabrication_path(item)
+          td.text-right = item.id
+          td = item.order.order_type_s
+          td = "#{item.product.name} (#{item.product.category.name})"
+          td = item.additional
+          td = item.product_options
+          td = link_to 'Готово', get_ready_fabrication_path(item), class: 'button tiny secondary', \
+                             data: {confirm: 'Вы уверены?'}, method: :put
