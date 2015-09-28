@@ -25,7 +25,7 @@
       = label_tag 'Тип договора'
       - Order.order_types.each do |k, v|
         = f.radio_button :order_type, k
-        = f.label :order_type, k, value: k
+        = f.label :order_type, I18n.t(k), value: k
         = hidden_field_tag :retail
     .large-2.small-3.columns.end
         .row.collapse

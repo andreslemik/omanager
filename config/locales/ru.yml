@@ -149,3 +149,7 @@ ru:
   expense: расход
   supplier: поставщик
   customer: покупатель
+
+  retail: частный
+  dealer: дилерский
+  internal: внутренний

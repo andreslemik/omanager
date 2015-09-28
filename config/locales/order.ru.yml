@@ -17,3 +17,7 @@ ru:
           ready: Готов
           done: Исполнен
           canceled: Отменен
+        order_type:
+          retail: частный
+          dealer: дилерский
+          internal: внутренний

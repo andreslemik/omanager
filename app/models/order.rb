@@ -30,7 +30,7 @@ class Order < ActiveRecord::Base
   validates :dog_num, presence: { message: 'Укажите номер договора' },
                       if: :retail?
   validates :client, :phone, :address, :area, presence: true, if: :retail?
-  validates :partner_id, presence: true, unless: :retail?
+  validates :partner_id, presence: true, if: :dealer?
 
   validates :order_items, presence: true
   validates :order_type, presence: true
@@ -57,6 +57,10 @@ class Order < ActiveRecord::Base
 
   def retail?
     return true if order_type == 'retail'
+    false
+  end
+  def dealer?
+    return true if order_type == 'dealer'
     false
   end
 
