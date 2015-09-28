@@ -28,7 +28,7 @@ class FabricationController < ApplicationController
 
   def get_ready
     @order_item.get_ready!
-    redirect_to schedule_fabrication_index_path
+    redirect_to :back
   end
 
   def schedule
