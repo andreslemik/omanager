@@ -74,7 +74,7 @@ class Order < ActiveRecord::Base
     when 'dealer'
       return "ДЗ: #{partner.name}"
     when 'internal'
-      return 'В'
+      return 'ВН'
     end
   end
 
@@ -85,6 +85,10 @@ class Order < ActiveRecord::Base
   def items_names
     order_items.map { |oi| "#{oi.product.name} (#{oi.product.category.name})" }
       .join(', ')
+  end
+
+  def all_items_pending?
+    order_items.pluck(:aasm_state).all? { |s| s == 'pending' }
   end
 
   ransacker :registered do |_parent|
@@ -114,10 +118,6 @@ class Order < ActiveRecord::Base
     event :cancel do
       transitions from: [:pending, :working], to: :canceled
     end
-  end
-
-  def all_items_pending?
-    order_items.pluck(:aasm_state).all? { |s| s == 'pending' }
   end
 
   private
