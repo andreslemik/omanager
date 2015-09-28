@@ -12,4 +12,9 @@ RSpec.describe Order, type: :model do
       create :order
     }.to change(OrderItem, :count).by 3
   end
+
+  it 'order retail' do
+    order = create :order
+    expect(order.retail?).to be true
+  end
 end

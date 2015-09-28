@@ -10,13 +10,14 @@ FactoryGirl.define do
     address { Faker::Address.street_address }
     phone { Faker::PhoneNumber.cell_phone }
     area 13
+    order_type Order.order_types[:retail]
 
-    factory :retail_order do
-      retail_client true
+    trait :internal_order do
+      order_type Order.order_types[:internal]
     end
 
-    factory :dealer_order do
-      retail_client false
+    trait :dealer_order do
+      order_type Order.order_types[:dealer]
       partner
     end
 
