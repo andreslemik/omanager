@@ -70,9 +70,9 @@ class Order < ActiveRecord::Base
     # short order_type
     case order_type
     when 'retail'
-      return 'Ч'
+      return 'ЧЗ'
     when 'dealer'
-      return "Д: #{partner.name}"
+      return "ДЗ: #{partner.name}"
     when 'internal'
       return 'В'
     end
