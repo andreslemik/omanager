@@ -42,12 +42,12 @@ ActiveAdmin.register Product do
           a.input :option_type, label: 'Опция'
         end
       end
-      f.inputs do
-        f.has_many :product_properties, heading: 'Свойства', allow_destroy: true, new_record: true do |a|
-          a.input :property, label: 'Свойство'
-          a.input :value, label: 'Значение'
-        end
-      end
+      # f.inputs do
+      #   f.has_many :product_properties, heading: 'Свойства', allow_destroy: true, new_record: true do |a|
+      #     a.input :property, label: 'Свойство'
+      #     a.input :value, label: 'Значение'
+      #   end
+      # end
       f.inputs do
         f.has_many :product_option_values, heading: 'Модификаторы цены', allow_destroy: true, new_record: true do |m|
           m.input :option_value, label: 'Опция', as: :select, collection: OptionValue.all.map { |ov| [ov.full_name, ov.id] }
