@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
 
   resources :orders do
+    get :internals, on: :collection
     resources :order_items, shallow: true
   end
 

@@ -3,10 +3,21 @@ class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
 
   authorize_actions_for Order
+  authority_actions internals: 'read'
 
   def index
-    @q = Order.ransack(params[:q])
+    @q = Order.without_internals.ransack(params[:q])
+    @orders_total = Order.without_internals.size
     @orders = @q.result(distinct: true).includes(:dept, :author, :products, :categories).order(order_date: :desc).page(params[:page])
+    @title = 'Список договоров'
+  end
+
+  def internals
+    @q = Order.internals.ransack(params[:q])
+    @orders_total = Order.internals.size
+    @orders = @q.result(distinct: true).includes(:dept, :author, :products, :categories).order(order_date: :desc).page(params[:page])
+    @title = 'Внутренние заказы'
+    render :index
   end
 
   def show
