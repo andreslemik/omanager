@@ -17,7 +17,6 @@
           th Телефон
           th Тип договора
           th Изделие
-          th Статус
           th
       tbody
         - @items.each do |item|
@@ -30,6 +29,5 @@
             td #{item.order.phone} (#{item.client_name})
             td = item.order.order_type_s
             td #{item.product.name} (#{item.product.category.name})
-            td = item.aasm.human_state
             td = link_to ficon(:calendar, :large), edit_delivery_path(item)
     = paginate @items

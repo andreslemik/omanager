@@ -5,6 +5,7 @@ h2 = @title
     caption = I18n.l date
     thead
       tr
+        th
         th № цех
         th Договор
         th Район
@@ -15,6 +16,7 @@ h2 = @title
     tbody
       - items.each do |item|
         tr
+          td = link_to ficon(:calendar, :large), edit_delivery_path(item)
           td.text-center = item.id
           td.text-center = link_to item.order.dog_num, order_path(item.order)
           td = item.order.area

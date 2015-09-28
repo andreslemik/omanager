@@ -22,7 +22,7 @@ class DeliveryController < ApplicationController
   def update
     respond_to do |f|
       if @order_item.update(item_params)
-        f.html { redirect_to delivery_index_path,
+        f.html { redirect_to schedule_delivery_index_path,
                              notice: 'Изделие успешно поставлено в очередь на доставку' }
       else
         f.html { render :edit }

@@ -16,7 +16,6 @@
           th.text-center Название
           th.text-center Ткань
           th.text-center Параметры
-          th.text-center Статус
           th
       tbody
         - @items.each do |i|
@@ -28,7 +27,6 @@
             td = "#{i.product.name} (#{i.product.category.name})"
             td = i.additional
             td = i.product_options
-            td = i.aasm.human_state
             td = link_to ficon(:calendar, :large), edit_fabrication_path(i)
 
     = paginate @items
