@@ -3,17 +3,17 @@
     caption = I18n.l(date)
     thead
       tr
-        th
-        th.text-center № цех
-        th.text-center Тип<br />договора
-        th.text-center Название
-        th.text-center Ткань
-        th.text-center Параметры
+        th(width='20')
+        th.text-center(width='50') № цех
+        th.text-center(width='100') Тип<br />договора
+        th.text-center(width='20%') Название
+        th.text-center(width='30%') Ткань
+        th.text-center(width='20%') Параметры
         th
     tbody
       - items.each do |item|
         tr
-          td = link_to ficon(:pencil, :small), edit_fabrication_path(item)
+          td = link_to ficon(:calendar, :large), edit_fabrication_path(item)
           td.text-right = item.id
           td = item.order.order_type_s
           td = "#{item.product.name} (#{item.product.category.name})"
