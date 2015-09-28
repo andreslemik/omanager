@@ -17,4 +17,9 @@ RSpec.describe Order, type: :model do
     order = create :order
     expect(order.retail?).to be true
   end
+
+  it 'order not retail' do
+    order = create :order, :dealer_order
+    expect(order.retail?).to be false
+  end
 end
