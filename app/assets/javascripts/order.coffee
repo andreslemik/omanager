@@ -71,15 +71,22 @@ $(document).on 'change', '.products', ->
   else
     $('#option_values_' + id).html('')
 
-$(document).on 'change', '#order_retail_client', ->
-  if @.checked
-    $('.retail').show()
-    $('.corporate').hide()
-    $('#retail').val(1)
-  else
-    $('.retail').hide()
-    $('.corporate').show()
-    $('#retail').val(0)
+$(document).on 'click', 'input[name="order[order_type]"]', ->
+
+  switch @.value.toString()
+    when 'retail'
+      $('#client_definition').show()
+      $('.retail').show()
+      $('.corporate').hide()
+      $('#retail').val(1)
+    when 'dealer'
+      $('#client_definition').show()
+      $('.retail').hide()
+      $('.corporate').show()
+      $('#retail').val(0)
+    when 'internal'
+      $('#client_definition').hide()
+      $('#retail').val(0)
 
 $(document).on 'change', '.option_values_select', ->
   values= []

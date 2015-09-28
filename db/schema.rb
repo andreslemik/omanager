@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150925113209) do
+ActiveRecord::Schema.define(version: 20150928135301) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -127,11 +127,13 @@ ActiveRecord::Schema.define(version: 20150925113209) do
     t.boolean  "retail_client", default: true
     t.integer  "partner_id"
     t.date     "desired_date"
+    t.integer  "order_type"
   end
 
   add_index "orders", ["aasm_state"], name: "index_orders_on_aasm_state", using: :btree
   add_index "orders", ["deleted_at"], name: "index_orders_on_deleted_at", using: :btree
   add_index "orders", ["dept_id"], name: "index_orders_on_dept_id", using: :btree
+  add_index "orders", ["order_type"], name: "index_orders_on_order_type", using: :btree
   add_index "orders", ["partner_id"], name: "index_orders_on_partner_id", using: :btree
 
   create_table "partners", force: :cascade do |t|

@@ -22,13 +22,11 @@
       = f.text_area :memo, label: 'Примечание:', placeholder: 'Примечание'
   .row
     .large-4.small-6.columns
-      .large-6.small-6.columns
-        p Частный клиент
-      .large-6.small-6.columns
-        .switch
-          = f.check_box :retail_client
-          = f.label :retail_client, ''
-          = hidden_field_tag :retail, 1
+      = label_tag 'Тип договора'
+      - Order.order_types.each do |k, v|
+        = f.radio_button :order_type, k
+        = f.label :order_type, k, value: k
+        = hidden_field_tag :retail
     .large-2.small-3.columns.end
         .row.collapse
           = f.label :desired_date
@@ -37,10 +35,10 @@
           .small-3.columns
             span.postfix = ficon :calendar, :large
   .row
-    .columns
+    .columns#client_definition
       fieldset
         legend Заказчик
-        .retail
+        .retail(style="display:none;")
           .large-3.columns
             = f.label :client, 'ФИО*'
             = f.text_field :client

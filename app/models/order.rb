@@ -13,6 +13,7 @@ class Order < ActiveRecord::Base
                 'Железнодорожный р-н': 4,
                 'Не Ульяновск': 0
        }
+  enum order_type: { retail: 0, dealer: 1, internal: 2 }
 
   has_many :order_items, dependent: :destroy, inverse_of: :order, autosave: true
   has_many :products, through: :order_items
@@ -32,6 +33,7 @@ class Order < ActiveRecord::Base
   validates :partner_id, presence: true, unless: :retail?
 
   validates :order_items, presence: true
+  validates :order_type, presence: true
 
   accepts_nested_attributes_for :order_items,
                                 reject_if: proc { |attrs| attrs.blank? },
@@ -54,18 +56,20 @@ class Order < ActiveRecord::Base
   end
 
   def retail?
-    retail_client
-  end
-
-  def order_type
-    return 'Частный' if retail_client
-    'Дилер'
+    return true if order_type == 'retail'
+    false
   end
 
   def order_type_s
     # short order_type
-    return 'Ч' if retail_client
-    "Д: #{partner.name}"
+    case order_type
+    when 'retail'
+      return 'Ч'
+    when 'dealer'
+      return "Д: #{partner.name}"
+    when 'internal'
+      return 'В'
+    end
   end
 
   def total
@@ -113,14 +117,9 @@ class Order < ActiveRecord::Base
   private
 
   def update_accounts
-    case retail_client
-    when true
-      operation = operations.where(order_id: id).first
-      operation = operations.new if operation.blank?
-    when false
-      operation = Partner.find(partner_id).operations.where(order_id: id).first
-      operation = Partner.find(partner_id).operations.new if operation.blank?
-    end
+    operation = operations.find_or_initialize_by(order_id: id)
+    operation = Partner.find(partner_id)
+                .operations.find_or_initialize_by(order_id: id) unless retail?
     operation.attributes = { operation_date: Time.now,
                              operation_type: :expense, amount: total,
                              memo: "Договор №#{dog_num} от #{I18n.l(order_date)}",
