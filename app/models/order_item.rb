@@ -62,7 +62,7 @@ class OrderItem < ActiveRecord::Base
   end
 
   def retail
-    return 1 if order.retail_client
+    return 1 if order.order_type == Order.order_types[:retail]
     0
   end
 
