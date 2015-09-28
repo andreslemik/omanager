@@ -63,7 +63,7 @@ class OrderItem < ActiveRecord::Base
   end
 
   def retail
-    return 1 if order.order_type == Order.order_types[:retail]
+    return 1 if order.order_type == 'retail'
     0
   end
 
