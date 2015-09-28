@@ -42,6 +42,8 @@ class Order < ActiveRecord::Base
   after_save :update_accounts
   after_destroy :delete_accounts
 
+  default_scope {where.not(order_type: Order.order_types[:internal])}
+
   # scopes by order state
   Order.aasm.states.map(&:name).each do |s|
     scope s, -> { where aasm_state: s }
