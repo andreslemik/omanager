@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150928135301) do
+ActiveRecord::Schema.define(version: 20150928154801) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -114,8 +114,8 @@ ActiveRecord::Schema.define(version: 20150928135301) do
     t.date     "order_date"
     t.text     "memo"
     t.string   "aasm_state"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.datetime "deleted_at"
     t.integer  "dept_id"
     t.integer  "author_id"
@@ -124,7 +124,6 @@ ActiveRecord::Schema.define(version: 20150928135301) do
     t.string   "address"
     t.string   "phone"
     t.integer  "area"
-    t.boolean  "retail_client", default: true
     t.integer  "partner_id"
     t.date     "desired_date"
     t.integer  "order_type"

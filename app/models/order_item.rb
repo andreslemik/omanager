@@ -57,7 +57,8 @@ class OrderItem < ActiveRecord::Base
   end
 
   def client_name
-    return order.partner.name unless order.retail_client?
+    return order.partner.name unless order.retail?
+    return 'Внутренний' if order.order_type == 'internal'
     order.client
   end
 
