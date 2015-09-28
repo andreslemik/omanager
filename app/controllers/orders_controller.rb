@@ -57,7 +57,7 @@ class OrdersController < ApplicationController
   private
 
   def set_order
-    @order = Order.find params[:id]
+    @order = Order.unscoped.find params[:id]
   end
 
   def order_params

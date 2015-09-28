@@ -87,6 +87,11 @@ class Order < ActiveRecord::Base
       .join(', ')
   end
 
+  def partner_name
+    return 'Внутренний заказ' if order_type == 'internal'
+    partner.name
+  end
+
   def all_items_pending?
     order_items.pluck(:aasm_state).all? { |s| s == 'pending' }
   end

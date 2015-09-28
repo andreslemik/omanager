@@ -20,7 +20,7 @@ h2 Договор №#{@order.dog_num} от #{I18n.l(@order.order_date)}
       p Адрес: #{@order.address}
       p Район: #{@order.area}
     - else
-      p Клиент: #{@order.partner.name}
+      p Клиент: #{@order.partner_name}
 .row
   .large-12.columns
     table
