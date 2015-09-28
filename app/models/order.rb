@@ -125,7 +125,7 @@ class Order < ActiveRecord::Base
   def update_accounts
     operation = operations.find_or_initialize_by(order_id: id)
     operation = Partner.find(partner_id)
-                .operations.find_or_initialize_by(order_id: id) unless retail?
+                .operations.find_or_initialize_by(order_id: id) if dealer?
     operation.attributes = { operation_date: Time.now,
                              operation_type: :expense, amount: total,
                              memo: "Договор №#{dog_num} от #{I18n.l(order_date)}",
