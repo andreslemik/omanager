@@ -17,11 +17,11 @@ h2 = @title
           = f.search_field :dog_num_eq
         .large-6.columns
           = f.label :aasm_state_eq, 'Статус'
-          = f.select :aasm_state_eq, Order.aasm.states_for_select, include_blank: true
+          = f.select :aasm_state_eq, Order.aasm.states_for_select.sort, include_blank: true
       .row
         .large-12.columns
           = f.label :dept_id_eq, 'Офис'
-          = f.select :dept_id_eq, options_from_collection_for_select(Dept.all, :id, :name), include_blank: true
+          = f.select :dept_id_eq, options_from_collection_for_select(Dept.order(:name), :id, :name), include_blank: true
       .row
         .large-12.columns
           = f.label :products_name_cont, 'Изделия содержат'
