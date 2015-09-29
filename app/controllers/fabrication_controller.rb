@@ -51,6 +51,18 @@ class FabricationController < ApplicationController
     end
   end
 
+  def print_orders
+    manufacturer = Partner.find(params[:manufacturer_id])
+    @items = OrderItem.to_order
+             .where('partners.id = ?', manufacturer.id)
+    respond_to do |format|
+      format.xlsx do
+        response.headers['Content-Disposition'] = \
+          'attachment; filename = "Заказ для ' << manufacturer.name << '.xlsx"'
+      end
+    end
+  end
+
   private
 
   def set_order_item

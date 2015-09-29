@@ -36,8 +36,11 @@
             tr
               th Поставщик
               th Кол-во
+              th
           tbody
             - @items.group_by(&:product).each do |product, item|
               tr
                 td = product.manufacturer.name
                 td.text-right = item.count
+                td = link_to ficon(:print, :medium), \
+                             print_orders_fabrication_index_path(product.manufacturer)
