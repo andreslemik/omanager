@@ -91,6 +91,7 @@ class OrderItem < ActiveRecord::Base
     event :stop_work do
       after_commit do
         update_attribute(:fabrication_date, nil)
+        order.stop_work! if order.aasm_state == 'working'
       end
       transitions from: :working, to: :pending
     end

@@ -7,7 +7,7 @@ RSpec.describe OrderItemsController, type: :controller do
   #   sign_in user
   # end
   before :each do
-    @order = FactoryGirl.create :retail_order
+    @order = FactoryGirl.create :order
   end
   describe 'GET #new' do
     login_as :admin
