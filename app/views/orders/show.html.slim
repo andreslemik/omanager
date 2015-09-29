@@ -7,7 +7,7 @@ h2 Договор №#{@order.dog_num} от #{I18n.l(@order.order_date)}
       li = link_to 'Список договоров', orders_path, class: 'button tiny secondary'
       li = link_to 'Назад', :back, class: 'button tiny secondary'
 .row
-  .large-4.columns
+  .large-3.columns
     table
       tr
         th Номер
@@ -24,7 +24,7 @@ h2 Договор №#{@order.dog_num} от #{I18n.l(@order.order_date)}
       tr
         th Комментарий
         td #{@order.memo}
-  .large-8.columns
+
     table
       - if @order.retail?
         tr
@@ -43,9 +43,9 @@ h2 Договор №#{@order.dog_num} от #{I18n.l(@order.order_date)}
         tr
           th Клиент
           td #{@order.partner_name}
-.row
-  .large-12.columns
+  .large-9.columns
     table
+      caption Изделия
       thead
         tr
           th.text-center № цех
@@ -67,3 +67,4 @@ h2 Договор №#{@order.dog_num} от #{I18n.l(@order.order_date)}
             td.text-center = oi.amount
             td.text-right = number_to_currency oi.subtotal, precision: 0
             td = oi.aasm.human_state
+
