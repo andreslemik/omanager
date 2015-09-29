@@ -29,14 +29,20 @@ RSpec.describe OrderItem, type: :model do
       order_item.save!
       expect(@order.aasm_state).to eq('working')
     end
-    it 'after one of two items state change back order not change' do
-      order_item = nil
-      (0..1).each do |i|
-        order_item = @order.order_items[i]
-        order_item.fabrication_date = Date.today
-        order_item.save!
+
+    it 'all items are ready' do
+      @order.order_items.each { |o| o.fabrication_date = Date.today; o.save!; o.get_ready! }
+      expect(@order.aasm_state).to eq('ready')
+    end
+
+    it '2 of 3 order items are ready' do
+      (1..2).each do |i|
+        o = @order.order_items[i]
+        o.fabrication_date = Date.today
+        o.save!
+        o.get_ready!
       end
-      expect{order_item.stop_work!}.to raise_error(AASM::InvalidTransition)
+      expect(@order.aasm_state).to eq('working')
     end
   end
 end

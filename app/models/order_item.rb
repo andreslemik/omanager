@@ -91,14 +91,14 @@ class OrderItem < ActiveRecord::Base
     event :stop_work do
       after_commit do
         update_attribute(:fabrication_date, nil)
-        order.stop_work! if order.aasm_state == 'working'
+        order.stop_work! if order.all_items_pending?
       end
       transitions from: :working, to: :pending
     end
     event :get_ready do
       transitions from: [:working, :pending], to: :ready
       after_commit do
-        order.get_ready! if order.aasm_state == 'working'
+        order.get_ready! if order.all_items_ready?
       end
     end
     event :to_delivery do
