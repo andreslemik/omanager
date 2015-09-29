@@ -52,7 +52,7 @@ class Order < ActiveRecord::Base
   end
 
   def to_s
-    "Договор №#{dog_num} от #{I18n.l order_date}"
+    "Договор №#{dog_num.blank? ? 'б/н' : dog_num} от #{I18n.l order_date}"
   end
 
   def author
@@ -137,11 +137,12 @@ class Order < ActiveRecord::Base
     operation = operations.find_or_initialize_by(order_id: id)
     operation = Partner.find(partner_id)
                 .operations.find_or_initialize_by(order_id: id) if dealer?
+    operation.attributes = { amount: total, memo: "Договор №#{dog_num} от #{I18n.l(order_date)}" }
     operation.attributes = { operation_date: Time.now,
                              operation_type: :expense, amount: total,
                              memo: "Договор №#{dog_num} от #{I18n.l(order_date)}",
                              order_id: id
-    }
+    } if operation.new_record?
     operation.save!
   end
 
