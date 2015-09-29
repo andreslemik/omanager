@@ -4,9 +4,15 @@ h3 = @title
 .large-2.columns
   .row
     .columns.panel
-      p Изделие: #{@order_item.product.name} (#{@order_item.product.category.name})
-      p Ткань: #{@order_item.additional}
-      p Опции: #{@order_item.product_options}
+      dl
+        dt Тип договора:
+        dd #{@order_item.order.order_type_s}
+        dt Изделие:
+        dd #{@order_item.product.name} (#{@order_item.product.category.name})
+        dt Ткань:
+        dd #{@order_item.additional}
+        dt Опции:
+        dd #{@order_item.product_options}
   = form_for @order_item, url: fabrication_path(@order_item) do |f|
     = f.text_field :fabrication_date, class: 'datepicker'
     = f.submit 'Сохранить'
