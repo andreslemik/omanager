@@ -97,6 +97,9 @@ class OrderItem < ActiveRecord::Base
     end
     event :get_ready do
       transitions from: [:working, :pending], to: :ready
+      after_commit do
+        order.get_ready! if order.aasm_state == 'working'
+      end
     end
     event :to_delivery do
       transitions from: :ready, to: :delivery
@@ -109,6 +112,9 @@ class OrderItem < ActiveRecord::Base
     end
     event :well_done do
       transitions from: :delivery, to: :done
+      after_commit do
+        order.done! if order.aasm_state == 'ready'
+      end
     end
   end
 

@@ -99,7 +99,15 @@ class Order < ActiveRecord::Base
   end
 
   def all_items_pending?
-    order_items.pluck(:aasm_state).all? { |s| s == 'pending' }
+    order_items.to_fabrication.pluck(:aasm_state).all? { |s| s == 'pending' }
+  end
+
+  def all_items_ready?
+    order_items.to_fabrication.pluck(:aasm_state).all? { |s| s == 'ready' }
+  end
+
+  def all_items_done?
+    order_items.to_fabrication.pluck(:aasm_state).all? { |s| s == 'done' }
   end
 
   ransacker :registered do |_parent|
@@ -121,10 +129,10 @@ class Order < ActiveRecord::Base
       transitions from: :working, to: :pending, guard: :all_items_pending?
     end
     event :get_ready do
-      transitions from: :working, to: :ready
+      transitions from: :working, to: :ready, guard: :all_items_ready?
     end
     event :done do
-      transitions from: :ready, to: :done
+      transitions from: :ready, to: :done, guard: :all_items_done?
     end
     event :cancel do
       transitions from: [:pending, :working], to: :canceled
