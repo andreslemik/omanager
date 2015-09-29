@@ -110,6 +110,10 @@ class Order < ActiveRecord::Base
     order_items.to_fabrication.pluck(:aasm_state).all? { |s| s == 'done' }
   end
 
+  def accounting_done?
+    false
+  end
+
   ransacker :registered do |_parent|
     Arel.sql('date(order_date)')
   end
@@ -132,7 +136,7 @@ class Order < ActiveRecord::Base
       transitions from: :working, to: :ready, guard: :all_items_ready?
     end
     event :done do
-      transitions from: :ready, to: :done, guard: :all_items_done?
+      transitions from: :ready, to: :done, guard: [:all_items_done?, :accounting_done?]
     end
     event :cancel do
       transitions from: [:pending, :working], to: :canceled
