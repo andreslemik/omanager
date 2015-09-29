@@ -55,6 +55,7 @@ h2 Договор №#{@order.dog_num} от #{I18n.l(@order.order_date)}
           th Цена
           th Кол-во
           th Сумма
+          th Статус
       tbody
         - @order.order_items.each do |oi|
           tr
@@ -65,3 +66,4 @@ h2 Договор №#{@order.dog_num} от #{I18n.l(@order.order_date)}
             td.text-right = number_to_currency oi.cost, precision: 0
             td.text-center = oi.amount
             td.text-right = number_to_currency oi.subtotal, precision: 0
+            td = oi.aasm.human_state
