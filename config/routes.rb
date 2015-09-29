@@ -25,6 +25,9 @@ Rails.application.routes.draw do
 
   resources :delivery, only: [:index, :edit, :update] do
     get :schedule, on: :collection
+    get 'print_schedule/:sdate', on: :collection,
+        action: :print_schedule, defaults: { format: 'xlsx' },
+        as: :print_schedule
     put :well_done, on: :member
   end
 

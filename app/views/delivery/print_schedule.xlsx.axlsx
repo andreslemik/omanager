@@ -1,0 +1,29 @@
+wb = xlsx_package.workbook
+page_setup = { fit_to_width: 1, orientation: :portrait,
+               paper_width: '297mm', paper_height: '210mm' }
+
+ws = wb.add_worksheet(page_setup: page_setup)
+
+# styles
+header_cell = wb.styles.add_style alignment: { vertical: :center,
+                                               horizontal: :center, wrap_text: true },
+                                  border: Axlsx::STYLE_THIN_BORDER, b: true
+bordered_cell = wb.styles.add_style border: Axlsx::STYLE_THIN_BORDER,
+                                    alignment: { vertical: :top,
+                                                 horizontal: :left, wrap_text: true }
+centered_cell = wb.styles.add_style alignment: { vertical: :top,
+                                                 horizontal: :center, wrap_text: true },
+                                    border: Axlsx::STYLE_THIN_BORDER
+
+ws.add_row ["Доставка на #{I18n.l @date}"], b: true
+ws.add_row
+
+ws.add_row %w(№\ цех Договор Район Адрес Телефон Изделие), style: header_cell
+
+@items.each do |item|
+  ws.add_row [item.id, item.order,
+      item.order.area, item.order.address, item.order.phone << ' ' << item.order.client,
+      item.product.name << ' ' << item.product.category.name], style: bordered_cell
+  ws.rows.last.cells[0].style = centered_cell
+end
+ws.column_widths 10, 20, 20, 40, 30, 30

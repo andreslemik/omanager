@@ -35,6 +35,17 @@ class DeliveryController < ApplicationController
     redirect_to schedule_delivery_index_path
   end
 
+  def print_schedule
+    @date = Date.parse(params[:sdate])
+    @items = OrderItem.delivery.where(delivery_date: @date)
+    respond_to do |format|
+      format.xlsx do
+        response.headers['Content-Disposition'] = \
+          'attachment; filename = "Доставка на ' << @date.strftime('%d-%m-%Y') << '.xlsx"'
+      end
+    end
+  end
+
   private
 
   def set_order_item
