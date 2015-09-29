@@ -40,6 +40,10 @@ class OrderItem < ActiveRecord::Base
   after_save :change_state, if: :fabrication_date_changed?
   after_save :delivery_state, if: :delivery_date_changed?
 
+  def to_s
+    "Позиция заказа №#{order.dog_num} от #{I18n.l order.order_date}"
+  end
+
   def option_values=(val)
     self[:option_values] = val.map(&:to_i)
   end

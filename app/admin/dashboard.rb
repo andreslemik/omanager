@@ -10,6 +10,16 @@ ActiveAdmin.register_page "Dashboard" do
       end
     end
 
+    section 'Последние изменения' do
+      table_for PaperTrail::Version.order('id desc').limit(20) do
+        column ('Что') { |v| v.item.to_s }
+        column ('Тип') { |v| v.item_type.underscore.humanize }
+        column ('Изменения') { |v| v.item.versions.last.changeset unless v.item.nil? }
+        column ('Когда') { |v| I18n.l(v.created_at) }
+        column ('Кто менял') { |v| User.find_by_id(v.whodunnit).try(:name) }
+      end
+    end
+
     # Here is an example of a simple dashboard with columns and panels.
     #
     # columns do

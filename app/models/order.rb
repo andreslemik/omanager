@@ -51,6 +51,10 @@ class Order < ActiveRecord::Base
     scope s, -> { where aasm_state: s }
   end
 
+  def to_s
+    "Договор №#{dog_num} от #{I18n.l order_date}"
+  end
+
   def author
     User.unscoped { super }
   end

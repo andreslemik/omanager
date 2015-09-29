@@ -19,4 +19,8 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:username, :email, :password, :password_confirmation, :current_password) }
   end
 
+  def user_for_paper_trail
+    user_signed_in? ? current_user.id : 'неизвестный пользователь'
+  end
+
 end

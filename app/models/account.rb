@@ -14,4 +14,8 @@ class Account < ActiveRecord::Base
   scope :expense, -> { where operation_type: 0 }
   scope :income, -> { where operation_type: 1 }
 
+  def to_s
+    "Денежная операция от #{I18n.l updated_at}"
+  end
+
 end
