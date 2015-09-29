@@ -8,19 +8,31 @@ h2 Договор №#{@order.dog_num} от #{I18n.l(@order.order_date)}
       li = link_to 'Назад', :back, class: 'button tiny secondary'
 .row
   .large-4.columns
-    p Номер: #{@order.dog_num}
-    p Дата: #{I18n.l @order.order_date}
-    p Сумма догвора: #{number_to_currency @order.total, precision: 0}
-    p Статус: #{@order.aasm.human_state}
-    p Комментарий: #{@order.memo}
+    dl.data-list
+      dt Номер
+      dd #{@order.dog_num}
+      dt Дата
+      dd #{I18n.l @order.order_date}
+      dt Сумма догвора
+      dd #{number_to_currency @order.total, precision: 0}
+      dt Статус
+      dd #{@order.aasm.human_state}
+      dt Комментарий
+      dd #{@order.memo}
   .large-8.columns
-    - if @order.retail?
-      p Клиент: #{@order.client}
-      p Телефон: #{@order.phone}
-      p Адрес: #{@order.address}
-      p Район: #{@order.area}
-    - else
-      p Клиент: #{@order.partner_name}
+    dl.data-list
+      - if @order.retail?
+        dt Клиент
+        dd #{@order.client}
+        dt Телефон
+        dd #{@order.phone}
+        dt Адрес
+        dd #{@order.address}
+        dt Район
+        dd #{@order.area}
+      - else
+        dt Клиент
+        dd #{@order.partner_name}
 .row
   .large-12.columns
     table
