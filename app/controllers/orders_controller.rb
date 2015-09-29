@@ -10,6 +10,7 @@ class OrdersController < ApplicationController
     @orders_total = Order.without_internals.size
     @orders = @q.result(distinct: true).includes(:dept, :author, :products, :categories).order(order_date: :desc).page(params[:page])
     @title = 'Список договоров'
+    @path = orders_path
   end
 
   def internals
@@ -17,6 +18,7 @@ class OrdersController < ApplicationController
     @orders_total = Order.internals.size
     @orders = @q.result(distinct: true).includes(:dept, :author, :products, :categories).order(order_date: :desc).page(params[:page])
     @title = 'Внутренние заказы'
+    @path = internals_orders_path
     render :index
   end
 

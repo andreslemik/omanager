@@ -3,7 +3,7 @@ h2 = @title
 
 .row
   .large-3.columns.large-push-9
-    = search_form_for @q do |f|
+    = search_form_for @q, url: @path do |f|
       .row
         .large-6.columns
           = f.label :registered_date_gteq, 'C'
@@ -39,7 +39,7 @@ h2 = @title
 
         .large-12.columns
           = f.submit 'Найти', class: 'button tiny'
-          = link_to 'Очистить', orders_path, class: 'button tiny secondary'
+          = link_to 'Очистить', @path, class: 'button tiny secondary'
 
   .large-9.columns.large-pull-3
     = paginate @orders
