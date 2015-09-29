@@ -22,7 +22,7 @@
         - @items.each do |item|
           tr
             td.text-center = item.id
-            td.text-center = link_to item.order.dog_num, order_path(item.order)
+            td.text-center = link_to_order(item.order)
             td.text-center = I18n.l(item.order.desired_date) unless item.order.desired_date.blank?
             td = item.order.area
             td = item.order.address
