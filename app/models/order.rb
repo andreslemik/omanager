@@ -25,13 +25,14 @@ class Order < ActiveRecord::Base
   has_many :operations, as: :accountable,
                         class_name: 'Account', dependent: :destroy
 
+  has_many :instalments, dependent: :destroy
+
   validates :dept_id, presence: { message: 'Укажите офис' }, if: :retail?
   validates :order_date, presence: { message: 'Укажите дату' }, if: :retail?
   validates :dog_num, presence: { message: 'Укажите номер договора' },
                       if: :retail?
   validates :client, :phone, :address, :area, presence: true, if: :retail?
   validates :partner_id, presence: true, if: :dealer?
-
   validates :order_items, presence: true
   validates :order_type, presence: true
 

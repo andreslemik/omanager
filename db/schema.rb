@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150929124646) do
+ActiveRecord::Schema.define(version: 20150929141056) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,6 +68,18 @@ ActiveRecord::Schema.define(version: 20150929124646) do
   end
 
   add_index "depts", ["deleted_at"], name: "index_depts_on_deleted_at", using: :btree
+
+  create_table "instalments", force: :cascade do |t|
+    t.integer  "order_id"
+    t.date     "payment_date"
+    t.decimal  "amount",       precision: 8, scale: 2
+    t.datetime "deleted_at"
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+  end
+
+  add_index "instalments", ["deleted_at"], name: "index_instalments_on_deleted_at", using: :btree
+  add_index "instalments", ["order_id"], name: "index_instalments_on_order_id", using: :btree
 
   create_table "option_types", force: :cascade do |t|
     t.string   "name"
@@ -274,6 +286,7 @@ ActiveRecord::Schema.define(version: 20150929124646) do
   add_index "versions", ["transaction_id"], name: "index_versions_on_transaction_id", using: :btree
 
   add_foreign_key "accounts", "orders"
+  add_foreign_key "instalments", "orders"
   add_foreign_key "option_values", "option_types"
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "products"
