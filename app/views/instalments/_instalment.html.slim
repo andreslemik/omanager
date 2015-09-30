@@ -1,6 +1,6 @@
 tr
   td = link_to ficon(:pencil, :small), edit_instalment_path(instalment)
   td = I18n.l instalment.payment_date
-  td = instalment.amount
+  td.text-right = number_to_currency(instalment.amount, precision: 0, unit: '')
   td = link_to ficon(:x, :small), instalment_path(instalment), \
         method: :delete, data: { confirm: 'Вы уверены?' }

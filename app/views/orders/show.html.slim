@@ -87,7 +87,7 @@ h2 Договор №#{@order.dog_num} от #{I18n.l(@order.order_date)}
                 = render @order.instalments
                 tr.total-row
                   td(colspan="2")
-                  td = @order.instalments_total
+                  td.text-right = number_to_currency(@order.instalments_total, precision: 0, unit: '')
                   td
         .large-6.columns
           h5.text-center Платежи
