@@ -1,10 +1,14 @@
 class InstalmentsController < ApplicationController
-  before_action :set_order, only: [:index, :new, :create, :destroy]
+  before_action :set_order, only: [:index, :new, :create]
   before_action :set_instalment, only: [:destroy, :edit, :update]
 
   def index
     @instalments = @order.instalments.page(params[:page])
     @title = 'Рассрочка по договору №' << @order.dog_num_s
+  end
+
+  def edit
+    @title = 'Редактирование платежа (рассрчка)'
   end
 
   def new
@@ -25,11 +29,12 @@ class InstalmentsController < ApplicationController
   end
 
   def destroy
+    session[:back] = request.referer
     respond_to do |f|
       if @instalment.destroy
-        f.html { redirect_to order_instalments_path(@order), notice: 'Договор удалён' }
+        f.html { redirect_to session[:back], notice: 'Платеж удалён' }
       else
-        f.html { render :edit, notice: 'Невозможно удалить договор'}
+        f.html { render :edit, notice: 'Невозможно удалить платеж'}
       end
     end
   end
