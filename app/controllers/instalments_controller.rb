@@ -28,6 +28,16 @@ class InstalmentsController < ApplicationController
     end
   end
 
+  def update
+    respond_to do |format|
+      if @instalment.update(instalment_params)
+        format.html { redirect_to order_path(@instalment.order), notice: 'Платеж изменен' }
+      else
+        format.html { render :edit }
+      end
+    end
+  end
+
   def destroy
     session[:back] = request.referer
     respond_to do |f|
