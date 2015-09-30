@@ -136,7 +136,7 @@ class Order < ActiveRecord::Base
     return 0 if (total - income_total) == 0 || !retail?
     operations_balance = operations.expense.summary - operations.income.summary
     return operations_balance unless instalments.any?
-    inst_after = instalments.after_date(date).map(&:amount).sum
+    inst_after = instalments.after_date(date).summary
     operations_balance - inst_after
   end
 

@@ -1,5 +1,6 @@
 class Account < ActiveRecord::Base
   include Authority::Abilities
+  include Summary
   self.authorizer_name = 'AccountAuthorizer'
   acts_as_paranoid
   has_paper_trail
@@ -16,10 +17,6 @@ class Account < ActiveRecord::Base
 
   scope :on_date, -> (date) { where('operation_date <= ?', date) }
   scope :after_date, -> (date) { where('operation_date > ?', date) }
-
-  def self.summary
-    pluck(:amount).sum
-  end
 
   def to_s
     "Денежная операция от #{I18n.l updated_at}"
