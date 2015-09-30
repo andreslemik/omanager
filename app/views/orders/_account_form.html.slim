@@ -1,0 +1,15 @@
+= form_for @account, url: accounts_path(accounter_type: 'order', accounter_id: @order.id) do |f|
+  fieldset
+    legend Новая операция
+    = render('shared/form_errors', model: @account) if @account.errors.any?
+    .row
+      .large-3.columns
+        = f.text_field :operation_date, label: 'Дата', class: 'datepicker'
+      .large-3.columns
+        = f.hidden_field :operation_type, value: :income
+        = f.number_field :amount, label: 'Сумма'
+      .large-6.columns
+        = f.text_area :memo, label: 'Примечание'
+
+    = f.submit 'Сохранить'
+    = link_to 'Отмена', '', class: 'button secondary small close-modal'

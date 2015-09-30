@@ -14,7 +14,7 @@
     $(this).datepicker
       altFormat: "yy-mm-dd"
       dateFormat: "dd.mm.yy"
-      altField: $(this).next()
+      #altField: $(this).next()
       regional: "ru"
 
 initial = ->

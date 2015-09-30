@@ -91,3 +91,16 @@ h2 Договор №#{@order.dog_num} от #{I18n.l(@order.order_date)}
                   td
         .large-6.columns
           h5.text-center Платежи
+          = link_to 'Добавить', '#', class: 'button tiny secondary', data: { reveal_id: 'account_form' }
+          - if @order.operations.any?
+            table
+              thead
+                tr
+                  th
+                  th Дата платежа
+                  th Сумма
+                  th Примечание
+              tbody
+                = render partial: 'accounts/account', collection: @order.operations.income
+          #account_form.reveal-modal.small(data-reveal='' role='dialog')
+            = render 'account_form'

@@ -123,3 +123,6 @@ $(document).on 'click', '.delete_order_item', ->
     row.css('text-decoration', 'none')
     $(select + ' .delete_order_item i.icon').removeClass('fi-refresh')
     $(select + ' .delete_order_item i.icon').addClass('fi-x')
+
+$(document).on 'click', '.close-modal', ->
+  $('.reveal-modal').foundation('reveal', 'close')
