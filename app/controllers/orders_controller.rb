@@ -23,6 +23,7 @@ class OrdersController < ApplicationController
   end
 
   def show
+    session[:back] = request.referer
   end
 
   def edit
