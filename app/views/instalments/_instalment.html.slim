@@ -1,3 +1,6 @@
 tr
+  td = link_to ficon(:pencil, :small), edit_instalment_path(instalment)
   td = I18n.l instalment.payment_date
   td = instalment.amount
+  td = link_to ficon(:x, :small), instalment_path(instalment), \
+        method: :delete, data: { confirm: 'Вы уверены?' }

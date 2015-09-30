@@ -94,6 +94,10 @@ class Order < ActiveRecord::Base
     order_items.map(&:subtotal).sum
   end
 
+  def instalments_total
+    instalments.map(&:amount).sum
+  end
+
   def items_names
     order_items.map { |oi| "#{oi.product.name} (#{oi.product.category.name})" }
       .join(', ')
