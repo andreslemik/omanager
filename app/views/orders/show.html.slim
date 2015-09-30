@@ -75,7 +75,7 @@ h2 Договор №#{@order.dog_num} от #{I18n.l(@order.order_date)}
     - if @order.retail?
       .row
         .large-6.columns
-          h5.text-center Рассрочка
+          h5 Рассрочка
           = link_to ficon(:plus, :medium), new_order_instalment_path(@order)
           - if @order.instalments.any?
             table
@@ -92,7 +92,7 @@ h2 Договор №#{@order.dog_num} от #{I18n.l(@order.order_date)}
                   td.text-right = number_to_currency(@order.instalments_total, precision: 0, unit: '')
                   td
         .large-6.columns
-          h5.text-center Платежи
+          h5 Платежи
           = link_to ficon(:plus, :medium), '', data: { reveal_id: 'account_form' }
           - if @order.operations.income.any?
             table
