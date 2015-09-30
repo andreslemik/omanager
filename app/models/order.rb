@@ -43,7 +43,7 @@ class Order < ActiveRecord::Base
   after_save :update_accounts
   after_destroy :delete_accounts
 
-  scope :without_internals, -> {where.not(order_type: Order.order_types[:internal])}
+  scope :without_internals, -> { where.not(order_type: Order.order_types[:internal]) }
 
   scope :internals, -> { where(order_type: Order.order_types[:internal]) }
 
@@ -68,6 +68,7 @@ class Order < ActiveRecord::Base
     return true if order_type == 'retail'
     false
   end
+
   def dealer?
     return true if order_type == 'dealer'
     false
@@ -130,6 +131,7 @@ class Order < ActiveRecord::Base
 
   def balance_on(date)
     return 0 unless retail?
+    return 0 if (total - income_total) == 0
     inst = instalments.where('payment_date <= ?', date).map(&:amount).sum
     inst_after = instalments.where('payment_date > ?', date).map(&:amount).sum
     income = operations.income.where('operation_date <= ?', date).map(&:amount).sum
