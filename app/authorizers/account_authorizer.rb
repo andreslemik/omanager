@@ -10,7 +10,7 @@ class AccountAuthorizer < ApplicationAuthorizer
     end
 
     def creatable_by?(user)
-      user.has_any_role? :admin, :accountant
+      user.has_any_role? :admin, :accountant, :manager
     end
 
     def deletable_by?(user)
