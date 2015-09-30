@@ -10,4 +10,4 @@
 .row
   .large-4.columns
     = f.submit 'Сохранить'
-    = link_to 'Отмена', session.delete(:back), class: 'button secondary small'
+    = link_to 'Отмена', session[:back], class: 'button secondary small'

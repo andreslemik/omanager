@@ -5,7 +5,7 @@ h2 Договор №#{@order.dog_num} от #{I18n.l(@order.order_date)}
       - if @order.updatable_by?(current_user)
         li = link_to 'Изменить', edit_order_path(@order), class: 'button tiny secondary'
       li = link_to 'Список договоров', orders_path, class: 'button tiny secondary'
-      li = link_to 'Назад', session.delete(:back), class: 'button tiny secondary'
+      li = link_to 'Назад', session[:back], class: 'button tiny secondary'
 .row
   .large-3.columns
     table

@@ -32,7 +32,7 @@ class InstalmentsController < ApplicationController
     session[:back] = request.referer
     respond_to do |f|
       if @instalment.destroy
-        f.html { redirect_to session.delete(:back), notice: 'Платеж удалён' }
+        f.html { redirect_to session[:back], notice: 'Платеж удалён' }
       else
         f.html { render :edit, notice: 'Невозможно удалить платеж'}
       end
