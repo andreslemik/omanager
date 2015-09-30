@@ -1,6 +1,6 @@
 = form_for @account, url: accounts_path(accounter_type: 'order', accounter_id: @order.id) do |f|
   fieldset
-    legend Новая операция
+    legend Новый платеж
     = render('shared/form_errors', model: @account) if @account.errors.any?
     .row
       .large-3.columns
