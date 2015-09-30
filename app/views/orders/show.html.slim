@@ -69,9 +69,10 @@ h2 Договор №#{@order.dog_num} от #{I18n.l(@order.order_date)}
                 td.text-center = oi.amount
                 td.text-right = number_to_currency oi.subtotal, precision: 0
                 td = oi.aasm.human_state
-    .row
-      .large-6.columns
-        h5.text-center Рассрочка
-        .text-center = link_to 'Редактировать', order_instalments_path(@order), class: 'button tiny secondary'
-      .large-6.columns
-        h5.text-center Платежи
+    - if @order.retail?
+      .row
+        .large-6.columns
+          h5.text-center Рассрочка
+          .text-center = link_to 'Редактировать', order_instalments_path(@order), class: 'button tiny secondary'
+        .large-6.columns
+          h5.text-center Платежи
