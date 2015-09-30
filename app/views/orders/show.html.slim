@@ -73,8 +73,7 @@ h2 Договор №#{@order.dog_num} от #{I18n.l(@order.order_date)}
       .row
         .large-6.columns
           h5.text-center Рассрочка
-          .text-center
-            = link_to 'Добавить', new_order_instalment_path(@order), class: 'button tiny secondary'
+          = link_to ficon(:plus, :medium), new_order_instalment_path(@order)
           - if @order.instalments.any?
             table
               thead
@@ -91,7 +90,7 @@ h2 Договор №#{@order.dog_num} от #{I18n.l(@order.order_date)}
                   td
         .large-6.columns
           h5.text-center Платежи
-          = link_to 'Добавить', '#', class: 'button tiny secondary', data: { reveal_id: 'account_form' }
+          = link_to ficon(:plus, :medium), '', data: { reveal_id: 'account_form' }
           - if @order.operations.any?
             table
               thead
@@ -102,5 +101,8 @@ h2 Договор №#{@order.dog_num} от #{I18n.l(@order.order_date)}
                   th Примечание
               tbody
                 = render partial: 'accounts/account', collection: @order.operations.income
+                tr.total-row
+                  td(colspan="2")
+                  td.text-right = number_to_currency(@order.income_total, precision: 0, unit: '')
           #account_form.reveal-modal.small(data-reveal='' role='dialog')
             = render 'account_form'
