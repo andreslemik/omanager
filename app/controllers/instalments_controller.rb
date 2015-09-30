@@ -6,6 +6,10 @@ class InstalmentsController < ApplicationController
     @title = 'Рассрочка по договору №' << @order.dog_num_s
   end
 
+  def new
+    @instalment = Instalment.new
+  end
+
   private
 
   def set_order
