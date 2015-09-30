@@ -1,6 +1,7 @@
 tr
-  td
+  td = link_to ficon(:pencil, :small), edit_account_path(account)
   td = I18n.l account.operation_date
   td.text-right = number_to_currency(account.amount, precision: 0, unit: '')
   td = account.memo
-  td
+  td = link_to ficon(:x, :small), account_path(account), method: :delete, \
+      data: { confirm: 'Вы уверены?' }

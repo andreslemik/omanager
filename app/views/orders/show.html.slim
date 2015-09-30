@@ -91,7 +91,7 @@ h2 Договор №#{@order.dog_num} от #{I18n.l(@order.order_date)}
         .large-6.columns
           h5.text-center Платежи
           = link_to ficon(:plus, :medium), '', data: { reveal_id: 'account_form' }
-          - if @order.operations.any?
+          - if @order.operations.income.any?
             table
               thead
                 tr

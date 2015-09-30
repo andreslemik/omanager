@@ -49,10 +49,13 @@ class AccountsController < ApplicationController
     authorize_action_for @account
     @account.destroy
     respond_to do |f|
-      f.html do
-        redirect_to partner_path(@account.accountable_id),
-                    notice: 'Запись удалена'
+      case @account.accountable_type
+        when 'Partner'
+          redirect = -> { redirect_to partner_path(@account.accountable_id), notice: 'Запись успешно удалена' }
+        when 'Order'
+          redirect = -> { redirect_to order_path(@account.accountable_id), notice: 'Запись успешно удалена' }
       end
+      f.html { redirect.call }
     end
   end
 
