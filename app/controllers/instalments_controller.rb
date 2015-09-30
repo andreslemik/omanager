@@ -1,5 +1,6 @@
 class InstalmentsController < ApplicationController
-  before_action :set_order, only: [:index, :new, :create]
+  before_action :set_order, only: [:index, :new, :create, :destroy]
+  before_action :set_instalment, only: [:destroy, :edit, :update]
 
   def index
     @instalments = @order.instalments.page(params[:page])
@@ -7,12 +8,43 @@ class InstalmentsController < ApplicationController
   end
 
   def new
+    session[:back] = request.referer
     @instalment = Instalment.new
+    @title = 'Новый платеж'
+  end
+
+  def create
+    @instalment = @order.instalments.build instalment_params
+    respond_to do |f|
+      if @instalment.save
+        f.html { redirect_to session[:back], notice: 'Платеж добавлен' }
+      else
+        f.html { render :new }
+      end
+    end
+  end
+
+  def destroy
+    respond_to do |f|
+      if @instalment.destroy
+        f.html { redirect_to order_instalments_path(@order), notice: 'Договор удалён' }
+      else
+        f.html { render :edit, notice: 'Невозможно удалить договор'}
+      end
+    end
   end
 
   private
 
+  def instalment_params
+    params.require(:instalment).permit(:payment_date, :amount)
+  end
+
   def set_order
     @order = Order.find(params[:order_id])
+  end
+
+  def set_instalment
+    @instalment = Instalment.find(params[:id])
   end
 end

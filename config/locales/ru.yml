@@ -15,6 +15,10 @@ ru:
     :submit: 'Сохранить %{model}'
   activerecord:
     attributes:
+      instalment:
+        id: ID
+        payment_date: Дата платежа
+        amount: Сумма
       partner:
         id: 'ID'
         name: 'Название'

@@ -1,1 +1,4 @@
 = render 'shared/title'
+
+= form_for [@order, @instalment] do |f|
+  = render 'form', f: f

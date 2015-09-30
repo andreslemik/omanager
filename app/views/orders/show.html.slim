@@ -73,6 +73,8 @@ h2 Договор №#{@order.dog_num} от #{I18n.l(@order.order_date)}
       .row
         .large-6.columns
           h5.text-center Рассрочка
-          .text-center = link_to 'Редактировать', order_instalments_path(@order), class: 'button tiny secondary'
+          .text-center
+            = link_to 'Редактировать', order_instalments_path(@order), class: 'button tiny secondary'
+            = link_to 'Добавить', new_order_instalment_path(@order), class: 'button tiny secondary'
         .large-6.columns
           h5.text-center Платежи

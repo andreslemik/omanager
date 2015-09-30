@@ -1,0 +1,13 @@
+- if @order.errors.any?
+  .row
+    .large-12.columns
+      = render 'shared/form_errors', model: @instalment
+.row
+  .large-1.columns
+    = f.text_field :payment_date, class: 'datepicker'
+  .large-2.columns.end
+    = f.number_field :amount
+.row
+  .large-4.columns
+    = f.submit 'Сохранить'
+    = link_to 'Отмена', :back, class: 'button secondary small'
