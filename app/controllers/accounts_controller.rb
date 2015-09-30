@@ -17,7 +17,7 @@ class AccountsController < ApplicationController
         when 'Partner'
           redirect = -> { redirect_to partner_path(@account.accountable_id), notice: 'Запись успешно изменена' }
         when 'Order'
-          redirect = -> { redirect_to edit_order_path(@account.accountable_id), notice: 'Запись успешно изменена' }
+          redirect = -> { redirect_to order_path(@account.accountable_id), notice: 'Запись успешно изменена' }
         end
         f.html { redirect.call }
       else
