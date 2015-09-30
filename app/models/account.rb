@@ -14,6 +14,13 @@ class Account < ActiveRecord::Base
   scope :expense, -> { where operation_type: 0 }
   scope :income, -> { where operation_type: 1 }
 
+  scope :on_date, -> (date) { where('operation_date <= ?', date) }
+  scope :after_date, -> (date) { where('operation_date > ?', date) }
+
+  def self.summary
+    pluck(:amount).sum
+  end
+
   def to_s
     "Денежная операция от #{I18n.l updated_at}"
   end

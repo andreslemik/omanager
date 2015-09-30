@@ -4,5 +4,6 @@ class Instalment < ActiveRecord::Base
   belongs_to :order
 
   default_scope { order :payment_date }
+  scope :after_date, -> (date) { where('payment_date > ?', date) }
 
 end

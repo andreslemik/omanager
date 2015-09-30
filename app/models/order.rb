@@ -43,7 +43,10 @@ class Order < ActiveRecord::Base
   after_save :update_accounts
   after_destroy :delete_accounts
 
-  scope :without_internals, -> { where.not(order_type: Order.order_types[:internal]) }
+  scope :without_internals, lambda {
+    where.not(order_type: \
+    Order.order_types[:internal])
+  }
 
   scope :internals, -> { where(order_type: Order.order_types[:internal]) }
 
@@ -130,13 +133,11 @@ class Order < ActiveRecord::Base
   end
 
   def balance_on(date)
-    return 0 unless retail?
-    return 0 if (total - income_total) == 0
-    inst = instalments.where('payment_date <= ?', date).map(&:amount).sum
-    inst_after = instalments.where('payment_date > ?', date).map(&:amount).sum
-    income = operations.income.where('operation_date <= ?', date).map(&:amount).sum
-    total - income unless instalments.any?
-    total - inst_after - income
+    return 0 if (total - income_total) == 0 || !retail?
+    operations_balance = operations.expense.summary - operations.income.summary
+    return operations_balance unless instalments.any?
+    inst_after = instalments.after_date(date).map(&:amount).sum
+    operations_balance - inst_after
   end
 
   ransacker :registered do |_parent|
