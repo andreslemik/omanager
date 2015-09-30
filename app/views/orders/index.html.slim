@@ -54,15 +54,18 @@ h2 = @title
           th.text-center(width="100") Номер
           th.text-center(width="100") Дата
           th.text-center Статус
+          th.text-center Тип
           th.show-for-large-only(width="200") Примечение
       tbody
         - @orders.each do |o|
           tr
-            td = link_to(ficon(:pencil, :small), edit_order_path(o), data: { no_turbolink: true }) if current_user.can_update?(o)
+            td = link_to(ficon(:pencil, :small), edit_order_path(o), \
+                data: { no_turbolink: true }) if current_user.can_update?(o)
             td == order_items_text o
             td = o.dept.try(:name)
             td.text-center = link_to_order(o)
             td = l(o.order_date)
             td = o.aasm.human_state
+            td = t o.order_type
             td.show-for-large-only = o.memo
 

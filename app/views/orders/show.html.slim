@@ -75,18 +75,19 @@ h2 Договор №#{@order.dog_num} от #{I18n.l(@order.order_date)}
           h5.text-center Рассрочка
           .text-center
             = link_to 'Добавить', new_order_instalment_path(@order), class: 'button tiny secondary'
-          table
-            thead
-              tr
-                th
-                th Дата платежа
-                th Сумма
-                th
-            tbody
-              = render @order.instalments
-              tr.total-row
-                td(colspan="2")
-                td = @order.instalments_total
-                td
+          - if @order.instalments.any?
+            table
+              thead
+                tr
+                  th
+                  th Дата платежа
+                  th Сумма
+                  th
+              tbody
+                = render @order.instalments
+                tr.total-row
+                  td(colspan="2")
+                  td = @order.instalments_total
+                  td
         .large-6.columns
           h5.text-center Платежи
