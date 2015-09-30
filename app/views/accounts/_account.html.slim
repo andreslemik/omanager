@@ -1,6 +1,6 @@
 tr
   td
-  td = account.operation_date
-  td = account.amount
+  td = I18n.l account.operation_date
+  td.text-right = number_to_currency(account.amount, precision: 0, unit: '')
   td = account.memo
   td
