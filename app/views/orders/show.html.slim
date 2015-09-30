@@ -19,6 +19,9 @@ h2 Договор №#{@order.dog_num} от #{I18n.l(@order.order_date)}
         th Сумма догвора
         td #{number_to_currency @order.total, precision: 0}
       tr
+        th Баланс
+        td #{number_to_currency @order.balance_on(Date.today), precision: 0}
+      tr
         th Статус
         td #{@order.aasm.human_state}
       tr

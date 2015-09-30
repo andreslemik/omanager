@@ -129,9 +129,11 @@ class Order < ActiveRecord::Base
   end
 
   def balance_on(date)
+    return 0 unless retail?
     inst = instalments.where('payment_date <= ?', date).map(&:amount).sum
     income = operations.income.where('operation_date <= ?', date).map(&:amount).sum
-    inst - income
+    return inst - income if inst > 0
+    total - income
   end
 
   ransacker :registered do |_parent|

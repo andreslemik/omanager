@@ -55,6 +55,7 @@ h2 = @title
           th.text-center(width="100") Дата
           th.text-center Статус
           th.text-center Тип
+          th.text-center Баланс
           th.show-for-large-only(width="200") Примечение
       tbody
         - @orders.each do |o|
@@ -67,5 +68,6 @@ h2 = @title
             td = l(o.order_date)
             td = o.aasm.human_state
             td = t o.order_type
+            td.text-right = number_to_currency(o.balance_on(Date.today), precision: 0, unit: '')
             td.show-for-large-only = o.memo
 
