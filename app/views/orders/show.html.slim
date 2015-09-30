@@ -44,27 +44,34 @@ h2 Договор №#{@order.dog_num} от #{I18n.l(@order.order_date)}
           th Клиент
           td #{@order.partner_name}
   .large-9.columns
-    table
-      caption Изделия
-      thead
-        tr
-          th.text-center № цех
-          th Изделие
-          th Описание
-          th Опции
-          th Цена
-          th Кол-во
-          th Сумма
-          th Статус
-      tbody
-        - @order.order_items.each do |oi|
-          tr
-            td = oi.id
-            td = oi.product.long_name
-            td = oi.additional
-            td = oi.product_options
-            td.text-right = number_to_currency oi.cost, precision: 0
-            td.text-center = oi.amount
-            td.text-right = number_to_currency oi.subtotal, precision: 0
-            td = oi.aasm.human_state
-
+    .row
+      .large-12.columns
+        table
+          caption Изделия
+          thead
+            tr
+              th.text-center № цех
+              th Изделие
+              th Описание
+              th Опции
+              th Цена
+              th Кол-во
+              th Сумма
+              th Статус
+          tbody
+            - @order.order_items.each do |oi|
+              tr
+                td = oi.id
+                td = oi.product.long_name
+                td = oi.additional
+                td = oi.product_options
+                td.text-right = number_to_currency oi.cost, precision: 0
+                td.text-center = oi.amount
+                td.text-right = number_to_currency oi.subtotal, precision: 0
+                td = oi.aasm.human_state
+    .row
+      .large-6.columns
+        h5.text-center Рассрочка
+        .text-center = link_to 'Редактировать', order_instalments_path(@order), class: 'button tiny secondary'
+      .large-6.columns
+        h5.text-center Платежи

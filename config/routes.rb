@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :orders do
     get :internals, on: :collection
     resources :order_items, shallow: true
+    resources :instalments, shallow: true
   end
 
   resources :partners, only: [:index, :show]

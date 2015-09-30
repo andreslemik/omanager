@@ -1,0 +1,15 @@
+- content_for :title, @title
+h3 = @title
+
+.large-3.columns
+  = paginate @instalments
+  table
+    thead
+      tr
+        th Дата платежа
+        th Сумма
+    tbody
+      = render partial: 'instalment', collection: @instalments
+.large-3.columns.end
+  = link_to 'Добавить', new_order_instalment_path(@order), class: 'button tiny'
+  = link_to 'Назад', order_path(@order), class: 'button tiny secondary'

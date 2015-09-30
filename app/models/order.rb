@@ -85,6 +85,11 @@ class Order < ActiveRecord::Base
     end
   end
 
+  def dog_num_s
+    return dog_num unless dog_num.blank?
+    'б/н'
+  end
+
   def total
     order_items.map(&:subtotal).sum
   end
