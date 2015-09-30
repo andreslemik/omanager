@@ -128,6 +128,12 @@ class Order < ActiveRecord::Base
     false
   end
 
+  def balance_on(date)
+    inst = instalments.where('payment_date <= ?', date).map(&:amount).sum
+    income = operations.income.where('operation_date <= ?', date).map(&:amount).sum
+    inst - income
+  end
+
   ransacker :registered do |_parent|
     Arel.sql('date(order_date)')
   end
