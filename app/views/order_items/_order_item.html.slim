@@ -1,0 +1,8 @@
+tr
+  td.text-center = order_item.id
+  td.text-center = link_to_order(order_item.order)
+  td = order_item.order.order_type_s
+  td #{order_item.product.name} (#{order_item.product.category.name})
+  td = order_item.additional
+  td = order_item.product_options
+  td = order_item.aasm.human_state

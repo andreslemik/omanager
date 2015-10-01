@@ -1,0 +1,15 @@
+= render 'shared/title'
+
+.large-8.columns
+  table
+    thead
+      tr
+        th № цех
+        th Договор
+        th.text-center Тип<br /> дог-ра
+        th Название
+        th Ткань
+        th Параметры
+        th Статус
+    tbody
+      = render @order_items

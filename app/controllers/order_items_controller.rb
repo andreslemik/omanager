@@ -1,6 +1,12 @@
 class OrderItemsController < ApplicationController
   before_action :set_order_item, only: [:edit, :update]
   before_action :set_order, only: [:new, :create]
+
+  def index
+    @title = 'Архив изделий'
+    @order_items = OrderItem.to_fabrication.page(params[:page])
+  end
+
   def new
     @order_item = @order.order_items.build(amount: 1)
     @categories = Category.joins(:products).group(:id)

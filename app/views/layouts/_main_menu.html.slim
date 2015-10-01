@@ -15,6 +15,7 @@ nav.top-bar role="navigation" data-topbar="" data-options="back_text: Назад
             li = link_to 'Новый договор', new_order_path, data: { no_turbolink: true }
           li = link_to 'Список договоров', orders_path
           li = link_to 'Внутренние заказы', internals_orders_path
+          li = link_to 'Архив изделий', order_items_path
       - if Account.readable_by? current_user
         li.has-dropdown
           a(href='#') Расчёты
