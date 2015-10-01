@@ -4,7 +4,7 @@ class OrderItemsController < ApplicationController
 
   def index
     @title = 'Архив изделий'
-    @order_items = OrderItem.to_fabrication.page(params[:page])
+    @order_items = OrderItem.to_fabrication.order(id: :desc, order_id: :asc).page(params[:page])
   end
 
   def new

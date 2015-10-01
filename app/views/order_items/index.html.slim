@@ -1,6 +1,7 @@
 = render 'shared/title'
 
 .large-8.columns
+  = paginate @order_items
   table
     thead
       tr
@@ -13,3 +14,4 @@
         th Статус
     tbody
       = render @order_items
+  = paginate @order_items
