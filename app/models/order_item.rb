@@ -52,7 +52,7 @@ class OrderItem < ActiveRecord::Base
   end
 
   def additional
-    "#{descr_basis} / #{descr_assort} / #{special_notes}"
+    [descr_basis, descr_assort, special_notes].join ' / '
   end
 
   def product_options
