@@ -34,12 +34,14 @@ Rails.application.routes.draw do
     put :well_done, on: :member
   end
 
-  get 'products/by_category_mfc/:category_id/:manufacturer_id',
-      to: 'products#by_category_mfc', defaults: { format: 'json' }
-  get 'products/manufacturers/:category_id',
-      to: 'products#manufacturers', defaults: { format: 'json' }
-  get 'products/price/:product_id/:type_id(/:mods)',
-      to: 'products#price', defaults: { format: 'json' }
-  get 'products/option_values/:product_id(/:attr_id)',
-      to: 'products#option_values'
+  scope :products do
+    get 'by_category_mfc/:category_id/:manufacturer_id',
+        to: 'products#by_category_mfc', defaults: { format: 'json' }
+    get 'manufacturers/:category_id',
+        to: 'products#manufacturers', defaults: { format: 'json' }
+    get 'price/:product_id/:type_id(/:mods)',
+        to: 'products#price', defaults: { format: 'json' }
+    get 'option_values/:product_id(/:attr_id)',
+        to: 'products#option_values'
+  end
 end
