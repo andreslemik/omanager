@@ -1,6 +1,6 @@
 = render 'shared/title'
 
-.large-8.columns
+.large-10.columns
   = paginate @order_items
   table
     thead
@@ -15,3 +15,25 @@
     tbody
       = render @order_items
   = paginate @order_items
+.large-2.columns
+  = search_form_for @q do |f|
+    .row
+      .columns
+        = f.label :id_eq, '№ цех'
+        = f.text_field :id_eq
+    .row
+      .large-6.columns
+        = f.label :order_dog_num_eq, 'Договор'
+        = f.text_field :order_dog_num_eq
+      .large-6.columns
+        = f.label :order_order_type_eq, 'Тип'
+        = f.select :order_order_type_eq, \
+          Order.order_types.map { |k,v| [I18n.t(k), v] }, include_blank: true
+    .row
+      .columns
+        = f.label :aasm_state_eq, 'Статус'
+        = f.select :aasm_state_eq, OrderItem.aasm.states_for_select.sort, include_blank: true
+    .row
+      .columns
+        = f.submit 'Найти', class: 'button tiny'
+        = link_to 'Очистить', order_items_path, class: 'button tiny secondary'

@@ -4,7 +4,8 @@ class OrderItemsController < ApplicationController
 
   def index
     @title = 'Архив изделий'
-    @order_items = OrderItem.to_fabrication.order(id: :desc, order_id: :asc).page(params[:page])
+    @q = OrderItem.to_fabrication.ransack(params[:q])
+    @order_items = @q.result(distinct: true).order(id: :desc, order_id: :asc).page(params[:page])
   end
 
   def new
