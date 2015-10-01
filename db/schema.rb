@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150929141056) do
+ActiveRecord::Schema.define(version: 20151001132334) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -113,11 +113,13 @@ ActiveRecord::Schema.define(version: 20150929141056) do
     t.datetime "deleted_at"
     t.date     "fabrication_date"
     t.date     "delivery_date"
+    t.integer  "dept_id"
   end
 
   add_index "order_items", ["aasm_state"], name: "index_order_items_on_aasm_state", using: :btree
   add_index "order_items", ["deleted_at"], name: "index_order_items_on_deleted_at", using: :btree
   add_index "order_items", ["delivery_date"], name: "index_order_items_on_delivery_date", using: :btree
+  add_index "order_items", ["dept_id"], name: "index_order_items_on_dept_id", using: :btree
   add_index "order_items", ["fabrication_date"], name: "index_order_items_on_fabrication_date", using: :btree
   add_index "order_items", ["order_id"], name: "index_order_items_on_order_id", using: :btree
   add_index "order_items", ["product_id"], name: "index_order_items_on_product_id", using: :btree
@@ -288,6 +290,7 @@ ActiveRecord::Schema.define(version: 20150929141056) do
   add_foreign_key "accounts", "orders"
   add_foreign_key "instalments", "orders"
   add_foreign_key "option_values", "option_types"
+  add_foreign_key "order_items", "depts"
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "products"
   add_foreign_key "orders", "depts"

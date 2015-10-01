@@ -6,8 +6,10 @@ class OrderItem < ActiveRecord::Base
   has_paper_trail
   belongs_to :order
   belongs_to :product
+  belongs_to :dept
   has_one :category, through: :product
-  has_one :partner, through: :product, foreign_key: :manufacturer_id, source: :manufacturer
+  has_one :partner, through: :product,
+                    foreign_key: :manufacturer_id, source: :manufacturer
 
   attr_accessor :category, :manufacturer
   serialize :option_values, JSON
@@ -16,7 +18,8 @@ class OrderItem < ActiveRecord::Base
 
   scope :by_desired_date, lambda {
     joins(:order)
-      .order('orders.desired_date asc NULLS last, orders.created_at desc, orders.id')
+      .order('orders.desired_date asc NULLS last,
+        orders.created_at desc, orders.id')
   }
 
   scope :to_fabrication, lambda {
@@ -30,11 +33,11 @@ class OrderItem < ActiveRecord::Base
   }
 
   scope :to_order, lambda {
-          joins(:partner, :category)
-            .where('partners.own = ?', false)
-            .where('categories.fabrication = ?', true)
-            .where(aasm_state: :pending)
-                 }
+    joins(:partner, :category)
+      .where('partners.own = ?', false)
+      .where('categories.fabrication = ?', true)
+      .where(aasm_state: :pending)
+  }
 
   after_save :update_order
   after_save :change_state, if: :fabrication_date_changed?
