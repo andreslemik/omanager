@@ -19,7 +19,7 @@ class FabricationController < ApplicationController
   def update
     respond_to do |f|
       if @order_item.update(item_params)
-        f.html { redirect_to schedule_fabrication_index_path, notice: 'Операция выполнена' }
+        f.html { redirect_to request.referrer, notice: 'Операция выполнена' }
       else
         f.html { render :edit }
       end
