@@ -5,4 +5,5 @@ tr
   td #{order_item.product.name} (#{order_item.product.category.name})
   td = order_item.additional
   td = order_item.product_options
+  td = order_item.dept.try(:name)
   td = order_item.aasm.human_state
