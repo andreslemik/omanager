@@ -7,3 +7,8 @@
     h4 == link_to ficon(:print, :medium), \
               print_schedule_fabrication_index_path, title: 'Распечатать'
     = render 'scheduled_items'
+
+    #set-dept-form.small.reveal-modal(data-reveal='' role='dialog')
+
+= content_for :js do
+  = javascript_include_tag 'fabrication', 'data-turbolinks-track' => true

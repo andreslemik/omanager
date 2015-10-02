@@ -99,7 +99,7 @@ class OrderItem < ActiveRecord::Base
       transitions from: :working, to: :pending
     end
     event :get_ready do
-      transitions from: [:working, :pending], to: :ready
+      transitions from: [:working, :pending], to: :ready, guard: :dept_is_set?
       after_commit do
         order.get_ready! if order.all_items_ready?
       end
@@ -122,6 +122,10 @@ class OrderItem < ActiveRecord::Base
   end
 
   private
+
+  def dept_is_set?
+    !dept_id.blank?
+  end
 
   def update_order
     order.update_attribute(:updated_at, Time.now)

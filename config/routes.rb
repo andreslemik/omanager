@@ -24,6 +24,7 @@ Rails.application.routes.draw do
                                            as: :print_orders
     end
     put :get_ready, on: :member
+    get :set_dept, on: :member
   end
 
   resources :delivery, only: [:index, :edit, :update] do

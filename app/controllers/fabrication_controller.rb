@@ -1,6 +1,6 @@
 # Fabrication controller
 class FabricationController < ApplicationController
-  before_action :set_order_item, only: [:edit, :update, :get_ready]
+  before_action :set_order_item, only: [:edit, :update, :get_ready, :set_dept]
   before_action :working_items, only: [:schedule, :edit]
   def index
     @title = 'Поставить в очередь'
@@ -19,7 +19,7 @@ class FabricationController < ApplicationController
   def update
     respond_to do |f|
       if @order_item.update(item_params)
-        f.html { redirect_to schedule_fabrication_index_path, notice: 'Изделие успешно поставлено в очередь' }
+        f.html { redirect_to schedule_fabrication_index_path, notice: 'Операция выполнена' }
       else
         f.html { render :edit }
       end
@@ -29,6 +29,10 @@ class FabricationController < ApplicationController
   def get_ready
     @order_item.get_ready!
     redirect_to :back
+  end
+
+  def set_dept
+    respond_to { |f| f.js }
   end
 
   def schedule
@@ -76,6 +80,6 @@ class FabricationController < ApplicationController
   end
 
   def item_params
-    params.require(:order_item).permit(:fabrication_date)
+    params.require(:order_item).permit(:fabrication_date, :dept_id)
   end
 end

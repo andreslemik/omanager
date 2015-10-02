@@ -19,5 +19,8 @@
           td = "#{item.product.name} (#{item.product.category.name})"
           td = item.additional
           td = item.product_options
-          td = link_to 'Готово', get_ready_fabrication_path(item), class: 'button tiny secondary', \
-                             data: {confirm: 'Вы уверены?'}, method: :put
+          /td = link_to 'Готово', get_ready_fabrication_path(item), class: 'button tiny secondary', \
+                             data: {confirm: 'Вы уверены?'}
+          td = link_to 'Готово', set_dept_fabrication_path(item), \
+            class: 'button tiny secondary get-ready',  \
+            remote: true
