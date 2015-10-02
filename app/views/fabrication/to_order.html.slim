@@ -25,8 +25,8 @@
                 td = "#{item.product.name} (#{item.product.category.name})"
                 td = item.additional
                 td = item.product_options
-                td = link_to 'Готово', get_ready_fabrication_path(item), class: 'button tiny secondary', \
-                                     data: {confirm: 'Вы уверены?'}, method: :put
+                td = link_to 'Готово', set_dept_fabrication_path(item), class: 'button tiny secondary', \
+                                     remote: true
         = paginate @items
 
       .large-3.columns
@@ -44,3 +44,6 @@
                 td.text-right = item.count
                 td = link_to ficon(:print, :medium), \
                              print_orders_fabrication_index_path(product.manufacturer)
+#set-dept-form.small.reveal-modal(data-reveal='' role='dialog')
+= content_for :js do
+  = javascript_include_tag 'fabrication', 'data-turbolinks-track' => true
