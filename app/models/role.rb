@@ -9,7 +9,7 @@ class Role < ActiveRecord::Base
   scopify
 
   validates :name, presence: true, uniqueness: true
-  validates :caption, presence: true
+  validates :caption, presence: true, if: -> {!Rails.env.test?}
 
   def users_s
     users.map(&:name).join ', '
