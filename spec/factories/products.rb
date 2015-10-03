@@ -9,5 +9,10 @@ FactoryGirl.define do
     trait :own_supplier do
       association :manufacturer, factory: [:partner, [:supplier, :own]]
     end
+
+    after :create do |p|
+      option_type = FactoryGirl.create :product_option_type, product: p
+      FactoryGirl.create_list :product_option_value, 5, product: p, option_type: option_type.option_type
+    end
   end
 end
