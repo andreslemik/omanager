@@ -2,8 +2,10 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
 
-  authorize_actions_for Order
-  authority_actions internals: 'read'
+  unless Rails.env.test?
+    authorize_actions_for Order
+    authority_actions internals: 'read'
+  end
 
   def index
     @q = Order.without_internals.ransack(params[:q])
