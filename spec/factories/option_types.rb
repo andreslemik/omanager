@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :option_type do
-    name { Faker::Lorem.word }
+    name { "#{Faker::Lorem.word} #{rand(1000000)}" }
     after :create do |ot|
       create_list :option_value, 5, option_type: ot
     end
