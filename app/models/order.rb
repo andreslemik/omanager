@@ -34,7 +34,7 @@ class Order < ActiveRecord::Base
   validates :client, :phone, :address, :area, presence: true, if: :retail?
   validates :partner_id, presence: true, if: :dealer?
   validates :order_items, presence: true
-  validates :order_type, presence: true
+  validates :order_type, presence: { message: 'Не указан тип договора' }
 
   accepts_nested_attributes_for :order_items,
                                 reject_if: proc { |attrs| attrs.blank? },
