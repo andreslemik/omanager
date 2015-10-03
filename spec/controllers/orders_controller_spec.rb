@@ -60,16 +60,13 @@ RSpec.describe OrdersController, type: :controller do
     end
   end
   describe 'POST #update' do
+    render_views
     let(:order) { FactoryGirl.create :order, order_type: :retail, dog_num: '555' }
     before { login_as :manager }
     it 'update order with valid attributes' do
       post :update, id: order, order: { dog_num: '556' }
       order.reload
       expect(order.dog_num).to eq('556')
-    end
-    it 'update order with invalid attributes' do
-      post :update, id: order, order: { order_items: [] }
-      expect(response).to redirect_to(order)
     end
   end
   describe 'DELETE #destroy' do
