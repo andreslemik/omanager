@@ -37,7 +37,22 @@ describe 'New order feature', type: :feature do
         select product.name, from: 'order_order_items_attributes_0_product_id'
       end
       expect(find_field('order_order_items_attributes_0_cost').value).to eq(product.price.to_s)
-      #sleep(inspection_time=5)
+    end
+
+    it 'price change', js: true, driver: :selenium do
+      product = Product.all.sample
+      ov = product.product_option_values.sample
+      price = product.price_mod(0, [ov.option_value_id])
+      visit new_order_path
+      within '#new_order' do
+        select product.category.name, from: 'order_order_items_attributes_0_category'
+        select product.manufacturer.name, from: 'order_order_items_attributes_0_manufacturer'
+        select product.name, from: 'order_order_items_attributes_0_product_id'
+
+        select ov.option_value.name, from: 'order_order_items_attributes_0_option_values'
+      end
+      expect(find_field('order_order_items_attributes_0_cost').value).to eq(price.to_s)
+      # sleep(inspection_time=5)
     end
   end
 end
