@@ -71,6 +71,7 @@ group :test do
   gem 'faker'
   gem 'selenium-webdriver'
   gem 'fuubar'
+  gem 'simplecov', require: false
 end
 
 group :production do
