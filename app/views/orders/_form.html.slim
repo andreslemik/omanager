@@ -24,7 +24,7 @@
     .large-4.small-6.columns
       = label_tag 'Тип договора'
       - Order.order_types.each do |k, v|
-        = f.radio_button :order_type, k
+        = f.radio_button :order_type, k, checked: v == Order.order_types[:retail]
         = f.label :order_type, I18n.t(k), value: k
         = hidden_field_tag :retail, value: 1
     .large-2.small-3.columns.end
