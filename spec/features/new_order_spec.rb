@@ -23,7 +23,7 @@ describe 'New order feature', type: :feature do
     end
   end
   context 'Creating order' do
-    it 'create retail order', js: true, driver: :selenium do
+    it 'select product will get it price', js: true, driver: :selenium do
       visit new_order_path
       product = Product.all.sample
       within '#new_order' do
