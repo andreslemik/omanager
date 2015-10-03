@@ -7,10 +7,11 @@ describe 'Edit order feature' do
     @order = FactoryGirl.create :order
   end
 
-  it 'open edit order form', js: true, driver: :selenium do
-    order = Order.all.sample
-    visit edit_order_path(order)
-    sleep(inspection_time=5)
+  it 'delete one order item', js: true, driver: :selenium do
+    visit edit_order_path(@order)
+    first('.delete_order_item').click
+    click_button('Сохранить')
+    expect(@order.order_items.count).to eq(2)
   end
 
 
