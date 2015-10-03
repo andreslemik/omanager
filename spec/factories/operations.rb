@@ -3,6 +3,6 @@ FactoryGirl.define do
     operation_date { Faker::Date.between 7.days.ago, Date.today }
     memo { Faker::Lorem.paragraph }
     operation_type :expense
-    amount { Faker::Number.between 1000, 1000000 }
+    amount { Faker::Number.between 1000, 1_000_000 }
   end
 end

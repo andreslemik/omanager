@@ -14,6 +14,5 @@ FactoryGirl.define do
     trait :own do
       own true
     end
-
   end
 end

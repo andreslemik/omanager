@@ -5,7 +5,7 @@ FactoryGirl.define do
     aasm_state :pending
     dept
     author
-    dog_num { Faker::Number.between 1, 100000 }
+    dog_num { Faker::Number.between 1, 100_000 }
     client { Faker::Name.name }
     address { Faker::Address.street_address }
     phone { Faker::PhoneNumber.cell_phone }
@@ -26,6 +26,5 @@ FactoryGirl.define do
         order.order_items << build(:order_item, order: order)
       end
     end
-
   end
 end

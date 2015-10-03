@@ -11,7 +11,6 @@ FactoryGirl.define do
       association :accountable, factory: :retail_order
     end
 
-
     operation_type :income
 
     trait :expence do
