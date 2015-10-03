@@ -132,6 +132,23 @@ class Order < ActiveRecord::Base
     false
   end
 
+  # fix error: '1' is not a valid order_type
+  def order_type=value
+    if value.kind_of?(String) && value.to_i.to_s == value
+      super value.to_i
+    else
+      super value
+    end
+  end
+
+  def area=value
+    if value.kind_of?(String) && value.to_i.to_s == value
+      super value.to_i
+    else
+      super value
+    end
+  end
+
   def balance_on(date)
     return 0 if (total - income_total) == 0 || !retail?
     operations_balance = operations.expense.summary - operations.income.summary

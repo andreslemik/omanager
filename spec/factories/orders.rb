@@ -9,15 +9,15 @@ FactoryGirl.define do
     client { Faker::Name.name }
     address { Faker::Address.street_address }
     phone { Faker::PhoneNumber.cell_phone }
-    area 13
-    order_type Order.order_types[:retail]
+    area 'Новый город'
+    order_type :retail
 
     trait :internal_order do
-      order_type Order.order_types[:internal]
+      order_type :internal
     end
 
     trait :dealer_order do
-      order_type Order.order_types[:dealer]
+      order_type :dealer
       partner
     end
 

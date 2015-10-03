@@ -38,6 +38,7 @@ class OrdersController < ApplicationController
     @order.order_items.build
   end
 
+  # :nocov:
   def create
     @order = Order.new order_params
     @order.author_id = current_user.id
@@ -49,6 +50,7 @@ class OrdersController < ApplicationController
       end
     end
   end
+  # :nocov:
 
   def update
     respond_to do |f|
