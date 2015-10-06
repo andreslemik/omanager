@@ -12,7 +12,7 @@ class InstalmentsController < ApplicationController
   end
 
   def new
-    session[:back] = request.referer
+    session[:back_inst] = request.referer
     @instalment = Instalment.new
     @title = 'Новый платеж'
   end
