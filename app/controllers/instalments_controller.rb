@@ -1,6 +1,7 @@
 class InstalmentsController < ApplicationController
   before_action :set_order, only: [:index, :new, :create]
   before_action :set_instalment, only: [:destroy, :edit, :update]
+  before_action :set_back_path, only: [:new, :edit]
 
   def index
     @instalments = @order.instalments.page(params[:page])
@@ -12,7 +13,6 @@ class InstalmentsController < ApplicationController
   end
 
   def new
-    session[:back_inst] = request.referer
     @instalment = Instalment.new
     @title = 'Новый платеж'
   end
@@ -62,4 +62,9 @@ class InstalmentsController < ApplicationController
   def set_instalment
     @instalment = Instalment.find(params[:id])
   end
+
+  def set_back_path
+    session[:back_inst] = request.referer
+  end
+
 end
