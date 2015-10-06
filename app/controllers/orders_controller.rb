@@ -25,7 +25,7 @@ class OrdersController < ApplicationController
   end
 
   def show
-    session[:back] = request.referer
+    session[:back] ||= request.referer
     @account = Account.new
   end
 
