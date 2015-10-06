@@ -12,7 +12,7 @@ class Role < ActiveRecord::Base
   validates :caption, presence: true, if: -> {!Rails.env.test?}
 
   def users_s
-    users.map(&:name).join ', '
+    users.order(:last_name, :first_name).map(&:name).join ', '
   end
 
 end
