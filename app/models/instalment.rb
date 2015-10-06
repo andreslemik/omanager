@@ -7,4 +7,6 @@ class Instalment < ActiveRecord::Base
   default_scope { order :payment_date }
   scope :after_date, -> (date) { where('payment_date > ?', date) }
 
+  validates :payment_date, :amount, presence: true
+
 end
