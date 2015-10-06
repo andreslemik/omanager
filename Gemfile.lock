@@ -44,7 +44,7 @@ GIT
 
 GIT
   remote: https://github.com/rails/turbolinks.git
-  revision: eac0a3e43a69b341abdd55ef1bc45d1d4cfaf8a9
+  revision: 01ec4087302496868e72e0ae3f16376f13fc1499
   specs:
     turbolinks (3.0.0)
       coffee-rails
@@ -379,7 +379,7 @@ GEM
       slim (~> 3.0)
     slop (3.6.0)
     spring (1.4.0)
-    sprockets (3.3.5)
+    sprockets (3.4.0)
       rack (> 1, < 3)
     sprockets-rails (2.3.3)
       actionpack (>= 3.0)
