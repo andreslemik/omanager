@@ -1,7 +1,7 @@
 class InstalmentsController < ApplicationController
   before_action :set_order, only: [:index, :new, :create]
   before_action :set_instalment, only: [:destroy, :edit, :update]
-  before_action :set_back_path, only: [:new, :edit]
+  before_action :set_back_path, only: [:new, :edit, :destroy]
 
   def index
     @instalments = @order.instalments.page(params[:page])
@@ -39,10 +39,9 @@ class InstalmentsController < ApplicationController
   end
 
   def destroy
-    session[:back] = request.referer
     respond_to do |f|
       if @instalment.destroy
-        f.html { redirect_to session[:back], notice: 'Платеж удалён' }
+        f.html { redirect_to session[:back_inst], notice: 'Платеж удалён' }
       else
         f.html { render :edit, notice: 'Невозможно удалить платеж'}
       end
