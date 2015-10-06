@@ -4,7 +4,8 @@
       = render 'shared/form_errors', model: @instalment
 .row
   .large-1.columns
-    = f.text_field :payment_date, class: 'datepicker'
+    = f.text_field :payment_date, class: 'datepicker', \
+      value: @instalment.new_record? ? '' :  I18n.l(@instalment.payment_date)
   .large-2.columns.end
     = f.number_field :amount
 .row
