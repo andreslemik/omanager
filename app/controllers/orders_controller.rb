@@ -50,7 +50,6 @@ class OrdersController < ApplicationController
       end
     end
   end
-  # :nocov:
 
   def update
     respond_to do |f|
@@ -61,6 +60,7 @@ class OrdersController < ApplicationController
       end
     end
   end
+  # :nocov:
 
   def destroy
     authorize_action_for @order
