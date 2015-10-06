@@ -26,7 +26,7 @@ RSpec.describe OrderItem, type: :model do
     it 'one item change state to working change order state too' do
       order_item = @order.order_items.first
       order_item.fabrication_date = Date.today
-      order_item.save!
+      order_item.save
       expect(@order.aasm_state).to eq('working')
     end
 
@@ -39,10 +39,29 @@ RSpec.describe OrderItem, type: :model do
       (1..2).each do |i|
         o = @order.order_items[i]
         o.fabrication_date = Date.today
-        o.save!
-        o.get_ready!
+        o.save
+        o.get_ready
       end
       expect(@order.aasm_state).to eq('working')
+    end
+
+    it 'order_retail' do
+      expect(@order.order_items.first.retail).to eq(1)
+    end
+
+    it 'when change delivery_date item get state "delivery"' do
+      item = @order.order_items.first
+      item.get_ready!
+      item.update_attribute :delivery_date, Date.today
+      expect(item.aasm_state).to eq('delivery')
+    end
+
+    it 'undo_delivery' do
+      item = @order.order_items.first
+      item.get_ready!
+      item.update_attribute :delivery_date, Date.today
+      item.undo_delivery!
+      expect(item.delivery_date).to be_nil
     end
   end
 end
