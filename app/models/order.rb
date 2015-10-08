@@ -66,7 +66,7 @@ class Order < ActiveRecord::Base
   # define methods by order_types (retail?, dealer?, internal?)
   Order.order_types.keys.each do |key|
     define_method("#{key}?".to_sym) do
-      return true if order_type == key
+      return true if order_type == key.to_s
       false
     end
   end
@@ -86,7 +86,8 @@ class Order < ActiveRecord::Base
   # define methods to determine if all fabrication order_items have some state
   OrderItem.aasm.states.each do |state|
     define_method "all_items_#{state.name}?".to_sym do
-      order_items.to_fabrication.pluck(:aasm_state).all? { |s| s == state.name.to_s }
+      order_items.to_fabrication
+        .pluck(:aasm_state).all? { |s| s == state.name.to_s }
     end
   end
 
@@ -112,6 +113,7 @@ class Order < ActiveRecord::Base
   end
 
   def balance_on(date)
+    return 0 unless :retail?
     operations_balance = operations.expense.summary - operations.income.summary
     if instalments.any?
       inst_after = instalments.after_date(date).summary
@@ -154,15 +156,18 @@ class Order < ActiveRecord::Base
   private
 
   def update_accounts
-    operation = operations.find_or_initialize_by(order_id: id)
-    operation = Partner.find(partner_id)
-                .operations.find_or_initialize_by(order_id: id) if dealer?
-    operation.attributes = { amount: total, memo: decorate.to_s }
-    operation.attributes = { operation_date: Time.now,
-                             operation_type: :expense, amount: total,
-                             memo: decorate.to_s,
-                             order_id: id
-    } if operation.new_record?
+    if dealer?
+      operation = Partner.find(partner_id)
+                  .operations.find_or_initialize_by(order_id: id)
+    else
+      operation = operations.find_or_initialize_by(order_id: id)
+    end
+    attrs = { amount: total, memo: decorate.to_s }
+    attrs.merge(operation_date: Time.now,
+                operation_type: :expense, amount: total,
+                memo: decorate.to_s,
+                order_id: id) if operation.new_record?
+    operation.attributes = attrs
     operation.save!
   end
 
