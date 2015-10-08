@@ -9,8 +9,7 @@ module OrdersHelper
   end
 
   def link_to_order(order)
-    order_num = order.dog_num.blank? ? 'б/н' : order.dog_num
-    link_to order_num, order_path(order)
+    link_to order.dog_num_s, order_path(order)
   end
 
 end

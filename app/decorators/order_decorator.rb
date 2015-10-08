@@ -13,6 +13,9 @@ class OrderDecorator < ApplicationDecorator
         .join(', ')
   end
   def to_s
-    "Договор №#{dog_num.blank? ? 'б/н' : dog_num} от #{I18n.l order_date}"
+    "Договор №#{dog_num_s} от #{I18n.l order_date}"
+  end
+  def dog_num_s
+    dog_num.blank? ? 'б/н' : dog_num
   end
 end
