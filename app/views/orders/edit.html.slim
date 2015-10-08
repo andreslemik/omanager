@@ -17,6 +17,13 @@
       .large-6.small-12.columns
         = f.text_area :memo, label: 'Примечание:', placeholder: 'Примечание'
     .row
+      .large-2.small-3.columns
+        = f.number_field :delivery_cost
+      .large-2.small-3.columns
+        = f.number_field :lift_cost
+      .large-2.small-3.columns.end
+        = f.number_field :install_cost
+    .row
       fieldset
         legend Заказчик
         .large-2.columns

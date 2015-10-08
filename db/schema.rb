@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151008174540) do
+ActiveRecord::Schema.define(version: 20151008180629) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -130,8 +130,8 @@ ActiveRecord::Schema.define(version: 20151008174540) do
     t.date     "order_date"
     t.text     "memo"
     t.string   "aasm_state"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
     t.datetime "deleted_at"
     t.integer  "dept_id"
     t.integer  "author_id"
@@ -143,6 +143,9 @@ ActiveRecord::Schema.define(version: 20151008174540) do
     t.integer  "partner_id"
     t.date     "desired_date"
     t.integer  "order_type"
+    t.decimal  "delivery_cost", precision: 8, scale: 2
+    t.decimal  "lift_cost",     precision: 8, scale: 2
+    t.decimal  "install_cost",  precision: 8, scale: 2
   end
 
   add_index "orders", ["aasm_state"], name: "index_orders_on_aasm_state", using: :btree

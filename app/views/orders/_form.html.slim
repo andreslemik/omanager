@@ -27,13 +27,22 @@
         = f.radio_button :order_type, k, checked: v == Order.order_types[:retail]
         = f.label :order_type, I18n.t(k), value: k
         = hidden_field_tag :retail, value: 1
-    .large-2.small-3.columns.end
-        .row.collapse
-          = f.label :desired_date
-          .small-9.columns
-            = f.text_field :desired_date, label: false, class: 'datepicker'
-          .small-3.columns
-            span.postfix = ficon :calendar, :large
+    .large-2.small-3.columns
+      .row.collapse
+        = f.label :desired_date
+        .small-9.columns
+          = f.text_field :desired_date, label: false, class: 'datepicker'
+        .small-3.columns
+          span.postfix = ficon :calendar, :large
+    .large-2.small-3.columns
+      = f.label :delivery_cost
+      = f.number_field :delivery_cost
+    .large-2.small-3.columns
+      = f.label :lift_cost
+      = f.number_field :lift_cost
+    .large-2.small-3.columns
+      = f.label :install_cost
+      = f.number_field :install_cost
   .row
     .columns#client_definition
       fieldset
