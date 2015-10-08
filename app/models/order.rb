@@ -86,7 +86,7 @@ class Order < ActiveRecord::Base
   # define methods to determine if all fabrication order_items have some state
   OrderItem.aasm.states.each do |state|
     define_method "all_items_#{state.name}?".to_sym do
-      order_items.to_fabrication.pluck(:aasm_state).all? { |s| s == state.name }
+      order_items.to_fabrication.pluck(:aasm_state).all? { |s| s == state.name.to_s }
     end
   end
 
@@ -143,8 +143,8 @@ class Order < ActiveRecord::Base
       transitions from: :working, to: :ready, guard: :all_items_ready?
     end
     event :done do
-      transitions from: :ready, to: :done, guard: [:all_items_done?,
-                                                   :accounting_done?]
+      transitions from: :ready, to: :done,
+                  guard: [:all_items_done?, :accounting_done?]
     end
     event :cancel do
       transitions from: [:pending, :working], to: :canceled
