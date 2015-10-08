@@ -5,10 +5,11 @@ class DeliveryController < ApplicationController
 
   def index
     @title = 'Поставить на доставку'
-    @items = OrderItem.ready
-                 .by_desired_date
-                 .includes(:order, :product)
-                 .page(params[:page])
+    source = OrderItem.ready
+             .by_desired_date
+             .includes(:order, :product)
+             .page(params[:page])
+    @items = OrderItemDecorator.decorate_collection source
   end
 
   def schedule
@@ -22,8 +23,10 @@ class DeliveryController < ApplicationController
   def update
     respond_to do |f|
       if @order_item.update(item_params)
-        f.html { redirect_to schedule_delivery_index_path,
-                             notice: 'Изделие успешно поставлено в очередь на доставку' }
+        f.html do
+          redirect_to schedule_delivery_index_path,
+                      notice: 'Изделие успешно поставлено в очередь на доставку'
+        end
       else
         f.html { render :edit }
       end
@@ -37,7 +40,8 @@ class DeliveryController < ApplicationController
 
   def print_schedule
     @date = Date.parse(params[:sdate])
-    @items = OrderItem.delivery.where(delivery_date: @date)
+    source = OrderItem.delivery.where(delivery_date: @date)
+    @items = OrderItemDecorator.decorate_collection source
     respond_to do |format|
       format.xlsx do
         response.headers['Content-Disposition'] = \
@@ -49,7 +53,7 @@ class DeliveryController < ApplicationController
   private
 
   def set_order_item
-    @order_item = OrderItem.find params[:id]
+    @order_item = OrderItem.find(params[:id]).decorate
   end
 
   def item_params
@@ -57,6 +61,6 @@ class DeliveryController < ApplicationController
   end
 
   def scheduled_items
-    @items = OrderItem.delivery
+    @items = OrderItemDecorator.decorate_collection(OrderItem.delivery)
   end
 end
