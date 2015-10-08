@@ -163,7 +163,7 @@ class Order < ActiveRecord::Base
       operation = operations.find_or_initialize_by(order_id: id)
     end
     attrs = { amount: total, memo: decorate.to_s }
-    attrs.merge(operation_date: Time.now,
+    attrs.merge!(operation_date: Time.now,
                 operation_type: :expense, amount: total,
                 memo: decorate.to_s,
                 order_id: id) if operation.new_record?
