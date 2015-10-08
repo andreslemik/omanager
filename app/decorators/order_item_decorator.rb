@@ -24,4 +24,8 @@ class OrderItemDecorator < ApplicationDecorator
     order.client
   end
 
+  def product_name
+    "#{product.name} (#{product.category.name}) [#{additional}]"
+  end
+
 end
