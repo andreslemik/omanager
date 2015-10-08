@@ -25,7 +25,12 @@ h2 = @title
       .row
         .large-12.columns
           = f.label :products_name_cont, 'Изделия содержат'
-          = f.text_field :products_name_or_categories_name_cont, placeholder: 'Изделия содержат...'
+          = f.text_field :products_name_or_categories_name_cont, \
+            placeholder: 'Изделия содержат...'
+      .row
+        .large-12.columns
+          = f.label :order_items_additionals_cont, 'Ткань содержит'
+          = f.text_field :order_items_additionals_cont, placeholder: 'Ткань содержит...'
       .row
         .large-12.columns
           = f.label :memo_cont, 'Примечание содержит'

@@ -99,6 +99,10 @@ class OrderItem < ActiveRecord::Base
     end
   end
 
+  ransacker :additionals do |_parent|
+    Arel.sql('descr_basis||descr_assort||special_notes')
+  end
+
   private
 
   def update_order
