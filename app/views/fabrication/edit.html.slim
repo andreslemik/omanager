@@ -6,7 +6,7 @@ h3 = @title
     .columns.panel
       dl
         dt Тип договора:
-        dd #{@order_item.order.order_type_s}
+        dd #{@order_item.order.decorate.order_type_s}
         dt Изделие:
         dd #{@order_item.product.name} (#{@order_item.product.category.name})
         dt Ткань:

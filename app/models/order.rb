@@ -83,11 +83,6 @@ class Order < ActiveRecord::Base
     operations.income.summary
   end
 
-  def partner_name
-    return 'Внутренний заказ' if order_type == 'internal'
-    partner.name
-  end
-
   # define methods to determine if all fabrication order_items have some state
   OrderItem.aasm.states.each do |state|
     define_method "all_items_#{state.name}?".to_sym do

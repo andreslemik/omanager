@@ -8,25 +8,34 @@ class OrderDecorator < ApplicationDecorator
                            precision: 0, unit: '')
     end
   end
+
   def items_names
     order_items.map { |oi| "#{oi.product.name} (#{oi.product.category.name})" }
-        .join(', ')
+      .join(', ')
   end
+
   def to_s
     "Договор №#{dog_num_s} от #{I18n.l order_date}"
   end
+
   def dog_num_s
     dog_num.blank? ? 'б/н' : dog_num
   end
+
   def order_type_s
     # short order_type
     case order_type
-      when 'retail'
-        return 'ЧЗ'
-      when 'dealer'
-        return "ДЗ: #{partner.name}"
-      when 'internal'
-        return 'ВН'
+    when 'retail'
+      return 'ЧЗ'
+    when 'dealer'
+      return "ДЗ: #{partner.name}"
+    when 'internal'
+      return 'ВН'
     end
+  end
+
+  def partner_name
+    return 'Внутренний заказ' if order_type == 'internal'
+    partner.name
   end
 end
