@@ -5,6 +5,8 @@ class Order < ActiveRecord::Base
   acts_as_paranoid
   has_paper_trail
 
+  paginates_per 10
+
   self.authorizer_name = 'OrderAuthorizer'
 
   enum area: {  'Новый город': 11, 'Верхняя терраса': 12, 'Нижняя терраса': 13,
