@@ -8,6 +8,9 @@
       .large-3.columns
         = f.hidden_field :operation_type, value: :income
         = f.number_field :amount, label: 'Сумма'
+      .large-3.columns
+        = f.select :dept_id, options_from_collection_for_select(Dept.order(:name), :id, :name), \
+          include_blank: true, label: 'Подразделение'
       .large-6.columns
         = f.text_area :memo, label: 'Примечание'
 

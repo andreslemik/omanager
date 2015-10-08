@@ -3,7 +3,13 @@
     legend Новая операция
     = render('shared/form_errors', model: @account) if @account.errors.any?
     = f.text_field :operation_date, label: 'Дата операции', class: 'datepicker'
-    = f.select :operation_type, Account.operation_types.map { |k,v| [I18n.t(k), k.to_sym] }, include_blank: true, label: 'Тип операции'
+    .row
+      .large-6.columns
+        = f.select :operation_type, Account.operation_types.map { |k,v| [I18n.t(k), k.to_sym] }, \
+          include_blank: true, label: 'Тип операции'
+      .large-6.columns
+        = f.select :dept_id, Dept.order(:name).pluck(:name, :id), include_blank: true, \
+          label: 'Подразделение'
     = f.number_field :amount, label: 'Сумма'
     = f.text_area :memo, label: 'Описание'
 

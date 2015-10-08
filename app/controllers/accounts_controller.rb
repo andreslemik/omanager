@@ -77,6 +77,6 @@ class AccountsController < ApplicationController
 
   def account_params
     params.require(:account)
-      .permit(:operation_type, :operation_date, :amount, :memo)
+      .permit(:operation_type, :operation_date, :amount, :memo, :dept_id)
   end
 end

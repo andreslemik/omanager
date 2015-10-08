@@ -110,5 +110,5 @@
                 tr.total-row
                   td(colspan="2")
                   td.text-right = number_to_currency(@order.income_total, precision: 0, unit: '')
-          #account_form.reveal-modal.small(data-reveal='' role='dialog')
+          #account_form.reveal-modal.medium(data-reveal='' role='dialog')
             = render 'account_form'

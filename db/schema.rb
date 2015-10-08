@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151001132334) do
+ActiveRecord::Schema.define(version: 20151008174540) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,10 +27,12 @@ ActiveRecord::Schema.define(version: 20151001132334) do
     t.datetime "updated_at",                               null: false
     t.text     "memo"
     t.integer  "order_id"
+    t.integer  "dept_id"
   end
 
   add_index "accounts", ["accountable_type", "accountable_id"], name: "index_accounts_on_accountable_type_and_accountable_id", using: :btree
   add_index "accounts", ["deleted_at"], name: "index_accounts_on_deleted_at", using: :btree
+  add_index "accounts", ["dept_id"], name: "index_accounts_on_dept_id", using: :btree
   add_index "accounts", ["operation_date"], name: "index_accounts_on_operation_date", using: :btree
   add_index "accounts", ["operation_type"], name: "index_accounts_on_operation_type", using: :btree
   add_index "accounts", ["order_id"], name: "index_accounts_on_order_id", using: :btree
@@ -287,6 +289,7 @@ ActiveRecord::Schema.define(version: 20151001132334) do
   add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
   add_index "versions", ["transaction_id"], name: "index_versions_on_transaction_id", using: :btree
 
+  add_foreign_key "accounts", "depts"
   add_foreign_key "accounts", "orders"
   add_foreign_key "instalments", "orders"
   add_foreign_key "option_values", "option_types"

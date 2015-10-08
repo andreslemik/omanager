@@ -7,12 +7,15 @@ h2 Изменение операции
           .large-12.columns
             = render 'shared/form_errors', model: @account
       .row
-        .large-4.columns
+        .large-3.columns
           = f.text_field :operation_date, label: 'Дата операции', class: 'datepicker', value: l(@account.operation_date)
-        .large-4.columns
+        .large-3.columns
           = f.select :operation_type, Account.operation_types.map { |k, v| [I18n.t(k), k.to_sym] }, include_blank: true, label: 'Тип операции'
-        .large-4.columns
+        .large-3.columns
           = f.number_field :amount, label: 'Сумма'
+        .large-3.columns
+          = f.select :dept_id, Dept.order(:name).pluck(:name, :id), include_blank: true, \
+            label: 'Подразделение'
       = f.text_area :memo, label: 'Описание'
 
       = f.submit 'Сохранить'
