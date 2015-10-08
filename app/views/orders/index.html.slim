@@ -28,6 +28,11 @@ h2 = @title
           = f.text_field :products_name_or_categories_name_cont, \
             placeholder: 'Изделия содержат...'
       .row
+        large-12.columns
+          = f.label :client_or_partner_name_cont, 'Клиент (ФИО, название)'
+          = f.text_field :client_or_partner_name_cont, \
+            placeholder: 'Клиент (ФИО, название)...'
+      .row
         .large-12.columns
           = f.label :order_items_additionals_cont, 'Ткань содержит'
           = f.text_field :order_items_additionals_cont, placeholder: 'Ткань содержит...'
