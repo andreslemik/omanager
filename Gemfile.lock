@@ -36,9 +36,9 @@ GIT
 
 GIT
   remote: git://github.com/zurb/foundation-rails.git
-  revision: a709f2e60f8428c979397cbaedc19077be1a8cf5
+  revision: acda9fc3c7f92cf6ddb4a59c6315d24feb225244
   specs:
-    foundation-rails (5.5.2.1)
+    foundation-rails (5.5.3.1)
       railties (>= 3.1.0)
       sass (>= 3.3.0, < 3.5)
 
@@ -357,7 +357,7 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
-    selenium-webdriver (2.47.1)
+    selenium-webdriver (2.48.0)
       childprocess (~> 0.5)
       multi_json (~> 1.0)
       rubyzip (~> 1.0)
