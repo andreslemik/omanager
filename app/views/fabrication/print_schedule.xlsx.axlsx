@@ -25,7 +25,7 @@ wb.styles do |s|
                   style: header_cell
     @items.each do |item|
       sheet.add_row [item.id, item.fabrication_date,
-                     item.order.order_type_s,
+                     item.order.decorate.order_type_s,
                      "#{item.product.name} (#{item.product.category.name})",
                      item.additional,
                      item.product_options],

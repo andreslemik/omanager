@@ -9,7 +9,7 @@ module OrdersHelper
   end
 
   def link_to_order(order)
-    link_to order.dog_num_s, order_path(order)
+    link_to order.decorate.dog_num_s, order_path(order)
   end
 
 end

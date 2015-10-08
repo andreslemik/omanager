@@ -27,7 +27,7 @@
             td = item.order.area
             td = item.order.address
             td #{item.order.phone} (#{item.client_name})
-            td = item.order.order_type_s
+            td = item.order.decorate.order_type_s
             td #{item.product.name} (#{item.product.category.name})
             td = link_to ficon(:calendar, :large), edit_delivery_path(item)
     = paginate @items

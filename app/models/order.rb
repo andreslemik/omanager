@@ -63,28 +63,13 @@ class Order < ActiveRecord::Base
     Dept.unscoped { super }
   end
 
-  def retail?
-    return true if order_type == 'retail'
-    false
-  end
-
-  def dealer?
-    return true if order_type == 'dealer'
-    false
-  end
-
-  def order_type_s
-    # short order_type
-    case order_type
-    when 'retail'
-      return 'ЧЗ'
-    when 'dealer'
-      return "ДЗ: #{partner.name}"
-    when 'internal'
-      return 'ВН'
+  # define methods by order_types (retail?, dealer?, internal?)
+  Order.order_types.keys.each do |key|
+    define_method("#{key}?".to_sym) do
+      return true if order_type == key
+      false
     end
   end
-
 
   def total
     order_items.map(&:subtotal).sum

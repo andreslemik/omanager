@@ -18,4 +18,15 @@ class OrderDecorator < ApplicationDecorator
   def dog_num_s
     dog_num.blank? ? 'б/н' : dog_num
   end
+  def order_type_s
+    # short order_type
+    case order_type
+      when 'retail'
+        return 'ЧЗ'
+      when 'dealer'
+        return "ДЗ: #{partner.name}"
+      when 'internal'
+        return 'ВН'
+    end
+  end
 end
