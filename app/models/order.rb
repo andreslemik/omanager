@@ -88,16 +88,11 @@ class Order < ActiveRecord::Base
     partner.name
   end
 
-  def all_items_pending?
-    order_items.to_fabrication.pluck(:aasm_state).all? { |s| s == 'pending' }
-  end
-
-  def all_items_ready?
-    order_items.to_fabrication.pluck(:aasm_state).all? { |s| s == 'ready' }
-  end
-
-  def all_items_done?
-    order_items.to_fabrication.pluck(:aasm_state).all? { |s| s == 'done' }
+  # define methods to determine if all fabrication order_items have some state
+  OrderItem.aasm.states.each do |state|
+    define_method "all_items_#{state.name}?".to_sym do
+      order_items.to_fabrication.pluck(:aasm_state).all? { |s| s == state.name }
+    end
   end
 
   def accounting_done?
@@ -122,11 +117,13 @@ class Order < ActiveRecord::Base
   end
 
   def balance_on(date)
-    return 0 if (total - income_total) == 0 || !retail?
     operations_balance = operations.expense.summary - operations.income.summary
-    return operations_balance unless instalments.any?
-    inst_after = instalments.after_date(date).summary
-    operations_balance - inst_after
+    if instalments.any?
+      inst_after = instalments.after_date(date).summary
+      operations_balance - inst_after
+    else
+      operations_balance
+    end
   end
 
   ransacker :registered do |_parent|
@@ -151,7 +148,8 @@ class Order < ActiveRecord::Base
       transitions from: :working, to: :ready, guard: :all_items_ready?
     end
     event :done do
-      transitions from: :ready, to: :done, guard: [:all_items_done?, :accounting_done?]
+      transitions from: :ready, to: :done, guard: [:all_items_done?,
+                                                   :accounting_done?]
     end
     event :cancel do
       transitions from: [:pending, :working], to: :canceled
