@@ -2,6 +2,7 @@ FactoryGirl.define do
   factory :account do
     amount { Faker::Number.number 4 }
     operation_date { Faker::Date.between 6.months.ago, Date.today }
+    dept
 
     trait :partner_operation do
       association :accountable, factory: [:partner, :customer]
