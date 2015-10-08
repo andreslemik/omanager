@@ -33,6 +33,7 @@ class OrdersController < ApplicationController
   def show
     session[:back] ||= request.referer
     @account = Account.new
+    @title = @order.to_s
   end
 
   def edit
@@ -82,7 +83,8 @@ class OrdersController < ApplicationController
   private
 
   def set_order
-    @order = Order.unscoped.find params[:id]
+    source = Order.unscoped.find params[:id]
+    @order = OrderDecorator.decorate source
   end
 
   def order_params

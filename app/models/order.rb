@@ -55,10 +55,6 @@ class Order < ActiveRecord::Base
     scope s, -> { where aasm_state: s }
   end
 
-  def to_s
-    "Договор №#{dog_num.blank? ? 'б/н' : dog_num} от #{I18n.l order_date}"
-  end
-
   def author
     User.unscoped { super }
   end
@@ -99,16 +95,11 @@ class Order < ActiveRecord::Base
   end
 
   def instalments_total
-    instalments.map(&:amount).sum
+    instalments.summary
   end
 
   def income_total
-    operations.income.map(&:amount).sum
-  end
-
-  def items_names
-    order_items.map { |oi| "#{oi.product.name} (#{oi.product.category.name})" }
-      .join(', ')
+    operations.income.summary
   end
 
   def partner_name

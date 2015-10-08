@@ -8,4 +8,11 @@ class OrderDecorator < ApplicationDecorator
                            precision: 0, unit: '')
     end
   end
+  def items_names
+    order_items.map { |oi| "#{oi.product.name} (#{oi.product.category.name})" }
+        .join(', ')
+  end
+  def to_s
+    "Договор №#{dog_num.blank? ? 'б/н' : dog_num} от #{I18n.l order_date}"
+  end
 end
