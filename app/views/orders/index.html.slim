@@ -68,6 +68,6 @@ h2 = @title
             td = l(o.order_date)
             td = o.aasm.human_state
             td = t o.order_type
-            td.text-right = number_to_currency(o.balance_on(Date.today), precision: 0, unit: '')
+            td.text-right = o.decorate.balance
             td.show-for-large-only = o.memo
 

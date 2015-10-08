@@ -10,7 +10,10 @@ class OrdersController < ApplicationController
   def index
     @q = Order.without_internals.ransack(params[:q])
     @orders_total = Order.without_internals.size
-    @orders = @q.result(distinct: true).includes(:dept, :author, :products, :categories).order(order_date: :desc).page(params[:page])
+    source = @q.result(distinct: true)
+             .includes(:dept, :author, :products, :categories)
+             .order(order_date: :desc).page(params[:page])
+    @orders = OrderDecorator.decorate_collection(source)
     @title = 'Список договоров'
     @path = orders_path
   end
@@ -18,7 +21,10 @@ class OrdersController < ApplicationController
   def internals
     @q = Order.internals.ransack(params[:q])
     @orders_total = Order.internals.size
-    @orders = @q.result(distinct: true).includes(:dept, :author, :products, :categories).order(order_date: :desc).page(params[:page])
+    source = @q.result(distinct: true)
+              .includes(:dept, :author, :products, :categories)
+              .order(order_date: :desc).page(params[:page])
+    @orders = OrderDecorator.decorate_collection(source)
     @title = 'Внутренние заказы'
     @path = internals_orders_path
     render :index
@@ -68,7 +74,7 @@ class OrdersController < ApplicationController
       if @order.destroy
         f.html { redirect_to orders_url, notice: 'Договор удалён' }
       else
-        f.html { render :edit, notice: 'Невозможно удалить договор'}
+        f.html { render :edit, notice: 'Невозможно удалить договор' }
       end
     end
   end
