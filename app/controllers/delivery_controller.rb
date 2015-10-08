@@ -8,6 +8,7 @@ class DeliveryController < ApplicationController
     source = OrderItem.ready
              .by_desired_date
              .includes(:order, :product)
+             .order('orders.dog_num asc, orders.area asc')
              .page(params[:page])
     @items = OrderItemDecorator.decorate_collection source
   end
@@ -45,7 +46,8 @@ class DeliveryController < ApplicationController
     respond_to do |format|
       format.xlsx do
         response.headers['Content-Disposition'] = \
-          'attachment; filename = "Доставка на ' << @date.strftime('%d-%m-%Y') << '.xlsx"'
+          'attachment; filename = "Доставка на ' << \
+          @date.strftime('%d-%m-%Y') << '.xlsx"'
       end
     end
   end
