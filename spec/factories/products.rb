@@ -2,7 +2,7 @@ FactoryGirl.define do
   factory :product do
     name { "#{Faker::Commerce.product_name} #{rand(100_000)}" }
     category
-    association :manufacturer, factory: [:partner, :supplier]
+    association :manufacturer, factory: [:partner, :supplier, :own]
     price 10_000
     margin 25
 
