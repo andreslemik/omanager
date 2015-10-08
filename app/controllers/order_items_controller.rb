@@ -5,7 +5,10 @@ class OrderItemsController < ApplicationController
   def index
     @title = 'Архив изделий'
     @q = OrderItem.to_fabrication.ransack(params[:q])
-    @order_items = @q.result(distinct: true).order(id: :desc, order_id: :asc).page(params[:page])
+    source = @q.result(distinct: true)
+                       .order(id: :desc, order_id: :asc)
+                       .page(params[:page])
+    @order_items = OrderItemDecorator.decorate_collection(source)
   end
 
   def new
@@ -53,7 +56,7 @@ class OrderItemsController < ApplicationController
   end
 
   def set_order_item
-    @order_item = OrderItem.find params[:id]
+    @order_item = OrderItem.find(params[:id]).decorate
   end
 
   def set_order

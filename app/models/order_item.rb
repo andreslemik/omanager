@@ -43,34 +43,12 @@ class OrderItem < ActiveRecord::Base
   after_save :change_state, if: :fabrication_date_changed?
   after_save :delivery_state, if: :delivery_date_changed?
 
-  def to_s
-    "Позиция заказа №#{order.dog_num} от #{I18n.l order.order_date}"
-  end
-
   def option_values=(val)
     self[:option_values] = val.map(&:to_i)
   end
 
-  def additional
-    [descr_basis, descr_assort, special_notes].join ' / '
-  end
-
-  def product_options
-    return '' if option_values.blank?
-    result = []
-    ov = OptionValue.where(id: option_values)
-    ov.map { |v| "#{v.option_type}: #{v.name}" }
-    result.join(', ')
-  end
-
-  def client_name
-    return order.partner.name if order.dealer?
-    return 'Внутренний' if order.order_type == 'internal'
-    order.client
-  end
-
   def retail
-    return 1 if order.order_type == 'retail'
+    return 1 if order.retail?
     0
   end
 

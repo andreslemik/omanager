@@ -33,7 +33,7 @@ RSpec.describe OrderItemsController, type: :controller do
     let(:order) { FactoryGirl.create :order }
     login_as :manager
     it 'update order_item with valid attributes' do
-      oi = order.order_items.first
+      oi = order.order_items.first.decorate
       post :update, id: oi, order_item: { descr_basis: 'A', descr_assort: 'B', special_notes: 'C' }
       oi.reload
       expect(oi.additional).to eq('A / B / C')

@@ -4,12 +4,13 @@ class FabricationController < ApplicationController
   before_action :working_items, only: [:schedule, :edit]
   def index
     @title = 'Поставить в очередь'
-    @items = OrderItem.pending
+    source = OrderItem.pending
              .to_fabrication
              .own_supplier
              .by_desired_date
              .includes(:order, :product)
              .page(params[:page])
+    @items = OrderItemDecorator.decorate_collection(source)
   end
 
   def edit
@@ -40,14 +41,16 @@ class FabricationController < ApplicationController
   end
 
   def to_order
-    @items = OrderItem.to_order
+    source = OrderItem.to_order
              .joins(:product)
              .order('partners.name', 'products.name')
              .page(params[:page])
+    @items = OrderItemDecorator.decorate_collection source
   end
 
   def print_schedule
-    @items = OrderItem.working.order(:fabrication_date, :id)
+    source = OrderItem.working.order(:fabrication_date, :id)
+    @items = OrderItemDecorator.decorate_collection source
     respond_to do |format|
       format.xlsx do
         response.headers['Content-Disposition'] = 'attachment; filename="График производства.xlsx"'
@@ -57,8 +60,9 @@ class FabricationController < ApplicationController
 
   def print_orders
     manufacturer = Partner.find(params[:manufacturer_id])
-    @items = OrderItem.to_order
+    source = OrderItem.to_order
              .where('partners.id = ?', manufacturer.id)
+    @items = OrderItemDecorator.decorate_collection source
     respond_to do |format|
       format.xlsx do
         response.headers['Content-Disposition'] = \
@@ -74,9 +78,10 @@ class FabricationController < ApplicationController
   end
 
   def working_items
-    @items = OrderItem.working
+    source = OrderItem.working
              .includes(:order, :product)
              .order(:fabrication_date, :id)
+    @items = OrderItemDecorator.decorate_collection(source)
   end
 
   def item_params

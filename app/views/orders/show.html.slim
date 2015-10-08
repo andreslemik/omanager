@@ -62,7 +62,7 @@
               th Сумма
               th Статус
           tbody
-            - @order.order_items.each do |oi|
+            - @order.order_items.each do |oi.decorate|
               tr
                 td = oi.id
                 td = oi.product.long_name
