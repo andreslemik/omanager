@@ -11,7 +11,7 @@
     table
       tr
         th Номер
-        td #{@order.dog_num}
+        td #{@order.dog_num_s}
       tr
         th Дата
         td #{I18n.l(@order.order_date) unless @order.order_date.blank? }
@@ -62,12 +62,12 @@
               th Сумма
               th Статус
           tbody
-            - @order.order_items.each do |oi.decorate|
+            - @order.order_items.each do |oi|
               tr
                 td = oi.id
                 td = oi.product.long_name
-                td = oi.additional
-                td = oi.product_options
+                td = oi.decorate.additional
+                td = oi.decorate.product_options
                 td.text-right = number_to_currency oi.cost, precision: 0
                 td.text-center = oi.amount
                 td.text-right = number_to_currency oi.subtotal, precision: 0

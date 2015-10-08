@@ -3,6 +3,7 @@ module OrdersHelper
     result = ''
     order.order_items.to_fabrication.each do |oi|
       result << content_tag(:span, oi.product.name, title: oi.product.category.name)
+      result << '(' << content_tag(:span, oi.decorate.additional) << ')'
       result << '<br />' unless oi == order.order_items.last
     end
     result

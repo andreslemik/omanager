@@ -14,11 +14,16 @@ class OrderDecorator < ApplicationDecorator
       .join(', ')
   end
 
+  def items_ids
+    order_items.map(&:id).join(', ')
+  end
+
   def to_s
     "Договор №#{dog_num_s} от #{I18n.l order_date}"
   end
 
   def dog_num_s
+    return "[#{items_ids}]" if internal?
     dog_num.blank? ? 'б/н' : dog_num
   end
 
