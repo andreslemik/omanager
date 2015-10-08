@@ -17,10 +17,13 @@
         td #{I18n.l(@order.order_date) unless @order.order_date.blank? }
       tr
         th Сумма догвора
-        td #{number_to_currency @order.total, precision: 0}
+        td = @order.total_summ
       tr
         th Баланс
-        td #{number_to_currency @order.balance_on(Date.today), precision: 0}
+        td = @order.balance
+      tr
+        th Текущая задолженность
+        td = @order.formatted_balance_at(Time.now)
       tr
         th Статус
         td #{@order.aasm.human_state}

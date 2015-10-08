@@ -3,10 +3,15 @@ class OrderDecorator < ApplicationDecorator
   delegate_all
 
   def balance
+    return '-' unless retail?
     h.content_tag :span, class: 'balance' do
       h.number_to_currency(object.total - object.income_total,
                            precision: 0, unit: '')
     end
+  end
+
+  def total_summ
+    h.number_to_currency(object.total, precision: 0, unit: '')
   end
 
   def items_names
@@ -20,6 +25,10 @@ class OrderDecorator < ApplicationDecorator
 
   def to_s
     "Договор №#{dog_num_s} от #{I18n.l order_date}"
+  end
+
+  def formatted_balance_at(date)
+    h.number_to_currency(balance_at(date), precision: 0, unit: '')
   end
 
   def dog_num_s

@@ -114,7 +114,7 @@ class Order < ActiveRecord::Base
     end
   end
 
-  def balance_on(date)
+  def balance_at(date)
     return 0 unless :retail?
     operations_balance = operations.expense.summary - operations.income.summary
     if instalments.any?
