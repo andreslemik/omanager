@@ -1,6 +1,6 @@
 # Delivery controller
 class DeliveryController < ApplicationController
-  before_action :set_order_item, only: [:edit, :update, :well_done]
+  before_action :set_order_item, only: [:edit, :update, :well_done, :well_done_form]
   before_action :scheduled_items, only: [:schedule, :edit]
 
   def index
@@ -34,9 +34,18 @@ class DeliveryController < ApplicationController
     end
   end
 
+  def well_done_form
+  end
+
   def well_done
-    @order_item.well_done!
-    redirect_to schedule_delivery_index_path
+    respond_to do |f|
+      if @order_item.update(done_params)
+        @order_item.well_done!
+        f.html {redirect_to schedule_delivery_index_path, notice: 'Выполнено'}
+      else
+        f.html { render :schedule }
+      end
+    end
   end
 
   def print_schedule
@@ -60,6 +69,10 @@ class DeliveryController < ApplicationController
 
   def item_params
     params.require(:order_item).permit(:delivery_date)
+  end
+
+  def done_params
+    params.require(:order_item).permit(:delivery_cost)
   end
 
   def scheduled_items

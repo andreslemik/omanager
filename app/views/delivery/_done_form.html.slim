@@ -1,0 +1,4 @@
+= form_for @order_item, url: well_done_delivery_path do |f|
+  = f.text_field :delivery_cost
+  = f.submit 'Готово'
+  = link_to 'Отмена', '', class: 'button secondary small close-modal'

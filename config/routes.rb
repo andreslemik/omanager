@@ -33,6 +33,8 @@ Rails.application.routes.draw do
         action: :print_schedule, defaults: { format: 'xlsx' },
         as: :print_schedule
     put :well_done, on: :member
+    patch :well_done, on: :member
+    get :well_done_form, on: :member, delaults: { format: 'js' }
   end
 
   scope :products do

@@ -39,9 +39,12 @@ class OrderItem < ActiveRecord::Base
       .where(aasm_state: :pending)
   }
 
+  attr_accessor :done_check
+
   after_save :update_order
   after_save :change_state, if: :fabrication_date_changed?
   after_save :delivery_state, if: :delivery_date_changed?
+  after_save :delivery_done, if: :done_checked?
 
   def option_values=(val)
     self[:option_values] = val.map(&:to_i)
@@ -50,6 +53,11 @@ class OrderItem < ActiveRecord::Base
   def retail
     return 1 if order.retail?
     0
+  end
+
+  def done_checked?
+    return true if @done_check == '1'
+    false
   end
 
   def subtotal
@@ -117,5 +125,9 @@ class OrderItem < ActiveRecord::Base
   def delivery_state
     return if delivery_date.blank?
     self.to_delivery! if aasm_state == 'ready'
+  end
+
+  def delivery_done
+    self.well_done!
   end
 end
