@@ -1,6 +1,7 @@
 # Delivery controller
 class DeliveryController < ApplicationController
-  before_action :set_order_item, only: [:edit, :update, :well_done, :well_done_form]
+  before_action :set_order_item, only: [:edit, :update,
+                                        :well_done, :well_done_form]
   before_action :scheduled_items, only: [:schedule, :edit]
 
   def index
@@ -40,8 +41,9 @@ class DeliveryController < ApplicationController
   def well_done
     respond_to do |f|
       if @order_item.update(done_params)
-        @order_item.well_done!
-        f.html {redirect_to schedule_delivery_index_path, notice: 'Выполнено'}
+        @order_item.well_done! if @order_item.order.internal?
+        @order_item.to_customer! unless @order_item.order.internal?
+        f.html { redirect_to schedule_delivery_index_path, notice: 'Выполнено' }
       else
         f.html { render :schedule }
       end

@@ -17,6 +17,7 @@ ru:
           ready: Готов
           delivery: На доставке
           done: Доставлен
+          customer: У покупателя
         delivery_date: Дата доставки
         fabrication_date: Дата производства
         delivery_cost: Стоимость доставки

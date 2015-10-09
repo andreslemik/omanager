@@ -70,6 +70,7 @@ class OrderItem < ActiveRecord::Base
     state :ready
     state :delivery
     state :done
+    state :customer
 
     event :work do
       after do
@@ -91,7 +92,7 @@ class OrderItem < ActiveRecord::Base
       end
     end
     event :to_delivery do
-      transitions from: :ready, to: :delivery
+      transitions from: [:ready, :done], to: :delivery
     end
     event :undo_delivery do
       after_commit do
@@ -101,6 +102,9 @@ class OrderItem < ActiveRecord::Base
     end
     event :well_done do
       transitions from: :delivery, to: :done
+    end
+    event :to_customer do
+      transitions from: :delivery, to: :customer
     end
   end
 
