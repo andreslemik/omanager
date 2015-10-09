@@ -72,7 +72,7 @@ class DeliveryController < ApplicationController
   end
 
   def done_params
-    params.require(:order_item).permit(:delivery_cost)
+    params.require(:order_item).permit(:delivery_cost, :dept_id)
   end
 
   def scheduled_items

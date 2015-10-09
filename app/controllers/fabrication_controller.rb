@@ -74,7 +74,7 @@ class FabricationController < ApplicationController
   private
 
   def set_order_item
-    @order_item = OrderItem.find params[:id]
+    @order_item = OrderItem.find(params[:id]).decorate
   end
 
   def working_items

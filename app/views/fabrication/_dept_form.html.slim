@@ -1,4 +1,4 @@
-= form_for @order_item, url: fabrication_path(@order_item) do |f|
+= form_for @order_item, url: fabrication_url(@order_item) do |f|
   = f.select :dept_id, Dept.order(:name).pluck(:name, :id), include_blank: true, label: 'Место хранения'
   = f.submit 'Готово', data: {id: @order_item.id}, id: 'item-get-ready'
   = link_to 'Отмена', '', class: 'button secondary small close-modal'
