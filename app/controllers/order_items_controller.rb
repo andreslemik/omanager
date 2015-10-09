@@ -1,6 +1,7 @@
 class OrderItemsController < ApplicationController
   before_action :set_order_item, only: [:edit, :update]
   before_action :set_order, only: [:new, :create]
+  before_action only: [:index] { get_query('search_order_items') }
 
   def index
     @title = 'Архив изделий'

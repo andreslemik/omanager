@@ -37,4 +37,4 @@
     .row
       .columns
         = f.submit 'Найти', class: 'button tiny'
-        = link_to 'Очистить', order_items_path, class: 'button tiny secondary'
+        = link_to 'Очистить', order_items_path(clear: true), class: 'button tiny secondary'

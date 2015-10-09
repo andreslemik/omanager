@@ -11,6 +11,12 @@ class ApplicationController < ActionController::Base
     Rails.logger.error("Redirected by #{caller(1).first rescue 'unknown'}")
   end
 
+  def get_query(cookie_key)
+    cookies.delete(cookie_key) if params[:clear]
+    cookies[cookie_key] = params[:q].to_json if params[:q]
+    @query = params[:q].presence || JSON.load(cookies[cookie_key])
+  end
+
   protected
 
   def configure_permitted_params
