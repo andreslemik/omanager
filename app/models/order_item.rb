@@ -101,9 +101,6 @@ class OrderItem < ActiveRecord::Base
     end
     event :well_done do
       transitions from: :delivery, to: :done
-      after_commit do
-        order.done! if order.aasm_state == 'ready'
-      end
     end
   end
 
