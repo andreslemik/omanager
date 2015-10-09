@@ -76,15 +76,18 @@
                   = ff.select :product_id, [], {}, { class: 'products' }
               .row.additional(id="option_values_#{ff.index}")
               .row
-                .large-4.columns
+                .large-3.columns
                   = ff.label :descr_basis, 'Цвет основа'
                   = ff.text_area :descr_basis
-                .large-4.columns
+                .large-3.columns
                   = ff.label :descr_assort, 'Цвет подбор'
                   = ff.text_area :descr_assort
-                .large-4.columns
+                .large-3.columns
                   = ff.label :special_notes, 'Специальные отметки'
                   = ff.text_area :special_notes
+                .large-3.columns
+                  = ff.label :memo, 'Примечание'
+                  = ff.text_area :memo
               .row
                 .large-2.columns
                   = ff.label :cost, 'Цена'

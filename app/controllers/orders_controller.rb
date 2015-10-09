@@ -94,6 +94,7 @@ class OrdersController < ApplicationController
                                   order_items_attributes: [:id, :product_id, :amount, :cost, :_destroy,
                                                            :delivery_cost, :lift_cost, :install_cost,
                                                            :descr_basis, :descr_assort, :special_notes,
+                                                           :memo,
                                                            option_values: []])
   end
 end
