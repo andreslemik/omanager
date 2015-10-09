@@ -10,9 +10,6 @@ FactoryGirl.define do
     address { Faker::Address.street_address }
     phone { Faker::PhoneNumber.cell_phone }
     area 'Новый город'
-    delivery_cost { Faker::Commerce.price }
-    lift_cost { Faker::Commerce.price }
-    install_cost { Faker::Commerce.price }
     order_type :retail
 
     trait :internal_order do

@@ -19,6 +19,9 @@ ru:
           done: Доставлен
         delivery_date: Дата доставки
         fabrication_date: Дата производства
+        delivery_cost: Доставка
+        lift_cost: Подъем
+        install_cost: Сборка
 
     models:
       order_item:

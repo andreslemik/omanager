@@ -11,9 +11,6 @@ ru:
         area: Район
         desired_date: 'Желаемая дата'
         order_items: 'Содержимое заказа'
-        delivery_cost: Доставка
-        lift_cost: Подъем
-        install_cost: Сборка
         aasm_state:
           pending: Ожидает
           working: Производство
