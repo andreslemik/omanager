@@ -21,14 +21,15 @@ ws.merge_cells 'A1:D1'
   ws.add_row
 end
 
-ws.add_row ['№', 'Название', 'Ткань', 'Параметры'], style: header_cell
+ws.add_row %w(№ Название Ткань Параметры Примечание), style: header_cell
 @items.each do |item|
   ws.add_row [item.id,
                  "#{item.product.name} (#{item.product.category.name})",
                  item.additional,
-                 item.product_options],
+                 item.product_options,
+             item.memo],
                 style: bordered_cell
   ws.rows.last.cells[0].style = centered_cell
 end
 
-ws.column_widths 10, 40, 40, 40
+ws.column_widths 10, 40, 40, 20, 30

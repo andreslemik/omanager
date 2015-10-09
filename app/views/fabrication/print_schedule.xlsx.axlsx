@@ -20,20 +20,21 @@ wb.styles do |s|
     sheet.merge_cells 'A1:F1'
     sheet.add_row
 
-    sheet.add_row ['№ цех', 'Дата готовности (примерно)',
-                   'Тип договора', 'Название', 'Ткань', 'Параметры'],
+    sheet.add_row %w(№\ цех Дата\ готовности\ (примерно) Тип\ договора Название
+      Ткань Параметры Примечание),
                   style: header_cell
     @items.each do |item|
       sheet.add_row [item.id, item.fabrication_date,
                      item.order.decorate.order_type_s,
                      "#{item.product.name} (#{item.product.category.name})",
                      item.additional,
-                     item.product_options],
+                     item.product_options,
+                     item.memo],
                     style: bordered_cell, width: [:auto, 12, 10, 40, 40, :auto]
       sheet.rows.last.cells[0].style = centered_cell
       sheet.rows.last.cells[1].style = date_time
       sheet.rows.last.cells[2].style = centered_cell
     end
-    sheet.column_widths 10, 12, 10, 40, 40, 40
+    sheet.column_widths 10, 12, 10, 30, 30, 30, 20
   end
 end

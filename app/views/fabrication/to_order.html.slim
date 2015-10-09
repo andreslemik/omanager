@@ -16,6 +16,7 @@
               th Изделие
               th Ткань
               th Параметры
+              th Примечение
               th
           tbody
             - @items.each do |item|
@@ -25,6 +26,7 @@
                 td = "#{item.product.name} (#{item.product.category.name})"
                 td = item.additional
                 td = item.product_options
+                td = item.memo
                 td = link_to 'Готово', set_dept_fabrication_path(item), class: 'button tiny secondary', \
                                      remote: true
         = paginate @items

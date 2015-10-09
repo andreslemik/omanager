@@ -9,6 +9,7 @@
         th.text-center(width='20%') Название
         th.text-center(width='30%') Ткань
         th.text-center(width='20%') Параметры
+        th.text-center Примечание
         th
     tbody
       - items.each do |item|
@@ -19,6 +20,7 @@
           td = "#{item.product.name} (#{item.product.category.name})"
           td = item.additional
           td = item.product_options
+          td = item.memo
           td = link_to 'Готово', set_dept_fabrication_path(item), \
             class: 'button tiny secondary get-ready',  \
             remote: true
