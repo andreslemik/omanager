@@ -22,6 +22,7 @@ ru:
         delivery_cost: Стоимость доставки
         lift_cost: Стоимость подъема
         install_cost: Стоимость сборки
+        memo: Примечание
 
     models:
       order_item:

@@ -5,6 +5,7 @@ tr(data-id="#{oi.id}" data-del="0")
   td = oi.product.try(:long_name)
   td = oi.additional
   td = oi.product_options
+  td = oi.memo
   td.text-right = number_to_currency oi.cost, precision: 0
   td.text-center = oi.amount
   td.text-right = number_to_currency oi.subtotal, precision: 0
