@@ -6,8 +6,8 @@ class OrderItemsController < ApplicationController
     @title = 'Архив изделий'
     @q = OrderItem.to_fabrication.ransack(params[:q])
     source = @q.result(distinct: true)
-                       .order(id: :desc, order_id: :asc)
-                       .page(params[:page])
+             .order(id: :desc, order_id: :asc)
+             .page(params[:page])
     @order_items = OrderItemDecorator.decorate_collection(source)
   end
 
@@ -23,7 +23,7 @@ class OrderItemsController < ApplicationController
     @manufacturers = Partner.joins(:products).where('products.manufacturer_id IN (?)',
                                                     @order_item.product.manufacturer_id).uniq
     @products = Product.where(category: @order_item.product.category)
-                    .where(manufacturer: @order_item.product.manufacturer)
+                .where(manufacturer: @order_item.product.manufacturer)
   end
 
   def update
@@ -39,12 +39,12 @@ class OrderItemsController < ApplicationController
   end
 
   def create
-   @order_item = @order.order_items.build(item_params)
-   if @order_item.save
-     redirect_to edit_order_path(@order), notice: 'Позиция заказа добавлена'
-   else
-     render action: 'new'
-   end
+    @order_item = @order.order_items.build(item_params)
+    if @order_item.save
+      redirect_to edit_order_path(@order), notice: 'Позиция заказа добавлена'
+    else
+      render action: 'new'
+    end
   end
 
   private
@@ -52,6 +52,7 @@ class OrderItemsController < ApplicationController
   def item_params
     params.require(:order_item).permit(:id, :product_id, :amount, :cost, :_destroy,
                                        :descr_basis, :descr_assort, :special_notes,
+                                       :delivery_cost, :lift_cost, :install_cost,
                                        option_values: [])
   end
 

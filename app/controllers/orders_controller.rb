@@ -92,6 +92,7 @@ class OrdersController < ApplicationController
                                   :client, :phone, :address, :area, :partner_id, :retail_client,
                                   :desired_date,
                                   order_items_attributes: [:id, :product_id, :amount, :cost, :_destroy,
+                                                           :delivery_cost, :lift_cost, :install_cost,
                                                            :descr_basis, :descr_assort, :special_notes,
                                                            option_values: []])
   end
