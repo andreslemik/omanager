@@ -10,7 +10,9 @@ Rails.application.routes.draw do
     resources :instalments, shallow: true
   end
 
-  resources :order_items, only: [:index]
+  resources :order_items, only: [:index] do
+    get :edit_dept, on: :member
+  end
 
   resources :partners, only: [:index, :show]
   resources :accounts

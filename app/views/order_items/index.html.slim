@@ -1,6 +1,6 @@
 = render 'shared/title'
 
-.large-10.columns
+.large-10.columns#order-items
   = paginate @order_items
   table
     thead
@@ -38,3 +38,4 @@
       .columns
         = f.submit 'Найти', class: 'button tiny'
         = link_to 'Очистить', order_items_path(clear: true), class: 'button tiny secondary'
+#edit-dept-form.small.reveal-modal(data-reveal='' role='dialog')
