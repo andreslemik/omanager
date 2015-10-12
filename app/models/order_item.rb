@@ -111,6 +111,9 @@ class OrderItem < ActiveRecord::Base
     end
     event :to_customer do
       transitions from: :delivery, to: :customer
+      after_commit do
+        self.update_attribute(:dept_id, nil)
+      end
     end
   end
 

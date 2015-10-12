@@ -6,6 +6,6 @@ tr
   td = order_item.decorate.additional
   td = order_item.decorate.product_options
   td
-    = link_to order_item.dept.blank? ? ficon(:pencil, :small) : order_item.dept.try(:name), \
-    edit_dept_order_item_path(order_item), remote: true
+    = link_to(order_item.dept.blank? ? ficon(:pencil, :small) : order_item.dept.try(:name), \
+    edit_dept_order_item_path(order_item), remote: true) unless order_item.aasm_state == 'customer'
   td = order_item.aasm.human_state
