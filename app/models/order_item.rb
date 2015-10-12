@@ -80,7 +80,7 @@ class OrderItem < ActiveRecord::Base
 
     event :work do
       after do
-        order.work! if order.aasm_state == 'pending'
+        order.work! if order.aasm.current_state == :pending
       end
       transitions from: :pending, to: :working
     end
@@ -129,12 +129,12 @@ class OrderItem < ActiveRecord::Base
 
   def change_state
     return if fabrication_date.blank?
-    self.work! if aasm_state == 'pending'
+    self.work! if aasm.current_state == :pending
   end
 
   def delivery_state
     return if delivery_date.blank?
-    self.to_delivery! if aasm_state == 'ready'
+    self.to_delivery! if aasm.current_state == :ready
   end
 
   def delivery_done
