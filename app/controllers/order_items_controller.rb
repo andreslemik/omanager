@@ -20,15 +20,16 @@ class OrderItemsController < ApplicationController
   end
 
   def edit
+    session[:back_url] = request.referrer
     @categories = Category.joins(:products).group(:id)
     @manufacturers = Partner.joins(:products).where('products.manufacturer_id IN (?)',
                                                     @order_item.product.manufacturer_id).uniq
     @products = Product.where(category: @order_item.product.category)
                 .where(manufacturer: @order_item.product.manufacturer)
-  end
-
-  def edit_dept
-    session[:back_url] = request.referrer
+    respond_to do |format|
+      format.html { }
+      format.js { render 'order_items/edit_dept' }
+    end
   end
 
   def update
