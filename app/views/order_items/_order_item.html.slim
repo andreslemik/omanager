@@ -5,6 +5,7 @@ tr
   td #{order_item.product.name} (#{order_item.product.category.name})
   td = order_item.decorate.additional
   td = order_item.decorate.product_options
-  td == "#{link_to ficon(:pencil, :small), edit_dept_order_item_path(order_item), remote: true} \
-    #{order_item.dept.try(:name)}"
+  td
+    = link_to order_item.dept.blank? ? ficon(:pencil, :small) : order_item.dept.try(:name), \
+    edit_dept_order_item_path(order_item), remote: true
   td = order_item.aasm.human_state
