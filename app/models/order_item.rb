@@ -64,6 +64,12 @@ class OrderItem < ActiveRecord::Base
     amount.to_i * cost.to_f
   end
 
+  def dept_changes
+    versions.map(&:object_changes)
+      .map { |a| YAML.load a }
+      .select { |a| a.include? 'dept_id' }
+  end
+
   aasm do
     state :pending, initial: true
     state :working
