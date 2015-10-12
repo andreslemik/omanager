@@ -65,9 +65,9 @@ class OrderItem < ActiveRecord::Base
   end
 
   def dept_changes
-    versions.map(&:object_changes)
-      .map { |a| YAML.load a }
-      .select { |a| a.include? 'dept_id' }
+    versions.pluck(:object_changes, :id)
+      .map { |a, b| [YAML.load(a), b] }
+      .select { |a, b| a.include? 'dept_id' }
   end
 
   aasm do
