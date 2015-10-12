@@ -32,6 +32,10 @@
           Order.order_types.map { |k,v| [I18n.t(k), v] }, include_blank: true
     .row
       .columns
+        = f.label :dept_id_eq, 'Место хранения'
+        = f.select :dept_id_eq, Dept.order(:name).pluck(:name, :id), include_blank: true
+    .row
+      .columns
         = f.label :aasm_state_eq, 'Статус'
         = f.select :aasm_state_eq, OrderItem.aasm.states_for_select.sort, include_blank: true
     .row
