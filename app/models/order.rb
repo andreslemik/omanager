@@ -68,7 +68,7 @@ class Order < ActiveRecord::Base
   # define methods by order_types (retail?, dealer?, internal?)
   Order.order_types.keys.each do |key|
     define_method("#{key}?".to_sym) do
-      return true if order_type == key.to_s
+      return true if order_type == key.to_s || @order_type == key.to_s
       false
     end
   end

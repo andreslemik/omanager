@@ -74,7 +74,10 @@ class OrdersController < ApplicationController
       if @order.update(order_params)
         f.html { redirect_to @order, notice: 'Договор успешно изменен' }
       else
-        f.html { render :edit }
+        f.html do
+          action = @order.order_type_changed? ? :edit_type : :edit
+          render action
+        end
       end
     end
   end

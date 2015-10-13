@@ -1,4 +1,5 @@
 = render 'shared/title'
+= hidden_field_tag :url, edit_type_order_path(@order)
 #edit-type-form
   = render 'edit_type_form'
 = content_for :js do
