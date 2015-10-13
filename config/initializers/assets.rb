@@ -9,4 +9,4 @@ Rails.application.config.assets.version = '1.5'
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 # Rails.application.config.assets.precompile += %w( search.js )
-Rails.application.config.assets.precompile += %w( order.js order_items.js fabrication.js )
+Rails.application.config.assets.precompile += %w( order.js order_items.js fabrication.js order_type.js)

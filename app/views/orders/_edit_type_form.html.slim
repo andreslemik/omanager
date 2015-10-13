@@ -1,0 +1,49 @@
+= form_for @order do |f|
+  - if @order.errors.any?
+    .row
+      .large-12.columns
+        = render 'shared/form_errors', model: @order
+  .row
+    .columns
+      - Order.order_types.each do |k, v|
+        = f.radio_button :order_type, k, \
+          checked: k == @order_type, label: false
+        = f.label :order_type, I18n.t(k), value: k
+  .row
+    .columns#client_definition
+      - unless @order_type == 'internal'
+        fieldset
+          legend Реквизиты договора
+          .row
+            .large-2.columns.small-3
+              .row.collapse
+                = f.label :order_date, 'Дата договора*'
+                .small-9.columns
+                  = f.text_field :order_date, class: 'datepicker', \
+                    value: l(Date.current), placeholder: 'Дата договора', \
+                    label: false
+                .small-3.columns
+                  span.postfix = ficon :calendar, :large
+            .large-2.columns.small-3.end
+              = f.text_field :dog_num, placeholder: 'Номер договора'
+        fieldset
+          legend Заказчик
+          - if @order_type == 'retail'
+            .retail
+              .large-3.columns
+                = f.text_field :client
+              .large-3.columns
+                = f.text_field :phone
+              .large-4.columns
+                = f.text_field :address
+              .large-2.columns
+                = f.select :area, Order.areas.map { |k, v| [k, k] }, include_blank: true
+          - else
+            .corporate
+              .large-12.columns
+                = f.select :partner_id, \
+                  options_from_collection_for_select(Partner.customers, :id, :name, @order.partner_id), \
+                  {include_blank: true}
+  .row
+    .columns
+      = f.submit 'Сохранить'

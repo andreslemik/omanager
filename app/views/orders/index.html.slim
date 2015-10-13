@@ -77,7 +77,7 @@ h2 = @title
             td.text-center = link_to_order(o)
             td = l(o.order_date)
             td = o.aasm.human_state
-            td = t o.order_type
+            td = link_to t(o.order_type), edit_type_order_path(o)
             td.text-right = o.decorate.balance
             td.show-for-large-only = o.memo
 

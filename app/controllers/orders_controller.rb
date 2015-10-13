@@ -1,10 +1,11 @@
 # Order controller
 class OrdersController < ApplicationController
-  before_action :set_order, only: [:show, :edit, :update, :destroy]
+  before_action :set_order, only: [:show, :edit, :edit_type, :update, :destroy]
 
   unless Rails.env.test?
     authorize_actions_for Order
     authority_actions internals: 'read'
+    authority_actions edit_type: 'update'
   end
 
   def index
@@ -38,6 +39,16 @@ class OrdersController < ApplicationController
 
   def edit
     authorize_action_for(@order)
+  end
+
+  def edit_type
+    authorize_action_for(@order)
+    @title = 'Изменение типа договора'
+    @order_type = params[:order_type] || @order.order_type
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def new

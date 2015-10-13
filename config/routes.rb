@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   resources :orders do
     get :internals, on: :collection
+    get :edit_type, on: :member
     resources :order_items, shallow: true
     resources :instalments, shallow: true
   end

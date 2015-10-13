@@ -1,0 +1,5 @@
+= render 'shared/title'
+#edit-type-form
+  = render 'edit_type_form'
+= content_for :js do
+  = javascript_include_tag 'order_type', 'data-turbolinks-track' => true
