@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/activeadmin/activeadmin.git
-  revision: 6e47a747bc4fc6efb7e7ddf2b33be0a3c7c3c329
+  revision: 72709dc26fcee5a4c0d26a2f00ba34764a86752a
   specs:
     activeadmin (1.0.0.pre2)
       arbre (~> 1.0, >= 1.0.2)
@@ -36,9 +36,9 @@ GIT
 
 GIT
   remote: git://github.com/zurb/foundation-rails.git
-  revision: acda9fc3c7f92cf6ddb4a59c6315d24feb225244
+  revision: 649f360696d8c80e8ba4952fb1bbe7048a2fd04c
   specs:
-    foundation-rails (5.5.3.1)
+    foundation-rails (5.5.3.2)
       railties (>= 3.1.0)
       sass (>= 3.3.0, < 3.5)
 
@@ -114,7 +114,7 @@ GEM
       thor (~> 0.19)
     browser (1.0.1)
     builder (3.2.2)
-    bullet (4.14.7)
+    bullet (4.14.9)
       activesupport (>= 3.0.0)
       uniform_notifier (~> 1.9.0)
     byebug (6.0.2)
@@ -259,7 +259,7 @@ GEM
       mime-types (>= 1.16, < 3)
     method_source (0.8.2)
     mime-types (2.6.2)
-    mini_magick (4.3.5)
+    mini_magick (4.3.6)
     mini_portile (0.6.2)
     minitest (5.8.1)
     multi_json (1.11.2)
