@@ -2,5 +2,6 @@
 = hidden_field_tag :url, edit_type_order_path(@order)
 #edit-type-form
   = render 'edit_type_form'
+= link_to 'Отмена', session[:back], class: 'button tiny secondary'
 = content_for :js do
   = javascript_include_tag 'order_type', 'data-turbolinks-track' => true

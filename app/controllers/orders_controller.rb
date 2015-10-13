@@ -44,6 +44,7 @@ class OrdersController < ApplicationController
   def edit_type
     authorize_action_for(@order)
     @title = 'Изменение типа договора'
+    session[:back] = request.referrer
     @order_type = params[:order_type] || @order.order_type
     respond_to do |format|
       format.html
