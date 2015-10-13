@@ -44,6 +44,7 @@ class Order < ActiveRecord::Base
 
   after_save :update_accounts
   after_destroy :delete_accounts
+  before_save :clear_attributes
 
   scope :without_internals, lambda {
     where.not(order_type: \
@@ -166,14 +167,19 @@ class Order < ActiveRecord::Base
     end
     attrs = { amount: total, memo: decorate.to_s }
     attrs.merge!(operation_date: Time.now,
-                operation_type: :expense, amount: total,
-                memo: decorate.to_s,
-                order_id: id) if operation.new_record?
+                 operation_type: :expense, amount: total,
+                 memo: decorate.to_s,
+                 order_id: id) if operation.new_record?
     operation.attributes = attrs
     operation.save!
   end
 
   def delete_accounts
     Account.destroy_all(order_id: id)
+  end
+
+  def clear_attributes
+    self.partner_id = nil if retail? || internal?
+    self.client = self.address = self.phone = self.area = nil if internal? || dealer?
   end
 end
