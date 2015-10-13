@@ -60,6 +60,7 @@
               th Изделие
               th Описание
               th Опции
+              th Примечание
               th Цена
               th Кол-во
               th Сумма
@@ -71,6 +72,7 @@
                 td = oi.product.long_name
                 td = oi.decorate.additional
                 td = oi.decorate.product_options
+                td = oi.memo
                 td.text-right = number_to_currency oi.cost, precision: 0
                 td.text-center = oi.amount
                 td.text-right = number_to_currency oi.subtotal, precision: 0
