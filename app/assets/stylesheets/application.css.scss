@@ -1,7 +1,6 @@
 //= require jquery-ui/datepicker
 //= require jquery-ui/smoothness
 //= require 'order'
-
 @import "foundation_and_overrides";
 @import 'foundation-icons';
 
@@ -9,16 +8,10 @@ body {
   padding: 1em;
 }
 
-i.large {
-  font-size: 200%;
-}
-
-i.medium {
-  font-size: 150%;
-}
-
-i.small {
-  font-size: $base-font-size;
+i {
+  &.large  { font-size: 200%; }
+  &.medium { font-size: 150%; }
+  &.small  { font-size: $base-font-size; }
 }
 
 .full-width {
