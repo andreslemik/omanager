@@ -1,3 +1,4 @@
+# app/models/state_machines/order_item_state_machine.rb
 module StateMachines::OrderItemStateMachine
   def self.included(base)
     base.send(:include, AASM)
