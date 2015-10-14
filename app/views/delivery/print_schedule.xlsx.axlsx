@@ -18,12 +18,13 @@ centered_cell = wb.styles.add_style alignment: { vertical: :top,
 ws.add_row ["Доставка на #{I18n.l @date}"], b: true
 ws.add_row
 
-ws.add_row %w(№\ цех Договор Район Адрес Телефон Изделие), style: header_cell
+ws.add_row %w(№\ цех Договор Район Адрес Телефон Изделие Склад), style: header_cell
 
 @items.each do |item|
   ws.add_row [item.id, item.order.decorate,
       item.order.area, item.order.address, item.order.decorate.client_name,
-      item.product_name], style: bordered_cell
+      item.product_name, item.decorate.dept_name], style: bordered_cell
   ws.rows.last.cells[0].style = centered_cell
 end
-ws.column_widths 10, 20, 20, 40, 30, 30
+#ws.column_widths 10, 20, 20, 40, 30, 30
+ws.column_widths 10
