@@ -22,7 +22,7 @@ ws.add_row %w(№\ цех Договор Район Адрес Телефон И
 
 @items.each do |item|
   ws.add_row [item.id, item.order.decorate,
-      item.order.area, item.order.address, item.order.phone << ' ' << item.order.client,
+      item.order.area, item.order.address, item.order.decorate.client_name,
       item.product_name], style: bordered_cell
   ws.rows.last.cells[0].style = centered_cell
 end

@@ -52,4 +52,15 @@ class OrderDecorator < ApplicationDecorator
     return 'Внутренний заказ' if order_type == 'internal'
     partner.name
   end
+
+  def client_name
+    case order_type
+      when 'internal'
+        'Внутренний заказ'
+      when 'partner'
+        partner.name
+      when 'retail'
+        client << ' ' << phone
+    end
+  end
 end
