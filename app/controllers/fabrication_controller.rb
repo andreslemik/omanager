@@ -15,12 +15,13 @@ class FabricationController < ApplicationController
 
   def edit
     @title = 'Постановка изделия в очередь'
+    session[:back] = request.referrer
   end
 
   def update
     respond_to do |f|
       if @order_item.update(item_params)
-        f.html { redirect_to request.referrer, notice: 'Операция выполнена' }
+        f.html { redirect_to session.delete(:back), notice: 'Операция выполнена' }
       else
         f.html { render :edit }
       end
