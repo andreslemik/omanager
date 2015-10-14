@@ -10,6 +10,11 @@ class OrderDecorator < ApplicationDecorator
     end
   end
 
+  def balance_unformatted
+    return '' unless retail?
+    total - income_total
+  end
+
   def total_summ
     h.number_to_currency(object.total, precision: 0, unit: '')
   end

@@ -24,7 +24,7 @@ ws.add_row %w(№\ цех Договор Район Адрес Телефон И
   ws.add_row [item.id, item.order.decorate,
       item.order.area, item.order.decorate.delivery_address, item.order.decorate.client_name,
       item.product_name, item.decorate.dept_name, item.delivery_cost,
-             item.lift_cost, item.install_cost, item.order.decorate.balance], style: bordered_cell
+             item.lift_cost, item.install_cost, item.order.decorate.balance_unformatted], style: bordered_cell
   ws.rows.last.cells[0].style = centered_cell
 end
 #ws.column_widths 10, 20, 20, 40, 30, 30
