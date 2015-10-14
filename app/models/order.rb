@@ -114,7 +114,7 @@ class Order < ActiveRecord::Base
     operations_balance = operations.expense
                          .summary(:amount) - operations.income.summary(:amount)
     return operations_balance unless instalments.any?
-    inst_after = instalments.after_date(date).summary
+    inst_after = instalments.after_date(date).summary(:amount)
     operations_balance - inst_after
   end
 

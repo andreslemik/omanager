@@ -9,7 +9,7 @@ RSpec.describe Instalment, type: :model do
 
   it 'two instalments by 5000 summary' do
     create_list :instalment, 2, amount: 5000
-    expect(Instalment.summary).to eq(10_000)
+    expect(Instalment.summary(:amount)).to eq(10_000)
   end
 
   it 'two of three instalments after 01.01.2016' do
