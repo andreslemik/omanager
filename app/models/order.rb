@@ -13,8 +13,7 @@ class Order < ActiveRecord::Base
                 'Центр': 21, 'Север': 22,
                 'Ближнее засвияжье': 31, 'Дальнее засвияжье': 32,
                 'Железнодорожный р-н': 4,
-                'Не Ульяновск': 0
-       }
+                'Не Ульяновск': 0 }
   enum order_type: { retail: 0, dealer: 1, internal: 2 }
 
   has_many :order_items, dependent: :destroy, inverse_of: :order, autosave: true
