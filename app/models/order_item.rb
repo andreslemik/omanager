@@ -68,6 +68,7 @@ class OrderItem < ActiveRecord::Base
     versions.pluck(:object_changes, :id)
       .map { |a, b| [YAML.load(a), b] }
       .select { |a, _b| a.include? 'dept_id' }
+      .sort { |a, b| b[1] <=> a[1] }
   end
 
   aasm do
