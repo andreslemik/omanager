@@ -1,4 +1,4 @@
-# OrderItem model
+# app/models/order_item.rb
 class OrderItem < ActiveRecord::Base
   include ActiveModel::Dirty
   include AASM
@@ -67,7 +67,7 @@ class OrderItem < ActiveRecord::Base
   def dept_changes
     versions.pluck(:object_changes, :id)
       .map { |a, b| [YAML.load(a), b] }
-      .select { |a, b| a.include? 'dept_id' }
+      .select { |a, _b| a.include? 'dept_id' }
   end
 
   aasm do
@@ -112,7 +112,7 @@ class OrderItem < ActiveRecord::Base
     event :to_customer do
       transitions from: :delivery, to: :customer
       after_commit do
-        self.update_attribute(:dept_id, nil)
+        update_attribute(:dept_id, nil)
       end
     end
   end

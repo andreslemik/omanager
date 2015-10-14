@@ -1,3 +1,4 @@
+# app/models/instalment.rb
 class Instalment < ActiveRecord::Base
   include Summary
   acts_as_paranoid
@@ -8,5 +9,4 @@ class Instalment < ActiveRecord::Base
   scope :after_date, -> (date) { where('payment_date > ?', date) }
 
   validates :payment_date, :amount, presence: true
-
 end

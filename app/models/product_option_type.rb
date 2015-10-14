@@ -1,3 +1,4 @@
+# app/models/product_option_type.rb
 class ProductOptionType < ActiveRecord::Base
   acts_as_list scope: :product
 

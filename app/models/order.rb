@@ -1,4 +1,4 @@
-# Order model class
+# app/models/order.rb
 class Order < ActiveRecord::Base
   include Authority::Abilities
   include AASM
@@ -180,6 +180,7 @@ class Order < ActiveRecord::Base
 
   def clear_attributes
     self.partner_id = nil if retail? || internal?
-    self.client = self.address = self.phone = self.area = nil if internal? || dealer?
+    self.client = self.address = self.phone = self.area = nil \
+      if internal? || dealer?
   end
 end

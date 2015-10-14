@@ -1,3 +1,4 @@
+# app/models/product_option_value.rb
 class ProductOptionValue < ActiveRecord::Base
   acts_as_paranoid
 
@@ -6,6 +7,6 @@ class ProductOptionValue < ActiveRecord::Base
   has_one :option_type, through: :option_value
 
   def name
-    self.option_value.name
+    option_value.name
   end
 end
