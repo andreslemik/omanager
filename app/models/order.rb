@@ -99,19 +99,13 @@ class Order < ActiveRecord::Base
   end
 
   # fix error: '1' is not a valid order_type
-  def order_type=(value)
-    if value.is_a?(String) && value.to_i.to_s == value
-      super value.to_i
-    else
-      super value
-    end
-  end
-
-  def area=(value)
-    if value.is_a?(String) && value.to_i.to_s == value
-      super value.to_i
-    else
-      super value
+  %w(order_type area).each do |item|
+    define_method("#{item}=") do |value|
+      if value.is_a?(String) && value.to_i.to_s == value
+        super value.to_i
+      else
+        super value
+      end
     end
   end
 
