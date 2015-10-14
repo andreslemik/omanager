@@ -1,5 +1,5 @@
 class OrderItemsController < ApplicationController
-  before_action :set_order_item, only: [:edit, :edit_dept, :update]
+  before_action :set_order_item, only: [:edit, :edit_dept, :update, :show]
   before_action :set_order, only: [:new, :create]
   before_action only: [:index] { get_query('search_order_items') }
 
@@ -10,6 +10,10 @@ class OrderItemsController < ApplicationController
              .order(id: :desc, order_id: :asc)
              .page(params[:page])
     @order_items = OrderItemDecorator.decorate_collection(source)
+  end
+
+  def show
+    @title = 'Параметры изделия'
   end
 
   def new

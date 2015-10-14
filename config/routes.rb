@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     resources :instalments, shallow: true
   end
 
-  resources :order_items, only: [:index]
+  resources :order_items, only: [:index, :show]
 
   resources :partners, only: [:index, :show]
   resources :accounts

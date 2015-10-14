@@ -1,0 +1,15 @@
+= render 'shared/title'
+
+.row
+  .large-4.columns
+    .panel
+      h4 Параметры изделия
+      dl
+        dt Название:
+        dd = @order_item.product.name
+        dt Ткань:
+        dd = @order_item.additional
+        dt Опции:
+        dd = @order_item.product_options
+        dt Примечание:
+        dd = @order_item.memo

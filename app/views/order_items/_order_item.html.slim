@@ -1,4 +1,5 @@
 tr
+  td = link_to ficon('magnifying-glass', :small), order_item_path(order_item)
   td.text-center = order_item.id
   td.text-center = link_to_order(order_item.order)
   td = order_item.order.decorate.order_type_s
