@@ -34,7 +34,7 @@
           - @dept_changes.each do |item|
             - version = PaperTrail::Version.find(item[1])
             tr
-              td = l item[0]['updated_at'][1].to_datetime
+              td = l item[0]['updated_at'][1].to_datetime.in_time_zone
               td = Dept.find_by_id(item[0]['dept_id'][0]).try(:name)
               td = Dept.find_by_id(item[0]['dept_id'][1]).try(:name)
               td = User.find_by_id(version.whodunnit).try(:name)
