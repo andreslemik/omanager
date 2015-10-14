@@ -14,6 +14,8 @@ class OrderItemsController < ApplicationController
 
   def show
     @title = 'Параметры изделия'
+    @dept_changes = Kaminari.paginate_array(@order_item.dept_changes)
+                        .page(params[:page]).per(5)
   end
 
   def new

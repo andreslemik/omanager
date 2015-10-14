@@ -13,3 +13,28 @@
         dd = @order_item.product_options
         dt Примечание:
         dd = @order_item.memo
+
+  .large-5.columns.end
+    .panel
+      h4 Места хранения
+      dl
+        dt Текущее:
+        dd = @order_item.dept.name
+        dt История:
+
+      = paginate @dept_changes
+      table
+        thead
+          tr
+            th Дата
+            th Было
+            th Стало
+            th Изменил
+        tbody
+          - @dept_changes.each do |item|
+            - version = PaperTrail::Version.find(item[1])
+            tr
+              td = l item[0]['updated_at'][1].to_datetime
+              td = Dept.find_by_id(item[0]['dept_id'][0]).try(:name)
+              td = Dept.find_by_id(item[0]['dept_id'][1]).try(:name)
+              td = User.find_by_id(version.whodunnit).try(:name)
