@@ -4,7 +4,7 @@ class OrderItemsController < ApplicationController
   before_action only: [:index] { get_query('search_order_items') }
 
   def index
-    @title = 'Архив изделий'
+    @title = 'Список изделий'
     @q = OrderItem.includes(:partner, :product).to_fabrication.ransack(params[:q])
     source = @q.result(distinct: true)
              .order(id: :desc, order_id: :asc)

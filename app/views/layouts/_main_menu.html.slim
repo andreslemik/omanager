@@ -15,16 +15,21 @@ nav.top-bar role="navigation" data-topbar="" data-options="back_text: Назад
             li = link_to 'Новый договор', new_order_path, data: { no_turbolink: true }
           li = link_to 'Список договоров', orders_path
           li = link_to 'Внутренние заказы', internals_orders_path
-          li = link_to 'Архив изделий', order_items_path
+          li = link_to 'Список изделий', order_items_path
       - if Account.readable_by? current_user
         li.has-dropdown
           a(href='#') Расчёты
           ul.dropdown
             li = link_to 'Расчеты с контрагентами', partners_path
-      - if current_user.has_any_role? :admin, :fabrication
+      - if current_user.has_any_role? :admin, :fabrication, :accountant
         li = link_to 'Производство', fabrication_index_path
       - if current_user.has_any_role? :admin, :accountant
         li = link_to 'Доставка', delivery_index_path
+      - if current_user.has_any_role? :admin, :accountant
+        li.has-dropdown
+          a(href='#') Склад
+          ul.dropdown
+            li = link_to 'Все изделия', order_items_path
 
     ul.right
       - if current_user.has_role?(:admin)
