@@ -7,7 +7,7 @@ class OrderItem < ActiveRecord::Base
   has_paper_trail
   belongs_to :order
   belongs_to :product
-  belongs_to :dept
+  belongs_to :dept, counter_cache: true
   has_one :category, through: :product
   has_one :partner, through: :product,
                     foreign_key: :manufacturer_id, source: :manufacturer

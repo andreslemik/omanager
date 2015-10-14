@@ -12,6 +12,10 @@ class OrderItemsController < ApplicationController
     @order_items = OrderItemDecorator.decorate_collection(source)
   end
 
+  def stores
+    @title = 'Места хранения'
+  end
+
   def show
     @title = 'Параметры изделия'
     @dept_changes = Kaminari.paginate_array(@order_item.dept_changes)

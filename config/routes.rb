@@ -4,14 +4,16 @@ Rails.application.routes.draw do
   devise_for :users # , ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
+  resources :order_items, only: [:index, :show] do
+    get :stores, on: :collection
+  end
+
   resources :orders do
     get :internals, on: :collection
     get :edit_type, on: :member
     resources :order_items, shallow: true
     resources :instalments, shallow: true
   end
-
-  resources :order_items, only: [:index, :show]
 
   resources :partners, only: [:index, :show]
   resources :accounts
