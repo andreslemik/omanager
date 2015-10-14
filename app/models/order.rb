@@ -79,11 +79,11 @@ class Order < ActiveRecord::Base
   end
 
   def instalments_total
-    instalments.summary
+    instalments.summary(:amount)
   end
 
   def income_total
-    operations.income.summary
+    operations.income.summary(:amount)
   end
 
   # define methods to determine if all fabrication order_items have some state
@@ -111,13 +111,11 @@ class Order < ActiveRecord::Base
 
   def balance_at(date)
     return 0 unless :retail?
-    operations_balance = operations.expense.summary - operations.income.summary
-    if instalments.any?
-      inst_after = instalments.after_date(date).summary
-      operations_balance - inst_after
-    else
-      operations_balance
-    end
+    operations_balance = operations.expense
+                         .summary(:amount) - operations.income.summary(:amount)
+    return operations_balance unless instalments.any?
+    inst_after = instalments.after_date(date).summary
+    operations_balance - inst_after
   end
 
   ransacker :registered do |_parent|

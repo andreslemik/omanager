@@ -2,6 +2,7 @@
 class OrderItem < ActiveRecord::Base
   include ActiveModel::Dirty
   include StateMachines::OrderItemStateMachine
+  include Summary
   acts_as_paranoid
   has_paper_trail
   belongs_to :order

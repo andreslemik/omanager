@@ -3,8 +3,8 @@ module Summary
   extend ActiveSupport::Concern
 
   included do
-    def self.summary
-      pluck(:amount).sum
-    end
+    def self.summary(field)
+      pluck(field).sum
+      end
   end
 end
