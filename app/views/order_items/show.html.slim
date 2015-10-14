@@ -19,7 +19,7 @@
       h4 Места хранения
       dl
         dt Текущее:
-        dd = @order_item.dept.name
+        dd = @order_item.dept.try(:name)
         dt История:
 
       = paginate @dept_changes
