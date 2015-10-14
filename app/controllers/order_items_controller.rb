@@ -16,6 +16,7 @@ class OrderItemsController < ApplicationController
     @title = 'Параметры изделия'
     @dept_changes = Kaminari.paginate_array(@order_item.dept_changes)
                         .page(params[:page]).per(5)
+    session[:back] = request.referrer unless params[:page]
   end
 
   def new
