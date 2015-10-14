@@ -1,8 +1,9 @@
 wb = xlsx_package.workbook
+margins = { left: 0.5, right: 0.5, top: 0.5, bottom: 0.5, header: 0.7, footer: 0.7 }
+options = { horizontal_centered: true }
 page_setup = { fit_to_width: 1, orientation: :landscape,
-               paper_width: '297mm', paper_height: '210mm' }
-
-ws = wb.add_worksheet(page_setup: page_setup)
+               paper_size: 9 }
+ws = wb.add_worksheet(page_setup: page_setup, page_margins: margins, print_options: options)
 
 # styles
 header_cell = wb.styles.add_style alignment: { vertical: :center,
@@ -22,10 +23,11 @@ ws.add_row %w(№\ цех Договор Район Адрес Телефон И
 
 @items.each do |item|
   ws.add_row [item.id, item.order.decorate,
-      item.order.area, item.order.decorate.delivery_address, item.order.decorate.client_name,
-      item.product_name, item.decorate.dept_name, item.delivery_cost,
-             item.lift_cost, item.install_cost, item.order.decorate.balance_unformatted], style: bordered_cell
+              item.order.area, item.order.decorate.delivery_address, item.order.decorate.client_name,
+              item.product_name, item.decorate.dept_name, item.delivery_cost,
+              item.lift_cost, item.install_cost, item.order.decorate.balance_unformatted], style: bordered_cell
   ws.rows.last.cells[0].style = centered_cell
+  (7..10).each { |i| ws.rows.last.cells[i].style = centered_cell }
 end
-#ws.column_widths 10, 20, 20, 40, 30, 30
-ws.column_widths 10
+
+ws.column_widths 10, nil, 15, 30, 30, 30, 10, 10, 10, 10, 10
