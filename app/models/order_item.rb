@@ -41,7 +41,6 @@ class OrderItem < ActiveRecord::Base
 
   attr_accessor :done_check
 
-  after_save :update_order
   after_save :change_state, if: :fabrication_date_changed?
   after_save :delivery_state, if: :delivery_date_changed?
   after_save :delivery_done, if: :done_checked?
@@ -127,10 +126,6 @@ class OrderItem < ActiveRecord::Base
   end
 
   private
-
-  def update_order
-    order.update_attribute(:updated_at, Time.now)
-  end
 
   def change_state
     return if fabrication_date.blank?

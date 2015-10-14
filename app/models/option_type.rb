@@ -13,15 +13,7 @@ class OptionType < ActiveRecord::Base
                                 reject_if: ->(ov) { ov[:name].blank? },
                                 allow_destroy: true
 
-  # after_touch :touch_all_products
-
   def option_values_string
     (option_values.map(&:name).join ', ').truncate(30)
-  end
-
-  private
-
-  def touch_all_products
-    products.update_all(updated_at: Time.current)
   end
 end
