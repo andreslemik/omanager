@@ -1,3 +1,4 @@
+# app/models/concerns/summary.rb
 module Summary
   extend ActiveSupport::Concern
 
@@ -6,5 +7,4 @@ module Summary
       pluck(:amount).sum
     end
   end
-
 end
