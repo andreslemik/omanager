@@ -53,6 +53,7 @@ class DeliveryController < ApplicationController
   def print_schedule
     @date = Date.parse(params[:sdate])
     source = OrderItem.delivery.where(delivery_date: @date)
+                 .joins(:order).order('orders.area, orders.id')
     @items = OrderItemDecorator.decorate_collection source
     respond_to do |format|
       format.xlsx do
