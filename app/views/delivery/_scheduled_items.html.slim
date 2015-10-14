@@ -12,6 +12,7 @@ h2 = @title
         th Адрес
         th Телефон
         th Изделие
+        th Склад
         th
     tbody
       - items.each do |item|
@@ -23,8 +24,6 @@ h2 = @title
           td = item.order.address
           td #{item.order.phone} (#{item.client_name})
           td #{item.product_name}
-          /td = link_to 'Доставлено', well_done_delivery_path(item), \
-            class: 'button tiny secondary', method: :put, \
-            data: { confirm: 'Вы уверены?' }
+          td = item.decorate.dept_name
           td = link_to 'Доставлено', well_done_form_delivery_path(item), \
             class: 'button tiny secondary', remote: true

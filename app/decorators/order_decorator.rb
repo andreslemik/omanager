@@ -57,10 +57,21 @@ class OrderDecorator < ApplicationDecorator
     case order_type
       when 'internal'
         'Внутренний заказ'
-      when 'partner'
+      when 'dealer'
         partner.name
       when 'retail'
         client << ' ' << phone
+    end
+  end
+
+  def delivery_address
+    case order_type
+      when 'internal'
+        dept.try(:name)
+      when 'dealer'
+        partner_name
+      when 'retail'
+        address
     end
   end
 end
