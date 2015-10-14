@@ -28,4 +28,8 @@ class OrderItemDecorator < ApplicationDecorator
     "#{product.name} (#{product.category.name}) [#{additional}]"
   end
 
+  def dept_name
+    return product.manufacturer.name if !product.manufacturer.own && dept_id.blank?
+    dept.try(:name)
+  end
 end
