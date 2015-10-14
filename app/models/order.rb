@@ -100,11 +100,8 @@ class Order < ActiveRecord::Base
   # fix error: '1' is not a valid order_type
   %w(order_type area).each do |item|
     define_method("#{item}=") do |value|
-      if value.is_a?(String) && value.to_i.to_s == value
-        super value.to_i
-      else
-        super value
-      end
+      return super value.to_i if value.is_a?(String) && value.to_i.to_s == value
+      super value
     end
   end
 
@@ -124,12 +121,7 @@ class Order < ActiveRecord::Base
   private
 
   def update_accounts
-    if dealer?
-      operation = Partner.find(partner_id)
-                  .operations.find_or_initialize_by(order_id: id)
-    else
-      operation = operations.find_or_initialize_by(order_id: id)
-    end
+    operation = new_operation
     attrs = { amount: total, memo: decorate.to_s }
     attrs.merge!(operation_date: Time.now,
                  operation_type: :expense, amount: total,
@@ -137,6 +129,15 @@ class Order < ActiveRecord::Base
                  order_id: id) if operation.new_record?
     operation.attributes = attrs
     operation.save!
+  end
+
+  def new_operation
+    if dealer?
+      Partner.find(partner_id)
+        .operations.find_or_initialize_by(order_id: id)
+    else
+      operations.find_or_initialize_by(order_id: id)
+    end
   end
 
   def delete_accounts
