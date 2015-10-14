@@ -78,6 +78,6 @@ class DeliveryController < ApplicationController
   end
 
   def scheduled_items
-    @items = OrderItemDecorator.decorate_collection(OrderItem.delivery)
+    @items = OrderItemDecorator.decorate_collection(OrderItem.delivery.joins(:order).order('orders.id, orders.area'))
   end
 end
