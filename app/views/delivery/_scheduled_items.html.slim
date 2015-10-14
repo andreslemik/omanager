@@ -16,6 +16,7 @@ h2 = @title
         th
     tbody
       - items.each do |item|
+        - item = item.decorate
         tr
           td = link_to ficon(:calendar, :large), edit_delivery_path(item)
           td.text-center = item.id
