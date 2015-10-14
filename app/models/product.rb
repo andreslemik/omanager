@@ -38,4 +38,8 @@ class Product < ActiveRecord::Base
     result *= (1 + margin.to_i / 100.0)
     result.round(-2)
   end
+
+  ransacker :fullname do
+    Arel.sql('products.name||categories.name')
+  end
 end

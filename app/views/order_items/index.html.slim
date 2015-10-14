@@ -40,6 +40,10 @@
         = f.select :aasm_state_eq, OrderItem.aasm.states_for_select.sort, include_blank: true
     .row
       .columns
+        = f.label :product_fullname_or_additionals_cont, 'Изделие или ткань'
+        = f.text_field :product_fullname_or_additionals_cont
+    .row
+      .columns
         = f.submit 'Найти', class: 'button tiny'
         = link_to 'Очистить', order_items_path(clear: true), class: 'button tiny secondary'
 #edit-dept-form.small.reveal-modal(data-reveal='' role='dialog')
