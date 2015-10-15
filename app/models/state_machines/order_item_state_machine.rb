@@ -24,7 +24,7 @@ module StateMachines::OrderItemStateMachine
         transitions from: :working, to: :pending
       end
       event :get_ready do
-        transitions from: [:working, :pending], to: :ready
+        transitions from: [:working, :pending, :done], to: :ready
         after_commit do
           order.get_ready! if order.all_items_ready?
         end

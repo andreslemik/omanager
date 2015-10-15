@@ -65,6 +65,13 @@ class OrderItemsController < ApplicationController
     end
   end
 
+  def get_ready
+    @order_item = OrderItem.find(params[:order_item_id]).decorate
+    @order_item.get_ready!
+    @order_item.update_attribute(:delivery_date, nil)
+    redirect_to :back
+  end
+
   private
 
   def item_params

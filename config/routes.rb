@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   resources :order_items, only: [:index, :show] do
     get :stores, on: :collection
+    put :get_ready
   end
 
   resources :orders do

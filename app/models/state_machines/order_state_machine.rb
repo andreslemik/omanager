@@ -16,7 +16,7 @@ module StateMachines::OrderStateMachine
         transitions from: :working, to: :pending, guard: :all_items_pending?
       end
       event :get_ready do
-        transitions from: :working, to: :ready, guard: :all_items_ready?
+        transitions from: [:working, :ready], to: :ready, guard: :all_items_ready?
       end
       event :done do
         transitions from: :ready, to: :done,
