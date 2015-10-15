@@ -7,6 +7,8 @@
     .panel
       h4 Параметры изделия
       dl
+        dt Статус:
+        dd = @order_item.aasm.human_state
         dt Название:
         dd = @order_item.product.name
         dt Ткань:
