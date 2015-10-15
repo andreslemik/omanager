@@ -3,6 +3,10 @@ class OrderItemsController < ApplicationController
   before_action :set_order, only: [:new, :create]
   before_action only: [:index] { get_query('search_order_items') }
 
+  unless Rails.env.test?
+    authorize_actions_for OrderItem
+  end
+
   def index
     @title = 'Список изделий'
     @q = OrderItem.includes(:partner, :product).to_fabrication.ransack(params[:q])
@@ -32,6 +36,7 @@ class OrderItemsController < ApplicationController
   end
 
   def edit
+    authorize_action_for(@order_item)
     session[:back_url] = request.referrer
     @categories = Category.joins(:products).group(:id)
     @manufacturers = Partner.joins(:products).where('products.manufacturer_id IN (?)',

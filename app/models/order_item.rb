@@ -1,10 +1,13 @@
 # app/models/order_item.rb
 class OrderItem < ActiveRecord::Base
+  include Authority::Abilities
   include ActiveModel::Dirty
   include StateMachines::OrderItemStateMachine
   include Summary
   acts_as_paranoid
   has_paper_trail
+  self.authorizer_name = 'OrderItemAuthorizer'
+
   belongs_to :order
   belongs_to :product
   belongs_to :dept, counter_cache: true

@@ -1,6 +1,7 @@
 = render 'shared/title'
 = link_to 'Назад', session[:back], class: 'button tiny secondary'
-= link_to 'Изменить', edit_order_item_path(@order_item), class: 'button tiny secondary'
+- if @order_item.updatable_by? current_user
+  = link_to 'Изменить', edit_order_item_path(@order_item), class: 'button tiny secondary'
 .row
   .large-4.columns
     .panel
@@ -22,8 +23,9 @@
         dt Текущее:
         dd
           = @order_item.dept.try(:name)
-          |&nbsp;
-          = link_to ficon(:pencil, :small), edit_order_item_path(@order_item), remote: true
+          - if @order_item.updatable_by? current_user
+            |&nbsp;
+            = link_to ficon(:pencil, :small), edit_order_item_path(@order_item), remote: true
         dt История:
 
       = paginate @dept_changes
