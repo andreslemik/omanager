@@ -1,5 +1,6 @@
 = render 'shared/title'
 = link_to 'Назад', session[:back], class: 'button tiny secondary'
+= link_to 'Изменить', edit_order_item_path(@order_item), class: 'button tiny secondary'
 .row
   .large-4.columns
     .panel
