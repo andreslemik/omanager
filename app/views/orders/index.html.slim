@@ -60,6 +60,7 @@ h2 = @title
         tr
           th
           th.text-center Изделия
+          th.text-center Ткань
           th.text-center Офис
           th.text-center(width="100") Номер
           th.text-center(width="100") Дата
@@ -73,6 +74,7 @@ h2 = @title
             td = link_to(ficon(:pencil, :small), edit_order_path(o), \
                 data: { no_turbolink: true }) if current_user.can_update?(o)
             td == order_items_text o
+            td == order_items_additionals o
             td = o.dept.try(:name)
             td.text-center = link_to_order(o)
             td = l(o.order_date)

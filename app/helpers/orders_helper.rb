@@ -5,7 +5,15 @@ module OrdersHelper
       result << content_tag(:span,
                             oi.product.name,
                             title: oi.product.category.name, class: 'product-name')
-      result << ' (' << content_tag(:span, oi.decorate.additional, class: 'product-additionals') << ')'
+      result << ',<br />' unless oi == order.order_items.last
+    end
+    result
+  end
+
+  def order_items_additionals(order)
+    result = ''
+    order.order_items.to_fabrication.each do |oi|
+      result << '[' <<content_tag(:span, oi.decorate.additional, class: 'product-additionals') << ']'
       result << '<br />' unless oi == order.order_items.last
     end
     result
