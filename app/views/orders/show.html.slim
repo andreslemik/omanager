@@ -80,7 +80,7 @@
                 td = oi.aasm.human_state
                 td
                   - if oi.aasm.current_state == :done
-                    = link_to ficon('shopping-cart', :small), \
+                    = link_to ficon('shopping-cart', :medium), \
                       order_item_get_ready_path(oi), data: { confirm: 'Поставить на доставку?' },  \
                       title: 'Поставить на доставку', method: :put
     - if @order.retail?
