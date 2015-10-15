@@ -14,6 +14,7 @@ class OrderItemsController < ApplicationController
 
   def stores
     @title = 'Места хранения'
+    @depts = Dept.order(:name).page(params[:page])
   end
 
   def show

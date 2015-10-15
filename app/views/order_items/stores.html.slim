@@ -1,2 +1,13 @@
 = render 'shared/title'
 
+= paginate @depts
+table
+  thead
+    tr
+      th Подразделение
+      th Изделий
+  tbody
+    - @depts.each do |dept|
+      tr
+        td = dept.name
+        td.text-right = link_to dept.order_items_count, order_items_path(q: {dept_id_eq: dept.id})
