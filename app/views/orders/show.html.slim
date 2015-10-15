@@ -65,7 +65,6 @@
               th Кол-во
               th Сумма
               th Статус
-              th
           tbody
             - @order.order_items.each do |oi|
               tr
@@ -77,9 +76,10 @@
                 td.text-right = number_to_currency oi.cost, precision: 0
                 td.text-center = oi.amount
                 td.text-right = number_to_currency oi.subtotal, precision: 0
-                td = oi.aasm.human_state
-                td
+                td.text-center
+                  = oi.aasm.human_state
                   - if oi.aasm.current_state == :done
+                    br
                     = link_to ficon('shopping-cart', :medium), \
                       order_item_get_ready_path(oi), data: { confirm: 'Поставить на доставку?' },  \
                       title: 'Поставить на доставку', method: :put
