@@ -60,14 +60,14 @@ h2 = @title
         tr
           th
           th.text-center Изделия
-          th.text-center Ткань
+          th.text-center(width='200') Ткань
           th.text-center Офис
-          th.text-center(width="100") Номер
-          th.text-center(width="100") Дата
+          th.text-center(width="50") Номер
+          th.text-center(width="50") Дата
           th.text-center Статус
           th.text-center Тип
           th.text-center Баланс
-          th.show-for-large-only(width="200") Примечение
+          th.show-for-large-only Примечение
       tbody
         - @orders.each do |o|
           tr
