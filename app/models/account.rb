@@ -9,7 +9,7 @@ class Account < ActiveRecord::Base
   paginates_per 15
 
   validates :operation_date, :operation_type, :amount, presence: true
-  validates :amount, numericality: { greater_than: 0 }
+  validates :amount, numericality: true
 
   belongs_to :accountable, polymorphic: true
   belongs_to :dept
