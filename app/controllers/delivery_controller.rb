@@ -71,7 +71,7 @@ class DeliveryController < ApplicationController
   end
 
   def item_params
-    params.require(:order_item).permit(:delivery_date)
+    params.require(:order_item).permit(:delivery_date, :memo)
   end
 
   def done_params

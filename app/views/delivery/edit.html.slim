@@ -12,6 +12,7 @@
         dd #{@order_item.product.name} (#{@order_item.product.category.name})
     = form_for @order_item, url: delivery_path(@order_item) do |f|
       = f.text_field :delivery_date, class: 'datepicker'
+      = f.text_area :memo
       = f.submit 'Сохранить'
       = link_to 'Отмена', :back, class: 'button secondary tiny'
   .large-10.columns
