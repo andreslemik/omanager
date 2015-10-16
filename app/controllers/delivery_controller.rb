@@ -43,7 +43,7 @@ class DeliveryController < ApplicationController
       if @order_item.update(done_params)
         @order_item.well_done! if @order_item.order.internal?
         @order_item.to_customer! unless @order_item.order.internal?
-        f.html { redirect_to schedule_delivery_index_path, notice: 'Выполнено' }
+        f.html { redirect_to order_path(@order_item.order), notice: 'Выполнено' }
       else
         f.html { render :schedule }
       end
