@@ -9,4 +9,5 @@ class Instalment < ActiveRecord::Base
   scope :after_date, -> (date) { where('payment_date > ?', date) }
 
   validates :payment_date, :amount, presence: true
+  validates :amount, numericality: { greater_than: 0 }
 end
