@@ -28,6 +28,10 @@ class Product < ActiveRecord::Base
     "#{category.name}: #{name} (#{manufacturer.name})"
   end
 
+  def price
+    super.nil? ? 0 : super
+  end
+
   def price_mod(retail, *mods)
     # Cost of the product considering its price modifiers (option_values)
     rt = retail.to_i
