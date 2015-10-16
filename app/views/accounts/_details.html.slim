@@ -2,10 +2,10 @@ table
   caption = I18n.l @date
   thead
     tr
-      th Подразделение
-      th Сумма
+      th.text-center Подразделение
+      th.text-center Сумма
   tbody
     - @details.each do |d|
       tr
         td = d[0].nil? ? 'Не указано' : Dept.find(d[0]).name
-        td = number_to_currency(d[1], precision: 0)
+        td.text-right = number_to_currency(d[1], precision: 0)
