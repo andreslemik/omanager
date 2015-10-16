@@ -1,7 +1,7 @@
 = render 'shared/title'
 
 .row
-  .large-6.small-6.columns
+  .large-3.small-6.columns
     = paginate @incomes
     table
       thead
@@ -10,11 +10,11 @@
           th.text-center Сумма
           th
       tbody
-        - @incomes.first.each do |k, v|
+        - @incomes.each do |income|
           tr
-            td = I18n.l k
-            td.text-right = number_to_currency(v, precision: 0)
+            td = I18n.l income[0]
+            td.text-right = number_to_currency(income[1], precision: 0)
             td = link_to ficon(:list, :medium), \
-              incomes_accounts_path(date: k.to_time.to_i), remote: true
-  .large-6.small-6.columns
+              incomes_accounts_path(date: income[0].to_time.to_i), remote: true
+  .large-6.end.small-6.columns
     #details

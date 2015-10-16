@@ -12,9 +12,9 @@ class AccountsController < ApplicationController
 
   def incomes
     @title = 'Поступления по датам и подразделениям'
-    @incomes = Kaminari.paginate_array([Account.income
+    @incomes = Kaminari.paginate_array(Account.income
                                            .order(operation_date: :desc)
-                                           .group(:operation_date).sum(:amount)])
+                                           .group(:operation_date).sum(:amount).to_a)
                    .page(params[:page]).per(15)
     if params[:date]
       @date = Time.at(params[:date].to_i).to_date
