@@ -28,7 +28,7 @@ ws.add_row %w(№\ цех Договор Район Адрес Телефон И
               "#{item.product.name}\n(#{item.product.category.name})",
               item.additional, item.decorate.dept_name, item.delivery_cost,
               item.lift_cost, item.install_cost, item.order.decorate.balance_unformatted,
-             item.memo], style: bordered_cell
+             item.delivery_memo], style: bordered_cell
   ws.rows.last.cells[0].style = centered_cell
   (7..10).each { |i| ws.rows.last.cells[i].style = centered_cell }
 end

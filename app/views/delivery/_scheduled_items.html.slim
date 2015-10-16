@@ -27,6 +27,6 @@ h2 = @title
           td #{item.order.phone} (#{item.client_name})
           td #{item.product_name}
           td = item.decorate.dept_name
-          td = item.memo
+          td = item.delivery_memo
           td = link_to 'Доставлено', well_done_form_delivery_path(item), \
             class: 'button tiny secondary', remote: true
