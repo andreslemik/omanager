@@ -15,13 +15,14 @@ class InstalmentsController < ApplicationController
   def new
     @instalment = Instalment.new
     @title = 'Новый платеж'
+    session[:back] = request.referrer
   end
 
   def create
     @instalment = @order.instalments.build instalment_params
     respond_to do |f|
       if @instalment.save
-        f.html { redirect_to session[:back], notice: 'Платеж добавлен' }
+        f.html { redirect_to session.delete(:back), notice: 'Платеж добавлен' }
       else
         f.html { render :new }
       end
