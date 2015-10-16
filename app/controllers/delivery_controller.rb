@@ -51,7 +51,7 @@ class DeliveryController < ApplicationController
   end
 
   def print_schedule
-    @date = Date.parse(params[:sdate])
+    @date = Time.at(params[:sdate].to_i).to_date
     source = OrderItem.delivery.where(delivery_date: @date)
                  .joins(:order).order('orders.area, orders.id')
     @items = OrderItemDecorator.decorate_collection source

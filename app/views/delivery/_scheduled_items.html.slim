@@ -2,7 +2,7 @@ h2 = @title
 
 - @items.group_by(&:delivery_date).each do |date, items|
   table
-    caption == "#{I18n.l(date)} #{link_to ficon(:print, :medium), print_schedule_delivery_index_path(date)}"
+    caption == "#{I18n.l(date)} #{link_to ficon(:print, :medium), print_schedule_delivery_index_path(date.to_time.to_i)}"
     thead
       tr
         th
