@@ -17,7 +17,9 @@ Rails.application.routes.draw do
   end
 
   resources :partners, only: [:index, :show]
-  resources :accounts
+  resources :accounts do
+    get :incomes, on: :collection
+  end
   resources :fabrication, only: [:index, :edit, :update] do
     collection do
       get 'schedule'

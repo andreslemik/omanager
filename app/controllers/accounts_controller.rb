@@ -4,9 +4,23 @@ class AccountsController < ApplicationController
   before_action :set_account, only: [:edit, :update, :destroy]
 
   authorize_actions_for Account
+  authority_actions incomes: 'read'
 
   def edit
     authorize_action_for @account
+  end
+
+  def incomes
+    @title = 'Поступления по датам и подразделениям'
+    @incomes = Account.income.order(operation_date: :desc).group(:operation_date).sum(:amount)
+    if params[:date]
+      @date = Time.at(params[:date].to_i).to_date
+      @details = Account.income.where(operation_date: @date).group(:dept_id).sum(:amount)
+    end
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def update

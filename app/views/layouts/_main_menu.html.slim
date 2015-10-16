@@ -21,6 +21,7 @@ nav.top-bar role="navigation" data-topbar="" data-options="back_text: Назад
           a(href='#') Расчёты
           ul.dropdown
             li = link_to 'Расчеты с контрагентами', partners_path
+            li = link_to 'Поступления', incomes_accounts_path
       - if current_user.has_any_role? :admin, :fabrication, :accountant
         li = link_to 'Производство', fabrication_index_path
       - if current_user.has_any_role? :admin, :accountant
