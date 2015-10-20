@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/activeadmin/activeadmin.git
-  revision: a3fca244b0cbaa6139931952ba2c72dda58e05b1
+  revision: 3aae773f978ad176cb8b5ebde3f2e2fc7652ed89
   specs:
     activeadmin (1.0.0.pre2)
       arbre (~> 1.0, >= 1.0.2)
@@ -109,7 +109,7 @@ GEM
     bcrypt (3.1.10)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    bourbon (4.2.5)
+    bourbon (4.2.6)
       sass (~> 3.4)
       thor (~> 0.19)
     browser (1.0.1)
@@ -157,7 +157,7 @@ GEM
     coffee-script-source (1.9.1.1)
     colorize (0.7.7)
     dalli (2.7.4)
-    database_cleaner (1.5.0)
+    database_cleaner (1.5.1)
     debug_inspector (0.0.2)
     devise (3.5.2)
       bcrypt (~> 3.0)
