@@ -2,9 +2,9 @@
 module Summary
   extend ActiveSupport::Concern
 
-  included do
-    def self.summary(field)
+  module ClassMethods
+    def summary(field)
       pluck(field).sum
-      end
+    end
   end
 end
