@@ -40,12 +40,12 @@
               th Кол-во
               th
           tbody
-            - @items.group_by(&:product).each do |product, item|
+            - @items.group_by(&:partner).each do |partner, item|
               tr
-                td = product.manufacturer.name
+                td = partner.name
                 td.text-right = item.count
                 td = link_to ficon(:print, :medium), \
-                             print_orders_fabrication_index_path(product.manufacturer)
+                             print_orders_fabrication_index_path(partner)
 #set-dept-form.small.reveal-modal(data-reveal='' role='dialog')
 = content_for :js do
   = javascript_include_tag 'fabrication', 'data-turbolinks-track' => true
