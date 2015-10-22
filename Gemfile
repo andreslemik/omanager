@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
 # Use postgresql as the database for Active Record
@@ -43,9 +42,8 @@ group :development, :test do
   gem 'spring'
 end
 
-
 gem 'slim-rails'
-gem 'russian'
+gem 'rs_russian', github: 'rs-pro/russian', branch: 'master'
 gem 'jquery-ui-rails'
 gem 'jquery-turbolinks'
 gem 'carrierwave'
@@ -79,7 +77,6 @@ group :production do
   gem 'htmlcompressor', github: 'paolochiodi/htmlcompressor', branch: 'master'
   gem 'dalli'
 end
-
 
 gem 'devise'
 gem 'authority'
