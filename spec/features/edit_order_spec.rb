@@ -13,6 +13,4 @@ describe 'Edit order feature' do
     click_button('Сохранить')
     expect(@order.order_items.count).to eq(2)
   end
-
-
 end

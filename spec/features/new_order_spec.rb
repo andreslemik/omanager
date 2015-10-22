@@ -23,7 +23,7 @@ describe 'New order feature', type: :feature do
     end
   end
   context 'Creating order' do
-    it 'select product will get it price', js: true, driver: :selenium do
+    it 'select product will get it price', js: true do
       visit new_order_path
       product = Product.all.sample
       within '#new_order' do
@@ -39,7 +39,7 @@ describe 'New order feature', type: :feature do
       expect(find_field('order_order_items_attributes_0_cost').value).to eq(product.price.to_s)
     end
 
-    it 'price change', js: true, driver: :selenium do
+    it 'price change', js: true do
       product = Product.all.sample
       ov = product.product_option_values.sample
       price = product.price_mod(0, [ov.option_value_id])
@@ -52,7 +52,7 @@ describe 'New order feature', type: :feature do
         select ov.option_value.name, from: 'order_order_items_attributes_0_option_values'
       end
       expect(find_field('order_order_items_attributes_0_cost').value).to eq(price.to_s)
-      # sleep(inspection_time=5)
+      # sleep(inspection_time=5) #selenium
     end
   end
 end
