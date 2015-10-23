@@ -58,6 +58,8 @@ group :development do
   gem 'capistrano-rvm'
   gem 'bullet'
   gem 'quiet_assets'
+  gem 'rails-audit'
+  gem 'better_errors'
 end
 
 group :test do
