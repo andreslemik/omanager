@@ -84,7 +84,7 @@ class OrderItemsController < ApplicationController
   def item_params
     params.require(:order_item).permit(:id, :product_id, :amount, :cost, :_destroy,
                                        :descr_basis, :descr_assort, :special_notes,
-                                       :dept_id,
+                                       :dept_id, :memo,
                                        :delivery_cost, :lift_cost, :install_cost,
                                        option_values: [])
   end
