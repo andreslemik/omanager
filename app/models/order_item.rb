@@ -49,7 +49,7 @@ class OrderItem < ActiveRecord::Base
   after_save :delivery_state, if: :delivery_date_changed?
   after_save :delivery_done, if: :done_checked?
 
-  after_commit :clean_delivery, if: Proc.new { |item| item.delivery_date.blank? }
+  after_commit :clean_delivery, if: proc { |item| item.delivery_date.blank? }
 
   def option_values=(val)
     self[:option_values] = val.map(&:to_i)
@@ -78,6 +78,11 @@ class OrderItem < ActiveRecord::Base
     else
       []
     end
+  end
+
+  def delivery_memo
+    order.memo << " Доставка: #{super}" unless super.blank?
+    order.memo
   end
 
   ransacker :additionals do |_parent|
