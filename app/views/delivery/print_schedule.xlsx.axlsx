@@ -41,4 +41,4 @@ ws.add_row %w(№\ цех Склад Изделие Ткань Район Адр
   (7..10).each { |i| ws.rows.last.cells[i].style = centered_cell }
 end
 
-ws.column_widths 10, nil, 15, 30, 30, 15, 30, 10, 10, 10, 10, 10, 30
+ws.column_widths 10, nil, 15, 30, 15, 30, 30, 10, 10, 10, 10, 10, 30
