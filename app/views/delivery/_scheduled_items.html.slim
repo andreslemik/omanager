@@ -7,12 +7,12 @@ h2 = @title
       tr
         th
         th № цех
-        th Договор
+        th Склад
+        th Изделие
         th Район
         th Адрес
+        th Договор
         th Телефон
-        th Изделие
-        th Склад
         th Примечание
         th
     tbody
@@ -21,12 +21,12 @@ h2 = @title
         tr
           td = link_to ficon(:calendar, :large), edit_delivery_path(item)
           td.text-center = item.id
-          td.text-center = link_to item.order.dog_num, order_path(item.order)
+          td = item.decorate.dept_name
+          td #{item.product_name}
           td = item.order.area
           td = item.order.decorate.delivery_address
+          td.text-center = link_to item.order.dog_num, order_path(item.order)
           td #{item.order.phone} (#{item.client_name})
-          td #{item.product_name}
-          td = item.decorate.dept_name
-          td = item.delivery_memo
+          td = item.delivery_memo_s
           td = link_to 'Доставлено', well_done_form_delivery_path(item), \
             class: 'button tiny secondary', remote: true

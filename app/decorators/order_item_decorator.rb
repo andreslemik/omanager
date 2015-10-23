@@ -32,4 +32,20 @@ class OrderItemDecorator < ApplicationDecorator
     return product.manufacturer.name if !product.manufacturer.own && dept_id.blank?
     dept.try(:name)
   end
+
+  def delivery_memo_s
+    if order_item.delivery_memo.blank?
+      "#{order.memo}".html_safe
+    else
+      "#{order.memo}<br />Доставка: #{order_item.delivery_memo}".html_safe
+    end
+  end
+
+  def delivery_memo_xls
+    if order_item.delivery_memo.blank?
+      "#{order.memo}".html_safe
+    else
+      "#{order.memo}\x0AДоставка: #{order_item.delivery_memo}".html_safe
+    end
+  end
 end

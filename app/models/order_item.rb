@@ -80,11 +80,6 @@ class OrderItem < ActiveRecord::Base
     end
   end
 
-  def delivery_memo
-    order.memo << " Доставка: #{super}" unless super.blank?
-    order.memo
-  end
-
   ransacker :additionals do |_parent|
     Arel.sql('descr_basis||descr_assort||special_notes')
   end
