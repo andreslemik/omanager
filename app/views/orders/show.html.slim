@@ -49,6 +49,8 @@
         tr
           th Клиент
           td #{@order.partner_name}
+    - if @order.updatable_by? current_user
+      = link_to('Изменить тип договора', edit_type_order_path(@order), class: 'button secondary tiny')
   .large-9.columns
     .row
       .large-12.columns
