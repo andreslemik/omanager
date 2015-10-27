@@ -33,9 +33,15 @@
 .row
   .large-2.columns
     = f.number_field :cost
-  .large-2.columns.end
+  .large-2.columns
     = f.number_field :amount
     = f.hidden_field :retail
+  .large-2.small-3.columns
+    = f.number_field :delivery_cost
+  .large-2.small-3.columns
+    = f.number_field :lift_cost
+  .large-2.small-3.columns.end
+    = f.number_field :install_cost
 .row
   .columns
     = f.submit
