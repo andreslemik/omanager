@@ -6,6 +6,7 @@ class OrderItemsController < ApplicationController
   unless Rails.env.test?
     authorize_actions_for OrderItem
     authority_actions stores: 'read'
+    authority_actions get_ready: 'update'
   end
 
   def index
