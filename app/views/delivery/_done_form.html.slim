@@ -1,10 +1,14 @@
 = form_for @order_item, url: well_done_delivery_path do |f|
   .row
     .large-4.columns
-      = f.text_field :delivery_cost
-    - if @order_item.order.internal?
-      .large-4.columns.end
-        = f.select :dept_id, Dept.order(:name).pluck(:name, :id), \
-          include_blank: true, label: 'Место хранения'
+      = f.number_field :delivery_cost
+    .large-4.columns
+      = f.number_field :lift_cost
+    .large-4.columns
+      = f.number_field :install_cost
+    /- if @order_item.order.internal?
+    .large-4.columns.end
+      = f.select :dept_id, Dept.order(:name).pluck(:name, :id), \
+        include_blank: true, label: 'Место хранения'
   = f.submit 'Готово'
   = link_to 'Отмена', '', class: 'button secondary small close-modal'

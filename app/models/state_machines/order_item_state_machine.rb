@@ -42,7 +42,11 @@ module StateMachines::OrderItemStateMachine
         transitions from: :delivery, to: :done
       end
       event :to_customer do
-        transitions from: :delivery, to: :customer
+        transitions from: :delivery, to: :customer do
+          guard do
+            dept_id.nil?
+          end
+        end
         after_commit do
           update_attribute(:dept_id, nil)
         end

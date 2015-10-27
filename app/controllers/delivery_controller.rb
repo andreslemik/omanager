@@ -41,8 +41,16 @@ class DeliveryController < ApplicationController
   def well_done
     respond_to do |f|
       if @order_item.update(done_params)
-        @order_item.well_done! if @order_item.order.internal?
-        @order_item.to_customer! unless @order_item.order.internal?
+        @order_item.reload
+        if @order_item.order.internal? || !@order_item.dept_id.nil?
+          @order_item.well_done!
+        else
+          if @order_item.may_to_customer?
+            @order_item.to_customer!
+          else
+            f.html { redirect_to schedule_delivery_index_path, error: 'Не выполнено' }
+          end
+        end
         f.html { redirect_to order_path(@order_item.order), notice: 'Выполнено' }
       else
         f.html { render :schedule }
