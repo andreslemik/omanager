@@ -44,6 +44,7 @@ class DeliveryController < ApplicationController
         @order_item.reload
         if @order_item.order.internal? || !@order_item.dept_id.nil?
           @order_item.well_done!
+          @order_item.get_ready! if @order_item.order.retail? && @order_item.may_get_ready?
         else
           if @order_item.may_to_customer?
             @order_item.to_customer!
@@ -61,7 +62,7 @@ class DeliveryController < ApplicationController
   def print_schedule
     @date = Time.at(params[:sdate].to_i).to_date
     source = OrderItem.delivery.where(delivery_date: @date)
-                 .joins(:order).order('orders.area, orders.id')
+             .joins(:order).order('orders.area, orders.id')
     @items = OrderItemDecorator.decorate_collection source
     respond_to do |format|
       format.xlsx do
@@ -88,6 +89,6 @@ class DeliveryController < ApplicationController
 
   def scheduled_items
     @items = OrderItem.delivery
-                 .joins(:order).order('orders.area, orders.id')
+             .joins(:order).order('orders.area, orders.id')
   end
 end
