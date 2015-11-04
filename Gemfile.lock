@@ -296,7 +296,7 @@ GEM
       httparty
       thor
       xml-simple
-    listen (3.0.3)
+    listen (3.0.4)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
     loofah (2.0.3)
