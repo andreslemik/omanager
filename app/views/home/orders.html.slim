@@ -1,1 +1,7 @@
-h2 Договоры
+= content_for :title, 'Договоры'
+.row
+  .columns
+    ul.small-block-grid-4
+      - if current_user.can_create?(Order)
+        li = nav_link ficon('page-add', :huge, :style1), 'Новый договор', \
+          new_order_path, data: {no_turbolink: true}

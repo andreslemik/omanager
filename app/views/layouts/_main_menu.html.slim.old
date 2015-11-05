@@ -8,7 +8,14 @@ nav.top-bar role="navigation" data-topbar="" data-options="back_text: Назад
 
   section.top-bar-section
     ul.left
-      = active_link_to 'Договоры', navigate_path('orders'), wrap_tag: :li
+      li.has-dropdown
+        a(href='#') Договоры
+        ul.dropdown
+          - if current_user.can_create?(Order)
+            li = link_to 'Новый договор', new_order_path, data: { no_turbolink: true }
+          li = link_to 'Список договоров', orders_path
+          li = link_to 'Внутренние заказы', internals_orders_path
+          li = link_to 'Список изделий', order_items_path
       - if Account.readable_by? current_user
         li.has-dropdown
           a(href='#') Расчёты

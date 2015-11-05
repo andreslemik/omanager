@@ -9,9 +9,14 @@ body {
 }
 
 i {
+  &.huge   { font-size: 500%; }
   &.large  { font-size: 200%; }
   &.medium { font-size: 150%; }
   &.small  { font-size: $base-font-size; }
+
+  &.style1 {
+    color: #B8D30B;
+    }
 }
 
 .full-width {
