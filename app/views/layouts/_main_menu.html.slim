@@ -16,9 +16,9 @@ nav.top-bar role="navigation" data-topbar="" data-options="back_text: Назад
             li = link_to 'Расчеты с контрагентами', partners_path
             li = link_to 'Поступления', incomes_accounts_path
       - if current_user.has_any_role? :admin, :fabrication, :accountant
-        li = link_to 'Производство', fabrication_index_path
+        = active_link_to 'Производство', fabrication_index_path, wrap_tag: :li
       - if current_user.has_any_role? :admin, :accountant
-        li = link_to 'Доставка', delivery_index_path
+        = active_link_to 'Доставка', delivery_index_path, wrap_tag: :li
       - if current_user.has_any_role? :admin, :accountant
         li.has-dropdown
           a(href='#') Склад
