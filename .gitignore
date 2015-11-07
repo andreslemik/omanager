@@ -12,12 +12,9 @@
 /log/*
 !/log/.keep
 /tmp
-/.bundle
 /db/*.sqlite3
 /db/*.sqlite3-journal
 /log/*.log
-/tmp
-database.yml
 doc/
 *.swp
 *~
@@ -25,5 +22,6 @@ doc/
 .idea
 .secret
 .DS_Store
+database.yml
 
 public/uploads
