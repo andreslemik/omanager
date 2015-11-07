@@ -5,7 +5,7 @@ Documentation:
 AbcSize:
   Enabled: false
 LineLength:
-  Max: 120
+  Max: 145
 AllCops:
   Exclude:
     - 'db/schema.rb'
