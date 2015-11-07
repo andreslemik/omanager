@@ -136,7 +136,6 @@ Rails/HasAndBelongsToMany:
 Rails/TimeZone:
   Exclude:
     - 'app/authorizers/account_authorizer.rb'
-    - 'app/controllers/accounts_controller.rb'
     - 'app/controllers/delivery_controller.rb'
     - 'app/models/order.rb'
 

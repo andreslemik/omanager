@@ -17,7 +17,7 @@ class AccountsController < ApplicationController
                                            .group(:operation_date).sum(:amount).to_a)
                    .page(params[:page]).per(15)
     if params[:date]
-      @date = Time.at(params[:date].to_i).to_date
+      @date = Time.zone.at(params[:date].to_i).to_date
       @details = Account.income.where(operation_date: @date).group(:dept_id).sum(:amount)
     end
     respond_to do |format|
@@ -87,7 +87,7 @@ class AccountsController < ApplicationController
 
   def set_account
     @account = Account.find params[:id]
-    klass = allowed_models.finf { |c| c.name == @account.accountable_type}
+    klass = allowed_models.finf { |c| c.name == @account.accountable_type }
     @accounter = klass.find(@account.accountable_id)
   end
 
