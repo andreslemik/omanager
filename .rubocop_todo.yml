@@ -6,6 +6,8 @@
 # Note that changes in the inspected code, or installation of new
 # versions of RuboCop, may require this file to be generated again.
 
+require: rubocop-rspec
+
 # Offense count: 4
 Lint/AmbiguousRegexpLiteral:
   Exclude:
@@ -134,7 +136,6 @@ Rails/HasAndBelongsToMany:
 Rails/TimeZone:
   Exclude:
     - 'app/authorizers/account_authorizer.rb'
-    - 'app/controllers/accounts_controller.rb'
     - 'app/controllers/delivery_controller.rb'
     - 'app/models/order.rb'
 
