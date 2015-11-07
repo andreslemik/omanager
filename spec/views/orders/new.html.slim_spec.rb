@@ -8,8 +8,6 @@ describe 'orders/new.html.slim' do
 
   it 'form contain select box with product category' do
     render
-    Category.find_each do |c|
-      expect(rendered).to match /#{sanitize c.name}/
-    end
+    expect(rendered).to match /#{sanitize Category.all.sample.name}/
   end
 end
