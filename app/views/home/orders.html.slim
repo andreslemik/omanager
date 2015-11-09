@@ -1,0 +1,10 @@
+= content_for :title, 'Договоры'
+.row
+  .columns
+    ul.small-block-grid-12
+      - if current_user.can_create?(Order)
+        li = nav_link ficon('page-add', :huge, :style1), 'Новый договор', \
+          new_order_path, data: {no_turbolink: true}
+        li = nav_link ficon('page-multiple', :huge, :style1), 'Список договоров', orders_path
+        li = nav_link ficon('loop', :huge, :style1), 'Внутренние заказы', internals_orders_path
+        li = nav_link ficon('clipboard-notes', :huge, :style1), 'Список изделий', order_items_path

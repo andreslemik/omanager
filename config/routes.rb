@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   devise_for :users # , ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
+  get 'nav/:page', to: 'home#nav', as: :navigate
+
   resources :order_items, only: [:index, :show] do
     get :stores, on: :collection
     put :get_ready
