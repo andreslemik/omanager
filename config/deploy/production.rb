@@ -12,7 +12,7 @@ role :web, "#{fetch(:user)}@#{fetch(:server)}"
 role :db,  "#{fetch(:user)}@#{fetch(:server)}"
 
 set :repo_url, 'git@bitbucket.org:andreslemik/omanager.git'
-set :branch, 'new_interface'
+# set :branch, 'new_interface'
 
 server fetch(:server), user: fetch(:user), roles: %w(web app), application: fetch(:application)
 set :rvm_type, :auto

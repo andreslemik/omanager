@@ -3,6 +3,25 @@
     {
       "warning_type": "Dynamic Render Path",
       "warning_code": 15,
+      "fingerprint": "ffc3f72195ed59c425c89f11f47545753bb501f3e4810646a31d8d7ec7a81fed",
+      "message": "Render path contains parameter value",
+      "file": "app/controllers/home_controller.rb",
+      "line": 9,
+      "link": "http://brakemanscanner.org/docs/warning_types/dynamic_render_path/",
+      "code": "render(action => \"home/#{[\"orders\", \"accounting\", \"production\", \"delivery\", \"store\"].find do\n (p == params[:page])\n end}\", {})",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "HomeController",
+        "method": "nav"
+      },
+      "user_input": "params[:page]",
+      "confidence": "Weak",
+      "note": ""
+    },
+    {
+      "warning_type": "Dynamic Render Path",
+      "warning_code": 15,
       "fingerprint": "6e0b1d7dc09f24f3bcf0e3e167d5f6c5ef5b7c37be6b02442167644860e6f818",
       "message": "Render path contains parameter value",
       "file": "app/views/order_items/index.html.slim",
@@ -19,6 +38,6 @@
       "note": ""
     }
   ],
-  "updated": "2015-11-08 02:24:24 +0300",
+  "updated": "2015-11-09 14:11:44 +0300",
   "brakeman_version": "3.1.2"
 }

@@ -5,7 +5,7 @@ class HomeController < ApplicationController
 
   def nav
     page = PAGES.find { |p| p == params[:page] }
-    raise ActionController::RoutingError.new('Page Not Found') if page.blank?
+    fail ActionController::RoutingError.new('Page Not Found'), 'Page Not Found' if page.blank?
     render "home/#{page}"
   end
 end
